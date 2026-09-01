@@ -1,0 +1,73 @@
+# Plantilla: ingesta parametrica Bronze (CRESA)
+# Uso esperado: una copia por tabla NUEVA que se incorpore al lake, ej. venta_smart.dbo.cotizacion.yml.
+# No aplica a las 173 tablas Bronze ya existentes - documentar su estado en
+# analisis_caracterizacion/11_convenciones_nombramiento_databricks.md, no reconfigurarlas aqui.
+
+config_version: 1
+source_name: venta_smart
+source_schema: dbo
+source_table: Cotizacion
+source_table_normalized: cotizacion
+enabled: false
+
+description: "Cotizaciones de Venta Smart que nunca se convirtieron en solicitud de credito - hoy invisibles para el gobierno de datos."
+priority:
+  wave: fase_3_backlog
+  score: 0
+  reason: "Bloquea calidad de datos de captura en tienda (CU-02). Depende de terceros (sistema en desarrollo segun AS-IS)."
+
+load_strategy:
+  # Valores permitidos: full_snapshot, incremental_datetime, incremental_sequence.
+  initial_mode: full_snapshot
+  incremental_mode: incremental_datetime
+  watermark_column: fecha_modificacion
+  sequence_column: null
+  delta_lookback_days: 2
+  delete_detection: false
+
+query:
+  custom_sql: null
+  where_clause: null
+  order_by: null
+
+primary_key:
+  columns:
+    - id_cotizacion
+  enforced_in_source: false
+
+natural_key:
+  columns:
+    - num_identificacion_cliente
+    - id_cotizacion
+
+columns:
+  include: "*"
+  exclude: []
+  rename: {}
+  pii_columns: [num_identificacion_cliente]
+  restricted_columns: []
+
+target:
+  bronze_catalog: dlh_cresa
+  bronze_schema: bronze
+  bronze_table: venta_smart_cotizacion
+  write_mode_initial: overwrite
+  write_mode_delta: merge
+  merge_strategy: upsert_by_primary_key
+
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+
+governance:
+  domain_official: Cliente
+  sensitivity: Interno
+  data_owner: "Pendiente de designacion - ver 06_hipotesis_validacion.md #2"
+  purview_collection: 01_Cliente
+
+control_plane:
+  run_table: dlh_cresa.audit01.gobierno_silver_reglas
+  watermark_table: dlh_cresa.audit01.dynamics_odata_run_summary
+  error_table: dlh_cresa.audit01.log_procesos

@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cre_solicitante_mina",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cre_solicitante_mina",
+    "sql": "select id,solicitante_id,propiedad,valor from CREDITO_CRESA.dbo.cre_solicitante_mina nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cre_solicitante_mina",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_cre_solicitante_mina.yml",
+  "job_config": "../jobs/credito_cresa_cre_solicitante_mina_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_lcr_cuentas",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "lcr_cuentas",
+    "sql": "select id,codigo_cliente,identificacion,tipo_identificacion,nombre1,nombre2,apellido1,apellido2,cellular,email,es_activa,cuota_maxima,cuota_reservada,solicitante_id,solicitud_origen_id,creado,creado_por,actualizado,actualizado_por,segmento_id,direccion_domicilio from CREDITO_CRESA.dbo.lcr_cuentas nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_lcr_cuentas",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_lcr_cuentas.yml",
+  "job_config": "../jobs/credito_cresa_lcr_cuentas_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cobro_tipo_credito_tb",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cobro_tipo_credito_tb",
+    "sql": "select empresa,desAgencia,document,nomcliente,numCredito,numComprobante,interesMora,gastoCobranza,dfechavencimiento,monto,fechacreacion,autorizacion,cuotaFin,valorCapital,valorInteres,tipoPago,vertical,estadoPago,estado,tipoCartera,clase from CREDITO_CRESA.dbo.cobro_tipo_credito_tb nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cobro_tipo_credito_tb",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_cobro_tipo_credito_tb.yml",
+  "job_config": "../jobs/credito_cresa_cobro_tipo_credito_tb_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

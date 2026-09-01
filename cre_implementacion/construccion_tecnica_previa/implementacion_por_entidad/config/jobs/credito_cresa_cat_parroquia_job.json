@@ -1,0 +1,32 @@
+{
+  "name": "ingest_credito_cresa_cat_parroquia",
+  "description": "Ingesta parametrizada de cat_parroquia desde CREDITO_CRESA a Bronze en Databricks con validaciones y alertas SMTP.",
+  "notebook_task": {
+    "notebook_path": "/Repos/your_repo/path/templates_ingenieria/notebooks/template_pipeline_metadata_driven",
+    "base_parameters": {
+      "config_yml": "analisis_caracterizacion/templates_ingenieria/config/ingestion/credito_cresa_cat_parroquia.yml",
+      "run_mode": "production",
+      "enable_quality_checks": "true",
+      "enable_alerts": "true",
+      "alert_email": "wilsonyanez@hotmail.com"
+    }
+  },
+  "schedule": {
+    "quartz_cron_expression": "0 30 2 * * ?",
+    "timezone_id": "America/Bogota",
+    "pause_status": "UNPAUSED"
+  },
+  "max_retries": 2,
+  "timeout_seconds": 1800,
+  "email_notifications": {
+    "on_success": ["wilsonyanez@hotmail.com"],
+    "on_failure": ["data-owner@empresa.local", "wilsonyanez@hotmail.com"]
+  },
+  "tags": {
+    "environment": "production",
+    "domain": "maestro",
+    "phase": "fase_3_ingesta",
+    "priority": "6",
+    "owner": "Equipo de Datos - Maestro"
+  }
+}

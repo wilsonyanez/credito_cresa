@@ -1,0 +1,33 @@
+{
+  "entity": "credito_cresa_cre_solicitud",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cre_solicitud",
+    "sql": "select id,empresa_id,unidad_negocio_id,canal_id,solicitante_id,secuencia_cupo,tipo_solicitud,
+almacen_oficina,tipo_credito_id,tipo_emprendedor_id,identificacion_emprendedor,grupo_cliente,grupo_impuesto,modo_pago,origen_credito_id,vendedor,cuota_sugerida,cuota_solicitada,
+cuota_aprobada,estado,actualizado,actualizado_por,creado,creado_por,secuencia_no,
+calificacion_buro_id,calificacion_confianza_id,calificacion_final_id,fecha_cambio_estado,
+notificacion_acepto,notificacion_enviada_id,salario_depurado,capacidad_pago,
+tipo_verificacion,tipo_verificacion_final,dia_pago_corte_activo,entrada_base,
+codigo_cliente,ciclo_corte_cliente,biometria_estado,biometria_id,lib_direccion_almacen,
+lib_usuario_id,lib_fecha_realizar,mina_telefono_1,mina_telefono_2,mina_correo_1,
+mina_correo_2,mina_score,final_score,verificacion_original,verificacion_activa,
+modelo_aprobador_id,almacen_origen_id,riesgo_id,contador_intentos,vendedor_usuario_id,
+regestion_intentos,cobertura_intentos from CREDITO_CRESA.dbo.cre_solicitud nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cre_solicitud",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_cre_solicitud.yml",
+  "job_config": "../jobs/credito_cresa_cre_solicitud_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

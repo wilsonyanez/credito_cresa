@@ -1,0 +1,32 @@
+{
+  "name": "ingest_credito_cresa_cat_estadoverificacion",
+  "description": "Ingesta parametrizada de catálogo cat_estadoverificacion desde CREDITO_CRESA (SQL Server) a Bronze en Databricks. Incluye validaciones de calidad, alertas SMTP y linaje.",
+  "notebook_task": {
+    "notebook_path": "/Repos/your_repo/path/templates_ingenieria/notebooks/template_pipeline_metadata_driven",
+    "base_parameters": {
+      "config_yml": "analisis_caracterizacion/templates_ingenieria/config/ingestion/credito_cresa_cat_estadoverificacion.yml",
+      "run_mode": "production",
+      "enable_quality_checks": "true",
+      "enable_alerts": "true",
+      "alert_email": "data-platform-team@empresa.local"
+    }
+  },
+  "schedule": {
+    "quartz_cron_expression": "0 0 2 * * ?",
+    "timezone_id": "America/Bogota",
+    "pause_status": "UNPAUSED"
+  },
+  "max_retries": 2,
+  "timeout_seconds": 1800,
+  "email_notifications": {
+    "on_success": ["data-platform-team@empresa.local"],
+    "on_failure": ["data-owner@empresa.local", "data-platform-team@empresa.local"]
+  },
+  "tags": {
+    "environment": "production",
+    "domain": "maestro",
+    "phase": "fase_3_ingesta",
+    "priority": "7",
+    "owner": "Equipo de Datos - Maestro"
+  }
+}

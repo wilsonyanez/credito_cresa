@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cat_canton",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cat_canton",
+    "sql": "select id,provincia_id,cod,pais_cod,provincia_cod,nombre,prefijo,cinec,es_activo from CREDITO_CRESA.dbo.cat_canton nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cat_canton",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_cat_canton.yml",
+  "job_config": "../jobs/credito_cresa_cat_canton_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

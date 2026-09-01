@@ -1,0 +1,25 @@
+{
+  "entity": "credito_cresa_lcr_graduacion",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "lcr_graduacion",
+    "sql": "select id,graduacion_id,codigo_empresa,codigo_cliente,calificacion_anterior,calificacion_nueva,indicador_rescate,cantidad_cortes_evaluados,maximo_dias_atraso,creado,creado_por,fecha_corte,
+envio_notificacion,estado_registro,segmento_anterior_id,segmento_nuevo_id,identificacion,capacidad_pago,tipo_cliente,relacion_dependencia_id,unidad_negocio_id,canal_id,grupo_id,edad,
+nacionalidad,riesgo_id,politica_id,salario_depurado,origen_credito_id,cuota_maxima_anterior,cuota_maxima_nueva,almacen_oficina,lcr_id,segmento_lcr_anterior,estado_procesamiento,estado_notificacion,error_notificacion,fecha_recepcion,fecha_procesamiento,error_descripcion,bitacora_id,solicitante_id,cuenta_id,intentos_procesamiento,origen_datos from CREDITO_CRESA.dbo.lcr_graduacion nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_lcr_graduacion",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_lcr_graduacion.yml",
+  "job_config": "../jobs/credito_cresa_lcr_graduacion_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

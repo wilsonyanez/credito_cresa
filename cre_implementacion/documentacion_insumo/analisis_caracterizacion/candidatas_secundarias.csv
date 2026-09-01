@@ -1,0 +1,9 @@
+fuente,dominio_oficial,que_falta,por_que_importa,esfuerzo_relativo,evidencia
+Vtex (transaccional),Cliente,Sin ninguna tabla transaccional en el lake - solo agregados de marketing,Bloquea CU-01 completo CU-10 CU-13,Alto - requiere integracion nueva o puente MuleSoft,Busqueda exhaustiva en 649 tablas cero resultados transaccionales
+Venta Smart,Cliente,Sin ninguna tabla en el lake,Ahi viven cotizaciones que nunca se convirtieron en solicitud de credito,Medio - sistema en desarrollo segun AS-IS,Busqueda exhaustiva cero resultados
+Genesys (contact center),Cliente,Sin ninguna tabla en el lake,Sin esto no hay forma de correlacionar contactabilidad real con flag_contactable,Alto,Busqueda exhaustiva cero resultados
+Opt-in por canal,Cliente,No existe como concepto en ninguna tabla,Bloqueador directo del switch de Salesforce 1 oct 2026,Bajo (activacion de captura) - no existe insumo,d365_customersv3_opt_inc incompleto es lo unico parecido
+Chasis/serial de motos limpio,Producto,Solo existe transferencias_motos_consulta sin indicador de propiedad,Errores conocidos que impiden matriculacion,Medio - transformacion sobre dato existente,Confirmado en transcripcion de Operaciones
+EAN unificador,Producto,No se encontro ninguna columna EAN en producto_dim ni en bronze,Confirma gap de codigo unificador,Alto - requiere captura nueva o mapeo externo,Confirmado en transcripcion de Presidencia Ejecutiva
+Proveedores y activos fijos,Fuera de alcance Cliente/Producto,Cero tablas en el lake,Bloquea CU-09 (Finanzas no es dominio de Azurian en Fase 3),Alto,Busqueda exhaustiva cero resultados
+Gestion de cobranza de campo,Cliente/Credito,Existe dimension etapa_cobranza pero no hay tabla de hechos,Bloquea CU-08 - impacto ~5M/mes cartera dificil recuperacion,Alto - hoy 100% Excel/WhatsApp,Confirmado por ausencia de tabla de hechos correspondiente

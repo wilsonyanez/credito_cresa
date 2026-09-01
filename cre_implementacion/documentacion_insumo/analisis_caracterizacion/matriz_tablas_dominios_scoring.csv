@@ -1,0 +1,26 @@
+esquema,tabla,fuente_origen,dominio_oficial,rol_en_maestro,capa,prioridad,estado_integracion,evidencia
+bronze,customersv3,Dynamics 365 F&O,Cliente,Identidad + CreditLimit,bronze,P1,integrado - confirmar duplicidad con d365_customerv3,651367 filas 100% CreditLimit poblado
+bronze,d365_customerv3,Dynamics 365 F&O,Cliente,Identidad (posible duplicado),bronze,P1,integrado - confirmar duplicidad con customersv3,prefijo d365_ consistente
+bronze,cecustomers,Dynamics 365 F&O,Cliente,Datos comerciales de cliente,bronze,P2,integrado,sin cifra propia relevada
+gold,dw_cresa_persona_dim,SIAC,Cliente,Nucleo demografico,gold,P1,integrado,768727 filas 1351 duplicados 0.18%
+gold,dw_cresa_persona_siac_dim,SIAC,Cliente,Complementaria a persona_dim,gold,P1,integrado,sin cifra propia relevada
+staging,temp_cotizaciones_siac,SIAC,Cliente,Cotizaciones,staging,P2,integrado,sin cifra propia relevada
+staging,solicitud_credicresa,CrediCresa/Resuelve,Cliente,Solicitudes de credito,staging,P1,integrado,sin cifra propia relevada
+gold,dw_cresa_estado_credito_dim,CrediCresa/Resuelve,Cliente,Estado de credito,gold,P1,integrado,sin cifra propia relevada
+gold,dw_cresa_rango_mora_dim,CrediCresa/Resuelve,Cliente,Rango de mora,gold,P1,integrado,sin cifra propia relevada
+gold,dw_cresa_dias_atraso_dim,CrediCresa/Resuelve,Cliente,Dias de atraso,gold,P1,integrado,sin cifra propia relevada
+gold,dw_cresa_cartera_saldos_fact,CrediCresa/Resuelve,Cliente,Fact granular - insumo cupo_disponible,gold,P1,integrado,191.7M filas 262563 clientes unicos rango 2024-01-31 a 2026-07-13
+gold,dw_cresa_dueno_cartera_dim,CrediCresa/Resuelve,Cliente,Dueno de cartera,gold,P2,integrado,sin cifra propia relevada
+gold,dw_cresa_etapa_cobranza_dim,Interno,Cliente,Dimension etapa cobranza sin hechos,gold,P2,integrado sin fact asociado,falta tabla de hechos de gestion/visitas
+silver,base_concrecion_cliente,Canal/Origen interno,Cliente,Estructura canal/origen,silver,P1,estructura existe 0 filas,0 filas al 2026-07-14
+gold,dw_cresa_producto_dim,Dynamics 365,Producto,Base del maestro (mas 5 backups sin marca),gold,P1,integrado - requiere resolver backups,189465 filas 83127 SKU unicos 2.28x
+bronze,d365_releasedproductsv2,Dynamics 365 F&O,Producto,Producto liberado a venta,bronze,P1,integrado,sin cifra propia relevada
+bronze,d365_productattributevaluesv3,Dynamics 365 F&O,Producto,Atributos EAV especificaciones tecnicas,bronze,P1,integrado - requiere pivotar,528278 filas unitofmeasure 100% vacio
+gold,dw_cresa_clase_producto_dim,Dynamics 365,Producto,Jerarquia comercial,gold,P1,integrado,sin cifra propia relevada
+externo_cresa,rlx_products,RELEX,Producto,Export activo a RELEX,externo_cresa,P1,integrado modo test,sin cifra propia relevada
+externo_cresa,rlx_products_ms,RELEX,Producto,Export activo a RELEX,externo_cresa,P2,integrado modo test,sin cifra propia relevada
+externo_cresa,sf_producto_test,Salesforce,Producto,Export en prueba,externo_cresa,P2,desalineado con RELEX,solo 4 columnas
+externo_cresa,sf_cliente_test,Salesforce,Cliente,Export en prueba,externo_cresa,P2,desalineado,sin cifra propia relevada
+audit01,dynamics_odata_run_summary,Interno,Gobierno tecnico,Control de ingesta Dynamics,audit01,P2,integrado - sin watermarks explicitos,4 tablas totales en audit01
+audit01,dynamics_odata_runlogs,Interno,Gobierno tecnico,Control de ingesta Dynamics,audit01,P2,integrado,sin cifra propia relevada
+fivetran_log,(10 tablas),Fivetran - fuente origen sin confirmar,Gobierno tecnico,Ingesta activa sin dueno identificado,fivetran_log,P3,activo sin dueno documentado,confirmar con Miguel Espinosa

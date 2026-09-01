@@ -1,0 +1,57 @@
+{
+  "name": "ingest_credito_cresa_source",
+  "description": "Pipeline único metadata-driven: recorre los YAML, lee la fuente recreada en Databricks y escribe Parquet por tabla.",
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "ensure_credito_cresa_source",
+      "notebook_task": {
+        "notebook_path": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/pre_productiva/notebooks/01_create_source_database",
+        "base_parameters": {
+          "source_config": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/pre_productiva/config/sources/credito_cresa.yml",
+          "seed_format": "parquet",
+          "replace_existing": "false",
+          "table_filter": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "existing_cluster_id": "REEMPLAZAR_CLUSTER_ID",
+      "timeout_seconds": 3600,
+      "max_retries": 0
+    },
+    {
+      "task_key": "ingest_credito_cresa_to_parquet",
+      "depends_on": [
+        {
+          "task_key": "ensure_credito_cresa_source"
+        }
+      ],
+      "notebook_task": {
+        "notebook_path": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/pre_productiva/notebooks/ingest_databricks_source_to_parquet",
+        "base_parameters": {
+          "source_config": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/pre_productiva/config/sources/credito_cresa.yml",
+          "source_name": "credito_cresa",
+          "dry_run": "false",
+          "table_filter": ""
+        },
+        "source": "WORKSPACE"
+      },
+      "existing_cluster_id": "REEMPLAZAR_CLUSTER_ID",
+      "timeout_seconds": 7200,
+      "max_retries": 1,
+      "min_retry_interval_millis": 300000,
+      "retry_on_timeout": true
+    }
+  ],
+  "schedule": {
+    "quartz_cron_expression": "0 0 2 * * ?",
+    "timezone_id": "America/Guayaquil",
+    "pause_status": "PAUSED"
+  },
+  "tags": {
+    "environment": "dev",
+    "source": "credito_cresa",
+    "format": "parquet",
+    "pipeline_type": "metadata_driven"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cat_sector_riesgo_geocerca",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cat_sector_riesgo_geocerca",
+    "sql": "select id,cat_sector_riesgo_id,latitud,longitud,creado,actualizado,creado_por,actualizado_por from CREDITO_CRESA.dbo.cat_sector_riesgo_geocerca nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cat_sector_riesgo_geocerca",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_cat_sector_riesgo_geocerca.yml",
+  "job_config": "../jobs/credito_cresa_cat_sector_riesgo_geocerca_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

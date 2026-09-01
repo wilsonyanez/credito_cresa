@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cre_solicitudlaboral",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cre_solicitudlaboral",
+    "sql": "select id,solicitud_id,provincia_id,canton_id,parroquia_id,actividad_laboral_id,actividad_economica_id,cargas_familiares,calle_principal,calle_transversal,nombre_empresa,salario,origen_ingresos,direccion,sector,referencia,tiempo_laboral,fecha_ingreso_laboral,telefono_fijo,cellular,relacion_dependencia_id,profesion_id,es_actual,actualizado,actualizado_por,creado,creado_por from CREDITO_CRESA.dbo.cre_solicitudlaboral nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cre_solicitudlaboral",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_cre_solicitudlaboral.yml",
+  "job_config": "../jobs/credito_cresa_cre_solicitudlaboral_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

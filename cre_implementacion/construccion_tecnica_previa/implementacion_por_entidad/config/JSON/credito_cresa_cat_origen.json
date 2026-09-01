@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cat_origen",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cat_origen",
+    "sql": "select id,fecha_creacion,actualizado,creado_por,actualizado_por,codigo_externo,nombre,es_activo from CREDITO_CRESA.dbo.cat_origen nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cat_origen",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_cat_origen.yml",
+  "job_config": "../jobs/credito_cresa_cat_origen_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

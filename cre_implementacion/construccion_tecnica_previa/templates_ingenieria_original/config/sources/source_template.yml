@@ -1,0 +1,47 @@
+# Plantilla: configuracion de fuente (SQL Server / API / OData)
+# Uso esperado: una copia por fuente logica NUEVA que se incorpore al lake de CRESA.
+# No aplica a las fuentes ya integradas (Dynamics 365, SIAC, CrediCresa) - esas ya
+# tienen su propio mecanismo de ingesta en produccion (OData, Fivetran, batch).
+# Reservada para el backlog: Vtex transaccional, Venta Smart, Genesys.
+
+source_name: venta_smart
+source_display_name: VENTA SMART
+source_type: sql_server
+environment: prod   # CRESA no tiene DEV/TEST separados hoy - ver 09_plan_ingesta_almacenamiento_lakehouse.md
+enabled: false       # activar solo cuando se apruebe la integracion
+
+connection:
+  # No guardar credenciales en el repositorio.
+  # Estos valores deben existir en Databricks Secret Scope (keyvaultdlh01) o Azure Key Vault.
+  secret_scope: cresa-sqlserver-prod
+  server_secret: venta-smart-server
+  port_secret: venta-smart-port
+  database_secret: venta-smart-database
+  user_secret: venta-smart-user
+  password_secret: venta-smart-password
+  encrypt: true
+  trust_server_certificate: false
+  login_timeout_seconds: 30
+  query_timeout_seconds: 1800
+
+defaults:
+  landing_enabled: true
+  landing_format: csv
+  bronze_format: delta
+  extraction_timezone: America/Guayaquil
+  ingestion_frequency: daily
+  max_parallel_tables: 4
+  fetch_size: 10000
+
+governance:
+  system_owner: Servicios IT / Datos y Analitica
+  technical_owner_role: Miguel Espinosa
+  default_sensitivity: Interno
+  purview_collection: 01_Cliente
+  lineage_required: true
+
+runtime:
+  databricks_cluster_policy: cresa-data-engineering
+  retry_attempts: 2
+  retry_interval_seconds: 300
+  notification_channel: data-analitica-cresa

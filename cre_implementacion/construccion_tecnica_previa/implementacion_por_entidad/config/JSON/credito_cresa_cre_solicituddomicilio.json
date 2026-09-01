@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cre_solicituddomicilio",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cre_solicituddomicilio",
+    "sql": "select id,solicitud_id,provincia_id,canton_id,parroquia_id,direccion,sector,calle_principal,calle_transversal,tipo_domicilio,referencia,telefono_fijo,cellular,tipo_propiedad,tipo_vivienda,tiempo_residencia,ubicacion_longitud,ubicacion_latitud,ubicacion_mapa,es_actual,manzana,villa,actualizado,actualizado_por,creado,creado_por from CREDITO_CRESA.dbo.cre_solicituddomicilio nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cre_solicituddomicilio",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_cre_solicituddomicilio.yml",
+  "job_config": "../jobs/credito_cresa_cre_solicituddomicilio_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

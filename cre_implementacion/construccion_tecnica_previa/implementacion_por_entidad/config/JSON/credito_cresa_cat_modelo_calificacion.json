@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cat_modelo_calificacion",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cat_modelo_calificacion",
+    "sql": "select id,fecha_creacion,actualizado,creado_por,actualizado_por,confianza_desde,confianza_hasta,nombre,es_activo from CREDITO_CRESA.dbo.cat_modelo_calificacion nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cat_modelo_calificacion",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_cat_modelo_calificacion.yml",
+  "job_config": "../jobs/credito_cresa_cat_modelo_calificacion_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "ingest_credito_cresa_cat_estadoverificacion",
+  "notebook_task": {
+    "notebook_path": "/Repos/your_repo/path/templates_ingenieria/notebooks/template_pipeline_metadata_driven",
+    "base_parameters": {
+      "config_yml": "analisis_caracterizacion/templates_ingenieria/config/ingestion/credito_cat_estadoverificacion.yml",
+      "run_mode": "test"
+    }
+  },
+  "schedule": {
+    "quartz_cron_expression": "0 30 6 * * ?",
+    "timezone_id": "America/Bogota",
+    "pause_status": "UNPAUSED"
+  },
+  "max_retries": 1,
+  "email_notifications": {
+    "on_failure": ["data-team@empresa.local"]
+  }
+}

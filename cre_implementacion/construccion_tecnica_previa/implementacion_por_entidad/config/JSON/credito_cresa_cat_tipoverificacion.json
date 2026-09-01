@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cat_tipoverificacion",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cat_tipoverificacion",
+    "sql": "select id,nombre,jerarquia,estado,creado,actualizado,creado_por,actualizado_por,naturaleza from CREDITO_CRESA.dbo.cat_tipoverificacion nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cat_tipoverificacion",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_cat_tipoverificacion.yml",
+  "job_config": "../jobs/credito_cresa_cat_tipoverificacion_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

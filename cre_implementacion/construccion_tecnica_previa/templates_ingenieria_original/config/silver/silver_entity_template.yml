@@ -1,0 +1,89 @@
+# Plantilla: entidad conformada Silver (CRESA)
+# Uso esperado: una copia por entidad. Ejemplo poblado real: cliente.dw_cresa_cliente_conformado.yml
+# Ver analisis_caracterizacion/10_metodologia_lakehouse_gobierno_fase3.md seccion "YAML de entidad Silver".
+
+config_version: 1
+entity_name: dw_cresa_cliente_conformado
+entity_display_name: Cliente Conformado
+domain_official: Cliente
+enabled: true
+
+purpose: "Conformar identidad, contacto y atributos de credito del cliente entre SIAC, Dynamics 365 y CrediCresa, sin aplicar todavia reglas de certificacion (eso es Gold)."
+data_retention_policy: inherited_from_source
+
+sources:
+  - table: dlh_cresa.bronze.customersv3
+    alias: dyn
+    required: true
+    join_type: base
+    note: "Confirmar antes si d365_customerv3 es el mismo pipeline o una version distinta."
+  - table: dlh_cresa.gold.dw_cresa_persona_dim
+    alias: siac
+    required: true
+    join_type: left
+    join_condition: "dyn.CustomerAccount = siac.num_identificacion"
+  - table: dlh_cresa.silver.base_concrecion_cliente
+    alias: canal
+    required: false
+    join_type: left
+    join_condition: "siac.num_identificacion = canal.num_identificacion"
+    note: "Tabla con 0 filas al 2026-07-14 - no bloquea la conformacion, pero canal_origen quedara nulo hasta que se active la captura."
+
+business_key:
+  columns:
+    - num_identificacion
+
+surrogate_key:
+  enabled: true
+  column: sk_cliente
+  strategy: sha2_business_key
+
+standardization:
+  column_naming: snake_case
+  trim_strings: true
+  empty_string_as_null: true
+  timezone: America/Guayaquil
+
+survivorship:
+  # Regla ya definida en Arquitectura To-Be 4.1bis - no reinventar aqui.
+  contacto: "mas_reciente_por_timestamp: dynamics > siac > venta_smart"
+  credito: "siempre_credicresa"
+  direccion: "solo_si_validada"
+
+cleansing_rules:
+  action_default: flag_only
+  rules:
+    - rule_id: SV_CLI_001
+      type: not_null
+      columns: [num_identificacion]
+      severity: critical
+      action: flag_only
+    - rule_id: SV_CLI_002
+      type: duplicate_natural_key
+      columns: [num_identificacion]
+      severity: high
+      action: flag_only
+      note: "Evidencia real: 1351 duplicados (0.18%) en dw_cresa_persona_dim al 2026-07-14."
+    - rule_id: SV_CLI_003
+      type: cross_source_reconciliation
+      columns: [credit_limit_dynamics, cupo_credicresa]
+      severity: critical
+      action: flag_only
+      note: "Pendiente de definicion de negocio - ver analisis_caracterizacion/06_hipotesis_validacion.md #3."
+
+quality_diagnostic:
+  enabled: true
+  score_column: _quality_score
+  status_column: _quality_status
+  flags_column: _quality_flags
+
+target:
+  catalog: dlh_cresa
+  schema: silver
+  table: dw_cresa_cliente_conformado
+  write_mode: merge
+  merge_key: [num_identificacion]
+
+control_plane:
+  run_table: dlh_cresa.audit01.gobierno_silver_reglas
+  rule_result_table: dlh_cresa.audit01.gobierno_silver_resultados

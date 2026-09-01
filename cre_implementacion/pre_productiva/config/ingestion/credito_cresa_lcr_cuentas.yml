@@ -1,0 +1,91 @@
+config_version: 1
+source_name: credito_cresa
+source_schema: dbo
+source_table: lcr_cuentas
+source_table_normalized: lcr_cuentas
+enabled: true
+
+description: "Catálogo de configuración control cuentas respuesta proveedor desde CREDITO_CRESA. Ingesta a Bronze para consumo de dominios. Campos explicitados para ingesta incremental/validación."
+priority:
+  wave: fase_3_ingesta
+  score: 5
+  reason: "Tabla de maestro usada por procesos de normalización y reporting."
+
+load_strategy:
+  initial_mode: full_snapshot
+  incremental_mode: full_snapshot
+  watermark_column: null
+  sequence_column: null
+  delta_lookback_days: 0
+  delete_detection: false
+
+read:
+  mode: table
+
+primary_key:
+  columns:
+    id
+  enforced_in_source: true
+
+natural_key:
+  columns:
+    - codigo_cliente
+    - identificacion
+    - tipo_identificacion
+    - solicitante_id
+    - solicitud_origen_id
+    - segmento_id
+
+columns:
+  include:
+    - id
+    - codigo_cliente
+    - identificacion
+    - tipo_identificacion
+    - nombre1
+    - nombre2
+    - apellido1
+    - apellido2
+    - cellular
+    - email
+    - es_activa
+    - cuota_maxima
+    - cuota_reservada
+    - solicitante_id
+    - solicitud_origen_id
+    - creado
+    - creado_por
+    - actualizado
+    - actualizado_por
+    - segmento_id
+    - direccion_domicilio
+
+  exclude: []
+  rename: {}
+  pii_columns: []
+  restricted_columns: []
+
+target:
+  bronze_catalog: dlh_cresa
+  bronze_schema: bronze
+  bronze_table: credito_cresa_lcr_cuentas
+  write_mode_initial: overwrite
+  write_mode_delta: merge
+  merge_strategy: upsert_by_primary_key
+
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+
+governance:
+  domain_official: Maestro
+  sensitivity: Interno
+  data_owner: "Equipo de Datos - Maestro (por asignar oficialmente)"
+  purview_collection: 01_Maestros
+
+control_plane:
+  run_table: dlh_cresa.audit01.gobierno_silver_reglas
+  watermark_table: dlh_cresa.audit01.dynamics_odata_run_summary
+  error_table: dlh_cresa.audit01.log_procesos

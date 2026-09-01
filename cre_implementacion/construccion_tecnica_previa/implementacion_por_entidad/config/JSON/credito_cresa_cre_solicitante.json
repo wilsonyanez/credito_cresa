@@ -1,0 +1,24 @@
+{
+  "entity": "credito_cresa_cre_solicitante",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cre_solicitante",
+    "sql": "select cod_cliente,tipo_cliente,es_activo,apellido_1,apellido_2,nombre_1,nombre_2,fecha_nacimiento,nacionalidad_id,sexo_id,estado_civil_id,nivel_educacion_id,profesion_id,
+identificacion,cellular,cliente_referencia_ubicacion,cliente_calle_principal,cliente_calle_transversal,cliente_numero_casa,provincia_id,canton_id,parroquia_id,creado,actualizado,creado_por,actualizado_por,cuota_estimada,fecha_cuota_estimada,cliente_direccion,email,numero_cargas,nacionalidad from CREDITO_CRESA.dbo.cre_solicitante nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cre_solicitante",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_cre_solicitante.yml",
+  "job_config": "../jobs/credito_cresa_cre_solicitante_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

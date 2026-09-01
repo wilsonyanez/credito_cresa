@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cre_solicitud_bitacora",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cre_solicitud_bitacora",
+    "sql": "select id,solicitud_id,estado,creado,creado_por from CREDITO_CRESA.dbo.cre_solicitud_bitacora nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cre_solicitud_bitacora",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_cre_solicitud_bitacora.yml",
+  "job_config": "../jobs/credito_cresa_cre_solicitud_bitacora_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

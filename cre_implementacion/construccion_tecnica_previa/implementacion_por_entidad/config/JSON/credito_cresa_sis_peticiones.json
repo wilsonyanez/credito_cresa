@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_sis_peticiones",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "sis_peticiones",
+    "sql": "select id,identificacion,api,metodo,url,request,status,response,creado,creado_por from CREDITO_CRESA.dbo.sis_peticiones nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_sis_peticiones",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_sis_peticiones.yml",
+  "job_config": "../jobs/credito_cresa_sis_peticiones_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

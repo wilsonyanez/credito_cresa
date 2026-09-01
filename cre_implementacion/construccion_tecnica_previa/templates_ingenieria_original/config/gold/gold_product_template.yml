@@ -1,0 +1,99 @@
+# Plantilla: producto de datos Gold (CRESA)
+# Uso esperado: una copia por producto. Ejemplo poblado real: cliente.dw_cresa_cliente_campos_salesforce.yml
+# Ver analisis_caracterizacion/04_gold_temporal_dataproducts.md.
+
+config_version: 1
+product_name: dw_cresa_cliente_campos_salesforce
+product_display_name: Campos Habilitadores Salesforce
+product_type: data_product
+status: temporal
+enabled: true
+
+domain_owner: Cliente
+cross_domain: true   # incorpora atributos del dominio Credito (CrediCresa) sin que Azurian gobierne ese dominio
+use_cases:
+  - CU-03_activacion_credito_sin_consumo
+  - CU-04_cross_selling_cupo_disponible
+  - CU-05_recompra_ultimas_cuotas
+  - CU-06_winback_clientes_inactivos
+
+description: "Quick win de mayor impacto/menor esfuerzo del roadmap: deriva cupo_disponible, flag_contactable, optin_* y num_cuota_actual/total sobre datos que ya existen en Gold, para desbloquear el switch de Salesforce Data Cloud."
+grain: una_fila_por_num_identificacion
+
+sources:
+  - table: dlh_cresa.silver.dw_cresa_cliente_conformado
+    alias: cli
+    required: true
+  - table: dlh_cresa.gold.dw_cresa_cartera_saldos_fact
+    alias: cartera
+    required: true
+  - table: dlh_cresa.gold.dw_cresa_rango_mora_dim
+    alias: mora
+    required: true
+
+contract:
+  primary_key: [num_identificacion]
+  required_columns:
+    - num_identificacion
+    - cupo_disponible
+    - flag_contactable
+    - optin_email
+    - optin_whatsapp
+    - optin_llamadas
+    - num_cuota_actual
+    - num_cuota_total
+  consumers:
+    - salesforce_data_cloud
+    - power_bi
+  sla:
+    refresh_frequency: daily
+    hard_deadline: "2026-10-01"   # switch Salesforce Data Cloud
+    intermediate_deadline: "2026-09-12"   # campos CU-03 a CU-06 disponibles en Gold
+
+certification_rules:
+  # Estado temporal: no rechazar registros todavia - la fórmula de cupo_disponible
+  # y la "escalera de mora" (flag_contactable) siguen pendientes de decision de negocio.
+  action_default: flag_only
+  rules:
+    - rule_id: GD_SF_001
+      type: not_null
+      columns: [num_identificacion]
+      severity: critical
+      action: reject_from_product
+    - rule_id: GD_SF_002
+      type: pending_business_rule
+      columns: [cupo_disponible]
+      severity: high
+      action: flag_only
+      note: "Bloqueado por reconciliacion CreditLimit vs cupo CrediCresa - ver 06_hipotesis_validacion.md #3."
+    - rule_id: GD_SF_003
+      type: pending_business_rule
+      columns: [flag_contactable]
+      severity: high
+      action: flag_only
+      note: "Bloqueado por definicion de la escalera de mora - decision de negocio de Credito."
+
+outputs:
+  - name: serving_table
+    catalog: dlh_cresa
+    schema: gold
+    table: dw_cresa_cliente_campos_salesforce
+  - name: rejected_records
+    catalog: dlh_cresa
+    schema: audit01
+    table: gobierno_gold_rechazos
+
+purview:
+  collection: 01_Cliente
+  glossary_terms:
+    - Cupo Disponible
+    - Flag Contactable
+    - Golden Record Cliente
+  sensitivity: Confidencial
+  data_owner: "Pendiente de designacion - ver 06_hipotesis_validacion.md #2"
+  data_steward: Pendiente
+  certification_status: temporal
+
+control_plane:
+  run_table: dlh_cresa.audit01.gobierno_gold_certificacion
+  publication_table: dlh_cresa.audit01.gobierno_gold_publicacion

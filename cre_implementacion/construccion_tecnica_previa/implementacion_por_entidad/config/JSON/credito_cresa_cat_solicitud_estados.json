@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cat_solicitud_estados",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cat_solicitud_estados",
+    "sql": "select id,calificacion_buro_id,calificacion_confianza_id,calificacion_final_id,origen_id,zona_riesgo_id,tipo_cliente_id,dependencia_id,grupo_id,edad_min,edad_max,nacionalidad,capacidad_pago,tipo_verificacion,entrada_base,es_activo,fecha_creacion,actualizado,creado_por,actualizado_por,unidadnegocio_id,canal_id from CREDITO_CRESA.dbo.cat_solicitud_estados nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cat_solicitud_estados",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_cat_solicitud_estados.yml",
+  "job_config": "../jobs/credito_cresa_cat_solicitud_estados_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

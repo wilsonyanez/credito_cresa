@@ -1,0 +1,19 @@
+{
+  "name": "ingest_credito_cresa_cat_canton",
+  "notebook_task": {
+    "notebook_path": "/Repos/your_repo/path/templates_ingenieria/notebooks/template_pipeline_metadata_driven",
+    "base_parameters": {
+      "config_yml": "analisis_caracterizacion/templates_ingenieria/config/ingestion/credito_cresa_cat_canton.yml",
+      "run_mode": "test"
+    }
+  },
+  "schedule": {
+    "quartz_cron_expression": "0 0 4 * * ?",
+    "timezone_id": "America/Bogota",
+    "pause_status": "UNPAUSED"
+  },
+  "max_retries": 1,
+  "email_notifications": {
+    "on_failure": ["data-team@empresa.local"]
+  }
+}

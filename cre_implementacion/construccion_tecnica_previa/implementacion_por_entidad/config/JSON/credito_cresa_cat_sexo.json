@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cat_sexo",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cat_sexo",
+    "sql": "select id,nombre,es_activo from CREDITO_CRESA.dbo.cat_sexo nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cat_sexo",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_cat_sexo.yml",
+  "job_config": "../jobs/credito_cresa_cat_sexo_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

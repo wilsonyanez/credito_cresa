@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_ver_respuesta_proveedor",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "ver_respuesta_proveedor",
+    "sql": "select id,verificacion_id,solicitud_id,gestor_id,motive,fecha_resolucion,estado,evidencia_url,comentario,creado,actualizado,creado_por,actualizado_por from CREDITO_CRESA.dbo.ver_respuesta_proveedor nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_ver_respuesta_proveedor",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_ver_respuesta_proveedor.yml",
+  "job_config": "../jobs/credito_cresa_ver_respuesta_proveedor_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

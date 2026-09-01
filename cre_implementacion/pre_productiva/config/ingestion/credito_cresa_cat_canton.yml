@@ -1,0 +1,77 @@
+config_version: 1
+source_name: credito_cresa
+source_schema: dbo
+source_table: cat_canton
+source_table_normalized: cat_canton
+enabled: true
+
+description: "Catálogo de cantones desde CREDITO_CRESA. Ingesta a Bronze para consumo de dominios."
+priority:
+  wave: fase_3_ingesta
+  score: 5
+  reason: "Tabla de maestro usada por procesos de normalización y reporting."
+
+load_strategy:
+  initial_mode: full_snapshot
+  incremental_mode: incremental_datetime
+  watermark_column: fecha_modificacion
+  sequence_column: null
+  delta_lookback_days: 2
+  delete_detection: false
+
+read:
+  mode: table
+
+primary_key:
+  columns:
+    - id
+  enforced_in_source: true
+
+natural_key:
+  columns:
+    - id
+    - provincia_id
+    - cod
+    - pais_cod
+    - provincia_cod
+
+columns:
+  include:
+    - id
+    - provincia_id
+    - cod
+    - pais_cod
+    - provincia_cod
+    - nombre
+    - prefijo
+    - cinec
+    - es_activo
+  exclude: []
+  rename: {}
+  pii_columns: []
+  restricted_columns: []
+
+target:
+  bronze_catalog: dlh_cresa
+  bronze_schema: bronze
+  bronze_table: credito_cresa_cat_canton
+  write_mode_initial: overwrite
+  write_mode_delta: merge
+  merge_strategy: upsert_by_primary_key
+
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+
+governance:
+  domain_official: Maestro
+  sensitivity: Interno
+  data_owner: "Equipo de Datos - Maestro (por asignar oficialmente)"
+  purview_collection: 01_Maestros
+
+control_plane:
+  run_table: dlh_cresa.audit01.gobierno_silver_reglas
+  watermark_table: dlh_cresa.audit01.dynamics_odata_run_summary
+  error_table: dlh_cresa.audit01.log_procesos

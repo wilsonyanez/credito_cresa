@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_lcr_reserva_cuotas",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "lcr_reserva_cuotas",
+    "sql": "select id,cuenta_id,empresa_id,almacen_id,origen,pedido_id,monto,es_activo,creado_por,creado,actualizado_por,actualizado,sobre_cupo from CREDITO_CRESA.dbo.lcr_reserva_cuotas nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_lcr_reserva_cuotas",
+    "write_mode": "merge",
+    "merge_key": ["cod_cliente"]
+  },
+  "config_yml": "../credito_cresa_lcr_reserva_cuotas.yml",
+  "job_config": "../jobs/credito_cresa_lcr_reserva_cuotas_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}

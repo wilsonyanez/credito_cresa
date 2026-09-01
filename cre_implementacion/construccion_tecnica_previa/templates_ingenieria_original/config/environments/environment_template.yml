@@ -1,0 +1,34 @@
+# Plantilla: parametros por ambiente (CRESA)
+# IMPORTANTE: a diferencia de Almar, CRESA hoy NO tiene separacion DEV/TEST/PROD real
+# (ver Implementacion/ARQUITECTURA_DESPLEGADA_VS_TOBE.md - "Catalogo unico con tablas
+# _test/_bk en produccion"). Este archivo declara prod.yml como el unico ambiente real
+# y deja dev.yml/qa.yml como aspiracion, para cuando se cierre ese gap estructural.
+
+environment: prod
+workspace_url: "https://adb-1077365077848684.4.azuredatabricks.net"
+unity_catalog:
+  catalog: dlh_cresa
+  bronze_schema: bronze
+  silver_schema: silver
+  gold_schema: gold
+  governance_schema: audit01   # se extiende, no se crea un catalogo de gobierno nuevo
+
+storage:
+  account_name: stgdlh02
+  container: dlhcresa01
+
+security:
+  secret_backend: databricks_secret_scope
+  key_vault_name: keyvaultdlh01
+  default_secret_scope: cresa-datahub-prod
+
+execution:
+  default_cluster_policy: cresa-data-engineering
+  default_job_timeout_minutes: 120
+  default_retry_attempts: 2
+  enable_notifications: true
+
+# --- Aspiracional, no real hoy (trabajo estructural, fuera de Fase 3) ---
+# environment: dev
+# unity_catalog:
+#   catalog: dlh_cresa_dev   # catalogo separado, pendiente de aprobacion

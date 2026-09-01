@@ -1,0 +1,23 @@
+{
+  "entity": "credito_cresa_cat_almacen",
+  "source": {
+    "database": "CREDITO_CRESA",
+    "schema": "dbo",
+    "table": "cat_almacen",
+    "sql": "select id,empresa_id,grupo_id,unidadnegocio_id,canton_id,canal_id,nombre,canal_dimension,unidadnegocio_dimension,empresacomercial,aplica_biometria,es_fisica,es_activo from CREDITO_CRESA.dbo.cat_almacen nolock"
+  },
+  "target": {
+    "catalog": "dlh_cresa",
+    "schema": "bronze",
+    "table": "credito_cresa_cat_almacen",
+    "write_mode": "merge",
+    "merge_key": ["id"]
+  },
+  "config_yml": "../credito_cresa_cat_almacen.yml",
+  "job_config": "../jobs/credito_cresa_cat_almacen_job.json",
+  "controls": {
+    "record_count_by_table": true,
+    "quality_checks": true,
+    "smtp_alerts": true
+  }
+}
