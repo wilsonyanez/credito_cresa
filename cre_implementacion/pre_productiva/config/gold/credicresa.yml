@@ -1,0 +1,7 @@
+config_version: 1
+layer: gold
+status: temporal
+load_strategy: full_snapshot
+format: parquet
+business_rules: pending_business_rule
+publish_to_consumers: false

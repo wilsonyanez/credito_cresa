@@ -1,0 +1,5 @@
+.venv/
+.deployment/
+**/__pycache__/
+
+scripts/cresa_credito_desplegar.log

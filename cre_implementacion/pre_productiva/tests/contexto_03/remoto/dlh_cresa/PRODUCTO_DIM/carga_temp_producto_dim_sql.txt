@@ -1,0 +1,98 @@
+-- Databricks notebook source
+--DROP TABLE IF EXISTS dlh_cresa.staging.temp_producto_dim;
+--CREATE OR REPLACE TABLE IF NOT EXISTS
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_producto_dim (
+  APCapacityCategory BIGINT COMMENT '',
+  APGroupCategory BIGINT COMMENT '',
+  APLineCategory BIGINT COMMENT '',
+  APSubGroupCategory BIGINT COMMENT '',
+  dataAreaId VARCHAR(20) COMMENT '',
+  ItemNumber VARCHAR(100) COMMENT 'id (Dynamic)',--NOT NULL,
+  InventBatchId VARCHAR(100) COMMENT 'num_motor',--NOT NULL,
+  InventSerialId VARCHAR(100) COMMENT 'serial_chasis',--NOT NULL,
+  PackagingGroupId VARCHAR(20) COMMENT '',
+  ProductGroupId VARCHAR(20) COMMENT '',
+  ProductLifecycleStateId	VARCHAR(20) COMMENT '',
+  ProductSearchName VARCHAR(150) COMMENT '',
+  SearchName VARCHAR(150) COMMENT '',
+  ProductType	VARCHAR(60) COMMENT '',
+  SellStartDate	TIMESTAMP	COMMENT '',
+  GrossDepth DECIMAL(18,4) COMMENT 'Profuncidad',
+  GrossProductWidth DECIMAL(18,4) COMMENT 'Ancho',
+  UnitCost DECIMAL(18,2)	COMMENT '',
+  ProductSubtype VARCHAR(20) COMMENT 'Subtipo Producto',
+  productname VARCHAR(250) COMMENT ''
+  --UnitCost	numeric(32,6)	COMMENT '',
+  --campo_x varchar(20) COMMENT '',  -- campos que se requieran crear
+)
+COMMENT 'Tabla temporal para procesos de construir dimension (temp_producto_dim)';
+
+
+
+-- COMMAND ----------
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_producto_0_parquet
+as 
+select distinct
+  CASE WHEN COALESCE(dataAreaId, '00000') = '' THEN '00000' ELSE dataAreaId END as dataAreaId,
+	ItemId,
+	CASE WHEN COALESCE(InventBatchId, '00000') = '' THEN '00000' ELSE InventBatchId END AS InventBatchId,
+  CASE WHEN COALESCE(InventSerialId, '00000') = '' THEN '00000' ELSE InventSerialId END AS InventSerialId,
+  LastUpdDateExpected,
+	LastUpdDatePhysical
+FROM -- PARQUET.`/Volumes/dlh_cresa/bronze/vol_bronze_dynamics/sum/sum.parquet`;
+  dlh_cresa.bronze.d365_sums;
+--select *from carga_temp_producto_0_parquet where ItemId in ('GCSTBS5002-013-CF') and InventSerialId='3038911539291';
+
+
+-- COMMAND ----------
+
+
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_producto_parquet
+as 
+select *from --parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_dynamics/releasedproductv2/releasedproductv2.parquet`
+-- dlh_cresa.bronze.ReleasedProductsV2;
+dlh_cresa.bronze.d365_ReleasedProductsV2;
+
+--select ItemNumber,ProductGroupId from carga_temp_producto_parquet where ItemNumber='GCSTBS5002-013-CF';
+--DESCRIBE TABLE carga_temp_producto_parquet;
+--SHOW VIEWS;
+
+TRUNCATE TABLE dlh_cresa.staging.temp_producto_dim;  
+
+INSERT INTO dlh_cresa.staging.temp_producto_dim
+select distinct
+pd.APCapacityCategory,
+pd.APGroupCategory,
+pd.APLineCategory,
+pd.APSubGroupCategory,
+CASE WHEN COALESCE(pd.dataAreaId, ctp.dataAreaId) = '' THEN '00000' 
+  ELSE COALESCE(pd.dataAreaId, ctp.dataAreaId) END as dataAreaId,
+CASE WHEN COALESCE(pd.ItemNumber, ctp.ItemId) = '' THEN '00000' 
+  ELSE COALESCE(pd.ItemNumber, ctp.ItemId) END as ItemNumber,
+--ctp.InventBatchId,
+--ctp.InventSerialId,
+CASE WHEN (pd.ProductGroupId = 'Veh_moto') THEN ctp.InventBatchId 
+  ELSE '00000' END as InventBatchId,
+CASE WHEN (pd.ProductGroupId = 'Veh_moto') THEN ctp.InventSerialId
+ELSE '00000' END as InventSerialId,
+-- ctp.InventSerialId,
+pd.PackagingGroupId,
+pd.ProductGroupId,
+pd.ProductLifecycleStateId,
+
+CASE WHEN pd.ProductSearchName <> '' THEN pd.ProductSearchName
+     WHEN COALESCE(pd.ProductSearchName, pd.SearchName) <> '' THEN 'SIN DEFINIR'
+  ELSE pd.SearchName END as ProductSearchName,
+pd.SearchName, --  se incrementa campo para descripcion del producto (SearchName)
+pd.ProductType,
+pd.SellStartDate,
+pd.GrossDepth,
+pd.GrossProductWidth,
+pd.UnitCost,
+pd.ProductSubtype,
+pd.productname
+from carga_temp_producto_parquet pd
+FULL OUTER JOIN carga_temp_producto_0_parquet ctp on pd.dataAreaId = ctp.dataAreaId and  pd.ItemNumber = ctp.itemid;

@@ -1,0 +1,24 @@
+[
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "bytes": 21505,
+    "sha256": "ccf1224c8ff3c3e0d059776c350e91a6b036859b8ccaad3398988d983f8b0d1a",
+    "celdas_combinadas": {
+      "xl/worksheets/sheet1.xml": [],
+      "xl/worksheets/sheet2.xml": []
+    }
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "bytes": 39898,
+    "sha256": "112c9fe5fa25160d5aef7544fa8bd1889fa3971f5e1c34dbc4f85daf11862769",
+    "celdas_combinadas": {
+      "xl/worksheets/sheet1.xml": [],
+      "xl/worksheets/sheet2.xml": [],
+      "xl/worksheets/sheet3.xml": [],
+      "xl/worksheets/sheet4.xml": [],
+      "xl/worksheets/sheet5.xml": [],
+      "xl/worksheets/sheet6.xml": []
+    }
+  }
+]

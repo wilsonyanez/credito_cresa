@@ -1,0 +1,24 @@
+# Ejemplo ilustrativo; no agrega una entidad al piloto.
+source_name: credicresa
+source_table: ejemplo
+columns:
+  include: [id, monto, codigo, fecha]
+  source_types:
+    id: BIGINT
+    monto: null
+    codigo: null
+    fecha: DATETIME
+  classification:
+    monto: numerico
+    codigo: alfanumerico
+  types:
+    id: BIGINT
+    monto: DECIMAL(10,2)
+    codigo: STRING
+    fecha: TIMESTAMP_NTZ
+# Los tipos existentes prevalecen; defaults solo ante ausencia de tipo.
+target:
+  catalog: cresa_credito
+  bronce: credicresa_datos_bronce.credicresa_ejemplo_bronce
+  plata: credicresa_datos_plata.credicresa_ejemplo_plata
+  oro: credicresa_datos_oro.credicresa_ejemplo_oro

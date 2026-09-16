@@ -1,0 +1,33 @@
+-- Databricks notebook source
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_producto_procedencia_dim (
+  cod_producto VARCHAR(20) ,
+  atributo VARCHAR(20) ,
+  tipo_atributo VARCHAR(60) 
+);
+
+
+-- COMMAND ----------
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_producto_anio_fabricacion_dim (
+  cod_producto VARCHAR(20) ,
+  atributo VARCHAR(20) ,
+  tipo_atributo INT
+);
+
+-- COMMAND ----------
+
+truncate table dlh_cresa.staging.temp_producto_procedencia_dim;
+
+insert into dlh_cresa.staging.temp_producto_procedencia_dim 
+select distinct ProductNumber,AttributeName,TextValue from dlh_cresa.bronze.ProductAttributeValuesV3 
+where AttributeName='Procedencia';
+
+
+
+-- COMMAND ----------
+
+truncate table dlh_cresa.staging.temp_producto_anio_fabricacion_dim;
+
+insert into dlh_cresa.staging.temp_producto_anio_fabricacion_dim 
+select distinct ProductNumber,AttributeName,IntegerValue from dlh_cresa.bronze.ProductAttributeValuesV3 
+where AttributeName='Año';

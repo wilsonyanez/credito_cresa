@@ -1,0 +1,145 @@
+{
+  "name": "JOB_CRE_00_CARGA_DATOS_CREDI_CRESA",
+  "description": "CRESA: fuente, Bronze, Silver y Gold temporales Parquet y verificacion; 34 entidades por fuente.",
+  "max_concurrent_runs": 1,
+  "parameters": [
+    {
+      "name": "period",
+      "default": ""
+    },
+    {
+      "name": "bootstrap",
+      "default": "false"
+    },
+    {
+      "name": "dry_run",
+      "default": "false"
+    },
+    {
+      "name": "seed_format",
+      "default": "csv"
+    },
+    {
+      "name": "delimiter",
+      "default": ","
+    },
+    {
+      "name": "table_filter",
+      "default": ""
+    },
+    {
+      "name": "input_batch",
+      "default": ""
+    }
+  ],
+  "tasks": [
+    {
+      "task_key": "credicresa_fuente",
+      "notebook_task": {
+        "notebook_path": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/notebooks/01_create_source_database",
+        "base_parameters": {
+          "source_config": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/config/sources/credicresa.yml"
+        },
+        "source": "WORKSPACE"
+      },
+      "environment_key": "default",
+      "timeout_seconds": 7200,
+      "max_retries": 0
+    },
+    {
+      "task_key": "credicresa_bronze",
+      "notebook_task": {
+        "notebook_path": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/notebooks/ingest_databricks_source_to_parquet",
+        "base_parameters": {
+          "source_config": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/config/sources/credicresa.yml"
+        },
+        "source": "WORKSPACE"
+      },
+      "environment_key": "default",
+      "timeout_seconds": 7200,
+      "max_retries": 0,
+      "depends_on": [
+        {
+          "task_key": "credicresa_fuente"
+        }
+      ]
+    },
+    {
+      "task_key": "credicresa_silver",
+      "notebook_task": {
+        "notebook_path": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/notebooks/03_credicresa_silver",
+        "base_parameters": {
+          "source_config": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/config/sources/credicresa.yml"
+        },
+        "source": "WORKSPACE"
+      },
+      "environment_key": "default",
+      "timeout_seconds": 7200,
+      "max_retries": 0,
+      "depends_on": [
+        {
+          "task_key": "credicresa_bronze"
+        }
+      ]
+    },
+    {
+      "task_key": "credicresa_gold",
+      "notebook_task": {
+        "notebook_path": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/notebooks/03_credicresa_gold",
+        "base_parameters": {
+          "source_config": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/config/sources/credicresa.yml"
+        },
+        "source": "WORKSPACE"
+      },
+      "environment_key": "default",
+      "timeout_seconds": 7200,
+      "max_retries": 0,
+      "depends_on": [
+        {
+          "task_key": "credicresa_silver"
+        }
+      ]
+    },
+    {
+      "task_key": "credicresa_verificar",
+      "notebook_task": {
+        "notebook_path": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/notebooks/02_verify_credicresa",
+        "base_parameters": {
+          "source_config": "/Workspace/REEMPLAZAR_RUTA_GIT_FOLDER/cresa/credicresa/config/sources/credicresa.yml"
+        },
+        "source": "WORKSPACE"
+      },
+      "environment_key": "default",
+      "timeout_seconds": 7200,
+      "max_retries": 0,
+      "depends_on": [
+        {
+          "task_key": "credicresa_gold"
+        }
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "environment_key": "default",
+      "spec": {
+        "environment_version": "2",
+        "dependencies": [
+          "PyYAML==6.0.3"
+        ]
+      }
+    }
+  ],
+  "schedule": {
+    "quartz_cron_expression": "0 0 2 * * ?",
+    "timezone_id": "America/Guayaquil",
+    "pause_status": "PAUSED"
+  },
+  "tags": {
+    "client": "cresa",
+    "source": "credicresa",
+    "managed_by": "pre_productiva",
+    "format": "parquet",
+    "project": "credicresa"
+  }
+}

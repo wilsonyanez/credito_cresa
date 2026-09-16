@@ -1,0 +1,211 @@
+-- Databricks notebook source
+--DROP TABLE IF EXISTS dlh_cresa.staging.temp_persona_dim;
+--CREATE OR REPLACE TABLE IF NOT EXISTS
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_persona_dim (
+  AddressCity	varchar(20) COMMENT '',
+  AddressCountryRegionId	varchar(20) COMMENT '',
+  AddressCountryRegionISOCode	varchar(20) COMMENT '',
+  AddressDescription varchar(20) COMMENT '',
+  AddressLocationId	varchar(20) COMMENT '',
+  AddressLocationRoles	varchar(20) COMMENT '',
+  AddressRecordId	varchar(20) COMMENT '',
+  AddressState	varchar(20) COMMENT '',
+  AddressStreet	varchar(400) COMMENT '',
+  AddressStreetNumber	varchar(20) COMMENT '',
+  AddressValidFrom	timestamp	COMMENT '',
+  AddressValidTo	timestamp	COMMENT '',
+  CreditLimit	DECIMAL(18,2)	COMMENT '',
+  CredManCreditLimitDate timestamp	COMMENT '',
+  CredManCreditLimitExpiryDate	timestamp	COMMENT '',
+  CredManCustomerSince	timestamp	COMMENT '',
+  CredManEligibleCreditMax	DECIMAL(18,2)	COMMENT '',
+  CredManCustCreditMaxAlt	DECIMAL(18,2)	COMMENT '',
+  CredManGroupId	varchar(20) COMMENT '',
+  CustomerAccount	VARCHAR(20)	COMMENT 'id (Dynamic)',--NOT NULL,
+  CustomerGroupId	varchar(20) COMMENT '',
+  DeliveryAddressDistrictName	varchar(60) COMMENT '',
+  DeliveryAddressState	varchar(20) COMMENT '',
+  DeliveryAddressStreet	varchar(400) COMMENT '',
+  -- DeliveryAddressStreetNumber	varchar(20) COMMENT '',
+  DeliveryAddressValidFrom	timestamp	COMMENT '',
+  DeliveryAddressValidTo	timestamp	COMMENT '',
+  DeliveryAddressZipCode	varchar(20) COMMENT '',
+  ElectronicLocationId	varchar(20) COMMENT '',
+  FullPrimaryAddress	varchar(400) COMMENT '',
+  InvoiceAddressCity	varchar(20) COMMENT '',
+  InvoiceAddress	varchar(20) COMMENT '',
+  InvoiceAddressCountryRegionISOCode	varchar(20) COMMENT '',
+  InvoiceAddressLocationId	varchar(20) COMMENT '',
+  InvoiceAddressState	varchar(20) COMMENT '',
+  InvoiceAddressStreetNumber	varchar(20) COMMENT '',
+  InvoiceAddressValidFrom	timestamp	COMMENT '',
+  InvoiceAddressValidTo	timestamp	COMMENT '',
+  InvoiceAddressZipCode	varchar(20) COMMENT '',
+  IsElectronicInvoice	varchar(20) COMMENT '',
+  -- IsFinalUser	varchar(20) COMMENT '',
+  -- IsServiceDeliveryAddressBased	varchar(20) COMMENT '',
+  LanguageId	varchar(20) COMMENT '',
+  NameAlias	varchar(20) COMMENT '',
+  NatureOfAssessee	varchar(20) COMMENT '',
+  OrganizationName	varchar(150) COMMENT '',
+  PartyNumber	varchar(20) COMMENT '',
+  PaymentMethod	varchar(20) COMMENT '',
+  PaymentTerms	varchar(20) COMMENT '',
+  PersonBirthDay	int	COMMENT '',
+  PersonBirthMonth	varchar(20) COMMENT '',
+  PersonBirthYear	int	COMMENT '',
+  PersonFirstName	varchar(100) COMMENT '',
+  PersonLastName	varchar(100) COMMENT '',
+  PersonMiddleName	varchar(100) COMMENT '',
+  PrimaryContactEmailDescription	varchar(20) COMMENT '',
+  PrimaryContactEmailIsIM	varchar(20) COMMENT '',
+ -- PrimaryContactEmailPurpose	varchar(20) COMMENT '',
+ -- PrimaryContactEmailRecordId	bigint	COMMENT '',
+  PrimaryContactPhone	varchar(20) COMMENT '',
+  PrimaryContactPhoneDescription	string COMMENT '',
+  PrimaryContactPhoneExtension	varchar(20) COMMENT '',
+  PrimaryContactPhonePurpose	varchar(20) COMMENT '',
+  PrimaryContactPhoneRecordId	bigint	COMMENT '',
+  PrimaryContactTelex	varchar(20) COMMENT '',
+  SalesAccountNumber	varchar(20) COMMENT '',
+  SalesCurrencyCode	varchar(20) COMMENT '',
+  SalesTaxGroup	varchar(20) COMMENT '',
+  SiteId	varchar(20) COMMENT '',
+  VATNum	varchar(20) COMMENT '',
+  CredManExclude	varchar(20) COMMENT '',
+  InvoiceAddressCountryRegionId	varchar(20) COMMENT '',
+  PartyType	varchar(20) COMMENT '',
+  dataAreaId	varchar(20) COMMENT '',
+  DefaultDimensionDisplayValue	varchar(20) COMMENT '',
+  -- PrimaryContactTelexPurpose	varchar(20) COMMENT '',
+  fecha_nacimiento timestamp,
+  --campo_x varchar(20) COMMENT '',  -- campos que se requieran crear
+  primarycontactemail varchar(100)
+)
+COMMENT 'Tabla temporal para procesos de construir dimension (temp_persona_dim)';
+
+-- COMMAND ----------
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_persona_parquet
+as 
+select * from dlh_cresa.bronze.d365_CustomersV3_OPT;
+--select *from parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_dynamics/customerv3/customerv3.parquet`;
+
+--select *from carga_temp_persona_parquet;
+--DESCRIBE TABLE carga_temp_persona_parquet;
+--SHOW VIEWS;
+
+
+TRUNCATE TABLE dlh_cresa.staging.temp_persona_dim;  
+
+INSERT INTO dlh_cresa.staging.temp_persona_dim
+select 
+  AddressCity,
+  AddressCountryRegionId,
+  AddressCountryRegionISOCode,
+  AddressDescription,
+  AddressLocationId,
+  AddressLocationRoles,
+  AddressRecordId,
+  LPAD(CAST(AddressState AS STRING), 2, '0') AddressState,
+  AddressStreet,
+  AddressStreetNumber,
+  AddressValidFrom,
+  AddressValidTo,
+  CreditLimit,
+  CredManCreditLimitDate,
+  CredManCreditLimitExpiryDate,
+  CredManCustomerSince,
+  CredManEligibleCreditMax,
+  CredManCustCreditMaxAlt,
+  CredManGroupId,
+  CustomerAccount,
+  CustomerGroupId,
+  DeliveryAddressDistrictName,
+  DeliveryAddressState,
+  DeliveryAddressStreet,
+  -- DeliveryAddressStreetNumber,
+  TRY_CAST(NULLIF(DeliveryAddressValidFrom, '') AS TIMESTAMP) AS DeliveryAddressValidFrom,
+  TRY_CAST(NULLIF(DeliveryAddressValidTo, '') AS TIMESTAMP) AS DeliveryAddressValidTo,
+  DeliveryAddressZipCode,
+  ElectronicLocationId,
+  FullPrimaryAddress,
+  InvoiceAddressCity,
+  InvoiceAddress,
+  InvoiceAddressCountryRegionISOCode,
+  InvoiceAddressLocationId,
+  InvoiceAddressState,
+  InvoiceAddressStreetNumber,
+  TRY_CAST(NULLIF(InvoiceAddressValidFrom, '') AS TIMESTAMP) AS InvoiceAddressValidFrom,
+  TRY_CAST(NULLIF(InvoiceAddressValidTo, '') AS TIMESTAMP) AS InvoiceAddressValidTo,
+  InvoiceAddressZipCode,
+  IsElectronicInvoice,
+  -- IsFinalUser,
+  -- IsServiceDeliveryAddressBased,
+  LanguageId,
+  NameAlias,
+  NatureOfAssessee,
+  OrganizationName,
+  PartyNumber,
+  PaymentMethod,
+  PaymentTerms,
+  TRY_CAST(NULLIF(PersonBirthDay, '') AS INT) AS PersonBirthDay,
+  PersonBirthMonth,
+  TRY_CAST(NULLIF(PersonBirthYear, '') AS INT) AS PersonBirthYear,
+  PersonFirstName,
+  PersonLastName,
+  PersonMiddleName,
+  PrimaryContactEmailDescription,
+  PrimaryContactEmailIsIM,
+  -- PrimaryContactEmailPurpose,
+  -- PrimaryContactEmailRecordId,
+  PrimaryContactPhone,
+  PrimaryContactPhoneDescription,
+  PrimaryContactPhoneExtension,
+  PrimaryContactPhonePurpose,
+  TRY_CAST(NULLIF(PrimaryContactPhoneRecordId, '') AS BIGINT) AS PrimaryContactPhoneRecordId,
+  PrimaryContactTelex,
+  SalesAccountNumber,
+  SalesCurrencyCode,
+  SalesTaxGroup,
+  SiteId,
+  VATNum,
+  CredManExclude,
+  InvoiceAddressCountryRegionId,
+  PartyType,
+  '0001' dataAreaId,
+  DefaultDimensionDisplayValue,
+  -- PrimaryContactTelexPurpose,
+  CASE 
+    WHEN PersonBirthDay = '' OR PersonBirthMonth = '' OR PersonBirthYear = '' 
+         OR PersonBirthDay IS NULL OR PersonBirthMonth IS NULL OR PersonBirthYear IS NULL
+    THEN NULL
+    ELSE TO_TIMESTAMP(
+      CONCAT(
+        LPAD(PersonBirthDay, 2, '0'), '-', 
+        CASE LOWER(PersonBirthMonth)
+          WHEN 'january' THEN '01'
+          WHEN 'february' THEN '02'
+          WHEN 'march' THEN '03'
+          WHEN 'april' THEN '04'
+          WHEN 'may' THEN '05'
+          WHEN 'june' THEN '06'
+          WHEN 'july' THEN '07'
+          WHEN 'august' THEN '08'
+          WHEN 'september' THEN '09'
+          WHEN 'october' THEN '10'
+          WHEN 'november' THEN '11'
+          WHEN 'december' THEN '12'
+          ELSE NULL
+        END,
+        '-', 
+        PersonBirthYear,
+        ' 00:00:00'
+      ),
+      'dd-MM-yyyy HH:mm:ss'
+    )
+  END AS fecha_nacimiento,
+  primarycontactemail
+from carga_temp_persona_parquet;
+

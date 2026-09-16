@@ -1,31 +1,7 @@
-# Databricks Connect para desarrollo local
+# Desarrollo local y Databricks Connect
 
-Databricks Connect permite ejecutar desde el IDE usando cómputo remoto. En esta solución no se utiliza para conectar una base Microsoft SQL; la fuente de prueba vive dentro de Databricks.
+Revisión: 2026-09-16. El paquete operativo usa la CLI Databricks y OAuth mediante los lanzadores descritos en [README](../README.md). No necesita Databricks Connect para validar contratos ni generar el plan local.
 
-## Datos requeridos
+Los archivos históricos `scripts/setup_databricks_connect.ps1` y `tests/smoke_databricks_connect.py` no están disponibles como flujo vigente; sus comandos se retiran de esta guía. Si se adopta Connect, definir y validar previamente Runtime, Python, cómputo y permisos del ambiente objetivo. No se declara instalado ni probado como parte de esta entrega.
 
-- URL del workspace.
-- Databricks Runtime.
-- ID del clúster o serverless.
-- Ruta del Git folder.
-
-La versión local de Python y `databricks-connect` debe corresponder al Runtime.
-
-```powershell
-.\pre_productiva\scripts\setup_databricks_connect.ps1 `
-  -WorkspaceUrl 'https://adb-<workspace>.azuredatabricks.net' `
-  -RuntimeVersion '16.4' `
-  -PythonVersion '3.12' `
-  -Profile 'cresa-dev'
-```
-
-Prueba posterior:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-$env:DATABRICKS_CONFIG_PROFILE = 'cresa-dev'
-python .\pre_productiva\tests\smoke_databricks_connect.py
-```
-
-Databricks Connect no sustituye el Git folder: el repositorio debe vincularse por separado al workspace.
-
+El MDM se diseña para `dev_dlh_cresa` / `dlh_cresa`; `cresa` sigue siendo el piloto. Connect no crea una conexión a SQL Server ni sustituye el versionado del código. Credenciales y autorización se administran fuera del repositorio.

@@ -1,3 +1,5 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Bronze Relevante — Selección y Justificación (CRESA)
 
 > A diferencia de Almar (selección P1 de 114 tablas sobre 993 nunca antes cargadas), aquí Bronze ya existe (173 tablas). La "selección" es de **qué tablas Bronze ya existentes son la fuente de verdad a conformar** para los golden records de Cliente y Producto — no de qué cargar por primera vez.

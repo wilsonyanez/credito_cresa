@@ -1,0 +1,15 @@
+version: 1
+catalog: cresa_credito
+source: credicresa
+max_database_objects: 45
+max_entities: 14
+layers: [bronce, plata, oro]
+storage: parquet
+control_storage: delta
+pipeline_kind: notebook_workflow
+selection: alphabetical
+bootstrap_only: true
+defaults:
+  numerico: DECIMAL(10,2)
+  alfanumerico: STRING
+  sin_clasificacion: STRING

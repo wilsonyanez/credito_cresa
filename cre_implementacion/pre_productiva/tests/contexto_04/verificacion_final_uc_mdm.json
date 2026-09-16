@@ -1,0 +1,1408 @@
+{
+  "date": "2026-09-16",
+  "scope": "GET Unity Catalog tables; metadata only; no fresh counts",
+  "entities": [
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_persona_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "id_dlh_persona",
+          "type": "bigint"
+        },
+        {
+          "name": "id_persona",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "id_empresa",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "cod_persona",
+          "type": "decimal(18,0)"
+        },
+        {
+          "name": "cod_cliente",
+          "type": "decimal(18,0)"
+        },
+        {
+          "name": "cod_calificacion",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "cod_formalidad",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "cod_tipo_identificacion",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "num_identificacion",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "num_identificacion_conyuge",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "num_identificacion_cliente_ref",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "fecha_nacimiento",
+          "type": "timestamp"
+        },
+        {
+          "name": "fecha_ingreso_trabajo",
+          "type": "timestamp"
+        },
+        {
+          "name": "cant_cargas_familiares",
+          "type": "int"
+        },
+        {
+          "name": "estabilidad_residencial",
+          "type": "int"
+        },
+        {
+          "name": "estabilidad_laboral",
+          "type": "int"
+        },
+        {
+          "name": "monto_ingresos",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "des_nombre_completo",
+          "type": "varchar(120)"
+        },
+        {
+          "name": "des_tipo_cliente",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_formalidad",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "ind_exento_impuestos",
+          "type": "varchar(1)"
+        },
+        {
+          "name": "ind_separacion_bienes",
+          "type": "varchar(1)"
+        },
+        {
+          "name": "des_sexo",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_genero",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_nacionalidad",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_cargo_profesion",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_estado_civil",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_direccion_particular_pais",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "cod_direccion_particular_provincia",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "des_direccion_particular_provincia",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "cod_direccion_particular_ciudad",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "des_direccion_particular_ciudad",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "des_direccion_particular_sector",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "des_direccion_particular",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "des_direccion_particular_telefono",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "des_direccion_particular_observacion",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "des_nombre_trabajo",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "des_direccion_trabajo",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "des_direccion_trabajo_sector",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_direccion_trabajo_ciudad",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_direccion_trabajo_provincia",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_telefono_trabajo",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_direccion_trabajo_observacion",
+          "type": "varchar(200)"
+        },
+        {
+          "name": "des_envio_correspondencia",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_direccion_correspondencia",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "des_casilla_correspondencia",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_nivel_educacion",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_email",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "cod_estado",
+          "type": "char(1)"
+        },
+        {
+          "name": "des_telefono2",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "edad",
+          "type": "int"
+        }
+      ],
+      "updated_at": 1789551370740
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_producto_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "id_dlh_producto",
+          "type": "bigint"
+        },
+        {
+          "name": "id_empresa",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "cod_producto",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "num_motor",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "serie_chasis",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "fecha_ingreso",
+          "type": "date"
+        },
+        {
+          "name": "cod_marca",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_linea",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_grupo",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_subgrupo",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_categoria",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_estado_producto",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_estado_marca",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_tipo_producto",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_capacidad",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_tipo_procedencia",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_color",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_eficiencia",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_planificable",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_fabricacion",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "des_producto",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "des_marca",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_linea",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_grupo",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_subgrupo",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_categoria",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_categoria_comercial",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_grupo_asistencia",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_tipo_producto",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_capacidad",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_tipo_procedencia",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_color",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_eficiencia",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_estado_producto",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_estado_marca",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_tipo_palet",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "des_pertenencia_marca",
+          "type": "varchar(80)"
+        },
+        {
+          "name": "ind_presupuesta",
+          "type": "varchar(1)"
+        },
+        {
+          "name": "ind_ingreso_compra",
+          "type": "varchar(1)"
+        },
+        {
+          "name": "cod_proveedor",
+          "type": "varchar(10)"
+        },
+        {
+          "name": "cobertura_ce",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "cobertura_dm",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "cant_por_palet",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "ancho",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "ancho_um",
+          "type": "varchar(4)"
+        },
+        {
+          "name": "altura",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "altura_um",
+          "type": "varchar(4)"
+        },
+        {
+          "name": "longitud",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "longitud_um",
+          "type": "varchar(4)"
+        },
+        {
+          "name": "pies_cubicos",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "maximo_gex1",
+          "type": "float"
+        },
+        {
+          "name": "maximo_gex2",
+          "type": "float"
+        },
+        {
+          "name": "ind_gex",
+          "type": "varchar(4)"
+        },
+        {
+          "name": "cod_estado",
+          "type": "char(1)"
+        },
+        {
+          "name": "tipo_marca",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "ruc_proveedor",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "codigo_proveedor",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "razon_social_proveedor",
+          "type": "varchar(350)"
+        },
+        {
+          "name": "replica_producto",
+          "type": "varchar(10)"
+        },
+        {
+          "name": "web_producto",
+          "type": "varchar(10)"
+        },
+        {
+          "name": "calificado_producto",
+          "type": "varchar(10)"
+        },
+        {
+          "name": "des_subtipo_producto",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "des_origen_producto",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "anio_fabricacion",
+          "type": "bigint"
+        },
+        {
+          "name": "exhibicion_producto",
+          "type": "varchar(10)"
+        },
+        {
+          "name": "moto_caso3",
+          "type": "varchar(10)"
+        },
+        {
+          "name": "des_producto_full",
+          "type": "varchar(250)"
+        }
+      ],
+      "updated_at": 1789552498513
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_clasificacion_clientes_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "id_dlh_cod_calificacion_cliente",
+          "type": "bigint"
+        },
+        {
+          "name": "cod_calificacion_cliente",
+          "type": "varchar(5)"
+        },
+        {
+          "name": "cod_calificacion_unificada",
+          "type": "varchar(5)"
+        },
+        {
+          "name": "clasificacion_clientes",
+          "type": "varchar(20)"
+        }
+      ],
+      "updated_at": 1789552791538
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_cartera_saldos_fact",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "id_operacion",
+          "type": "bigint"
+        },
+        {
+          "name": "fecha",
+          "type": "date"
+        },
+        {
+          "name": "id_empleado",
+          "type": "varchar(11)"
+        },
+        {
+          "name": "id_cliente",
+          "type": "bigint"
+        },
+        {
+          "name": "id_almacen",
+          "type": "varchar(5)"
+        },
+        {
+          "name": "id_estado_credito",
+          "type": "int"
+        },
+        {
+          "name": "id_share",
+          "type": "int"
+        },
+        {
+          "name": "id_cuota",
+          "type": "int"
+        },
+        {
+          "name": "id_dias_atraso",
+          "type": "int"
+        },
+        {
+          "name": "id_clase_producto",
+          "type": "int"
+        },
+        {
+          "name": "monto",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "saldo",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "nro_operaciones",
+          "type": "int"
+        },
+        {
+          "name": "id_etapa_cobranza",
+          "type": "bigint"
+        },
+        {
+          "name": "id_generico",
+          "type": "varchar(40)"
+        },
+        {
+          "name": "id_rango_mora",
+          "type": "int"
+        },
+        {
+          "name": "id_rango_mora_alterno",
+          "type": "int"
+        },
+        {
+          "name": "id_rango_saldo",
+          "type": "int"
+        },
+        {
+          "name": "id_rango_monto",
+          "type": "int"
+        },
+        {
+          "name": "id_rango_mora_anterior",
+          "type": "int"
+        },
+        {
+          "name": "saldo_anterior",
+          "type": "int"
+        },
+        {
+          "name": "ratio_mora_30",
+          "type": "decimal(4,2)"
+        },
+        {
+          "name": "id_saldo_rango_mora",
+          "type": "int"
+        },
+        {
+          "name": "ratio_mora_120",
+          "type": "decimal(4,2)"
+        },
+        {
+          "name": "ratio_mora_180",
+          "type": "decimal(4,2)"
+        },
+        {
+          "name": "saldo_rango_mora_30",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "saldo_rango_mora_120",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "saldo_rango_mora_180",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "id_marca_renegociada",
+          "type": "int"
+        },
+        {
+          "name": "id_dueno_cartera",
+          "type": "int"
+        },
+        {
+          "name": "saldo_precancelacion",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "id_riesgo_tienda",
+          "type": "int"
+        },
+        {
+          "name": "id_dueno_fideicomiso",
+          "type": "int"
+        },
+        {
+          "name": "id_cuota_cero",
+          "type": "int"
+        },
+        {
+          "name": "saldo_cuota_cero",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "id_dueno_cartera_alterno",
+          "type": "int"
+        },
+        {
+          "name": "saldo_cuota_cero_1",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "ratio_cuota_cero_1",
+          "type": "decimal(4,2)"
+        },
+        {
+          "name": "saldo_cuota_cero_2",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "ratio_cuota_cero_2",
+          "type": "decimal(4,2)"
+        },
+        {
+          "name": "saldo_cuota_cero_3",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "ratio_cuota_cero_3",
+          "type": "decimal(4,2)"
+        },
+        {
+          "name": "nro_operaciones_cuota_cero",
+          "type": "int"
+        },
+        {
+          "name": "nro_operaciones_cuota_cero_1",
+          "type": "int"
+        },
+        {
+          "name": "nro_operaciones_cuota_cero_2",
+          "type": "int"
+        },
+        {
+          "name": "nro_operaciones_cuota_cero_3",
+          "type": "int"
+        },
+        {
+          "name": "saldo_rango_mora_360",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "ratio_mora_360",
+          "type": "decimal(4,2)"
+        },
+        {
+          "name": "cuota_proximo_vencimiento",
+          "type": "int"
+        },
+        {
+          "name": "cuotas_pendientes",
+          "type": "int"
+        },
+        {
+          "name": "cuotas_pagadas",
+          "type": "int"
+        },
+        {
+          "name": "id_atraso_promedio",
+          "type": "int"
+        },
+        {
+          "name": "id_atraso_maximo",
+          "type": "int"
+        },
+        {
+          "name": "id_migracion",
+          "type": "int"
+        }
+      ],
+      "updated_at": 1788578552495
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_estado_credito_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "PK_id_estado_credito",
+          "type": "int"
+        },
+        {
+          "name": "estado_credito",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "estado_registro",
+          "type": "int"
+        }
+      ],
+      "updated_at": 1767955989918
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_dias_atraso_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "PK_id_dias_atraso",
+          "type": "int"
+        },
+        {
+          "name": "dias_atraso",
+          "type": "int"
+        },
+        {
+          "name": "rango_dias_atraso",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "rango_mora_interno",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "s_descripcion_alterna",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "rango_mora_semanal",
+          "type": "varchar(30)"
+        }
+      ],
+      "updated_at": 1767767067656
+    },
+    {
+      "entity": "dlh_cresa.silver.base_concrecion_cliente",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int"
+        },
+        {
+          "name": "origen",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "canal",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "id_fecha",
+          "type": "int"
+        },
+        {
+          "name": "num_identificacion",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "nombre_cliente",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "ci_vendedor",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cod_tienda_siac",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "asignado",
+          "type": "varchar(60)"
+        },
+        {
+          "name": "cliente_gestionado",
+          "type": "varchar(60)"
+        }
+      ],
+      "updated_at": 1759777886065
+    },
+    {
+      "entity": "dlh_cresa.bronze.customersv3",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "AddressCity",
+          "type": "string"
+        },
+        {
+          "name": "AddressCountryRegionId",
+          "type": "string"
+        },
+        {
+          "name": "AddressCountryRegionISOCode",
+          "type": "string"
+        },
+        {
+          "name": "AddressDescription",
+          "type": "string"
+        },
+        {
+          "name": "AddressLocationId",
+          "type": "string"
+        },
+        {
+          "name": "AddressLocationRoles",
+          "type": "string"
+        },
+        {
+          "name": "AddressRecordId",
+          "type": "string"
+        },
+        {
+          "name": "AddressState",
+          "type": "string"
+        },
+        {
+          "name": "AddressStreet",
+          "type": "string"
+        },
+        {
+          "name": "AddressStreetNumber",
+          "type": "string"
+        },
+        {
+          "name": "AddressValidFrom",
+          "type": "timestamp"
+        },
+        {
+          "name": "AddressValidTo",
+          "type": "timestamp"
+        },
+        {
+          "name": "CreditLimit",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "CredManCreditLimitDate",
+          "type": "timestamp"
+        },
+        {
+          "name": "CredManCreditLimitExpiryDate",
+          "type": "timestamp"
+        },
+        {
+          "name": "CredManCustomerSince",
+          "type": "timestamp"
+        },
+        {
+          "name": "CredManEligibleCreditMax",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "CredManCustCreditMaxAlt",
+          "type": "decimal(18,2)"
+        },
+        {
+          "name": "CredManGroupId",
+          "type": "string"
+        },
+        {
+          "name": "CustomerAccount",
+          "type": "string"
+        },
+        {
+          "name": "CustomerGroupId",
+          "type": "string"
+        },
+        {
+          "name": "DeliveryAddressDistrictName",
+          "type": "string"
+        },
+        {
+          "name": "DeliveryAddressState",
+          "type": "string"
+        },
+        {
+          "name": "DeliveryAddressStreet",
+          "type": "string"
+        },
+        {
+          "name": "DeliveryAddressStreetNumber",
+          "type": "string"
+        },
+        {
+          "name": "DeliveryAddressValidFrom",
+          "type": "timestamp"
+        },
+        {
+          "name": "DeliveryAddressValidTo",
+          "type": "timestamp"
+        },
+        {
+          "name": "DeliveryAddressZipCode",
+          "type": "string"
+        },
+        {
+          "name": "ElectronicLocationId",
+          "type": "string"
+        },
+        {
+          "name": "FullPrimaryAddress",
+          "type": "string"
+        },
+        {
+          "name": "InvoiceAddressCity",
+          "type": "string"
+        },
+        {
+          "name": "InvoiceAddress",
+          "type": "string"
+        },
+        {
+          "name": "InvoiceAddressCountryRegionISOCod",
+          "type": "string"
+        }
+      ],
+      "updated_at": 1782754960718
+    },
+    {
+      "entity": "dlh_cresa.bronze.d365_productattributevaluesv3",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "_filename",
+          "type": "string"
+        },
+        {
+          "name": "_loadtime",
+          "type": "string"
+        },
+        {
+          "name": "attributename",
+          "type": "string"
+        },
+        {
+          "name": "attributetypename",
+          "type": "string"
+        },
+        {
+          "name": "booleanvalue",
+          "type": "string"
+        },
+        {
+          "name": "currencycode",
+          "type": "string"
+        },
+        {
+          "name": "currencyvalue",
+          "type": "bigint"
+        },
+        {
+          "name": "datatype",
+          "type": "string"
+        },
+        {
+          "name": "datetimevalue",
+          "type": "timestamp"
+        },
+        {
+          "name": "decimalvalue",
+          "type": "double"
+        },
+        {
+          "name": "integervalue",
+          "type": "bigint"
+        },
+        {
+          "name": "productnumber",
+          "type": "string"
+        },
+        {
+          "name": "textvalue",
+          "type": "string"
+        },
+        {
+          "name": "unitofmeasure",
+          "type": "string"
+        }
+      ],
+      "updated_at": 1788297176273
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_maestro_cliente",
+      "status": "NOT_FOUND",
+      "error": "Error: Table 'dlh_cresa.gold.dw_cresa_maestro_cliente' does not exist.\n"
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_maestro_producto",
+      "status": "NOT_FOUND",
+      "error": "Error: Table 'dlh_cresa.gold.dw_cresa_maestro_producto' does not exist.\n"
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_rango_mora_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "pk_id_rango_mora",
+          "type": "int"
+        },
+        {
+          "name": "descripcion",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "s_descripcion_alterna",
+          "type": "varchar(100)"
+        }
+      ],
+      "updated_at": 1767955990147
+    },
+    {
+      "entity": "dlh_cresa.gold.dw_cresa_persona_siac_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "PK_id_cod_cliente",
+          "type": "bigint"
+        },
+        {
+          "name": "numero_cedula",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "nombre_cliente",
+          "type": "varchar(150)"
+        },
+        {
+          "name": "fecha_nacimiento",
+          "type": "timestamp"
+        },
+        {
+          "name": "estado_civil",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "cod_persona",
+          "type": "bigint"
+        },
+        {
+          "name": "cod_provincia",
+          "type": "varchar(25)"
+        },
+        {
+          "name": "cod_barrio",
+          "type": "varchar(25)"
+        },
+        {
+          "name": "cod_canton",
+          "type": "varchar(25)"
+        },
+        {
+          "name": "cod_parroquia",
+          "type": "varchar(25)"
+        },
+        {
+          "name": "direccion",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "ubicacion",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "correo_electronico",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "observacion",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "negocio",
+          "type": "varchar(400)"
+        },
+        {
+          "name": "tipo_propiedad",
+          "type": "varchar(50)"
+        },
+        {
+          "name": "direccion_trabajo",
+          "type": "varchar(400)"
+        }
+      ],
+      "updated_at": 1789449441688
+    },
+    {
+      "entity": "dlh_cresa.staging.temp_dw_cresa_producto_dim_his",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "id_empresa",
+          "type": "string"
+        },
+        {
+          "name": "cod_producto",
+          "type": "string"
+        },
+        {
+          "name": "num_motor",
+          "type": "string"
+        },
+        {
+          "name": "serie_chasis",
+          "type": "string"
+        },
+        {
+          "name": "fecha_ingreso",
+          "type": "date"
+        },
+        {
+          "name": "cod_marca",
+          "type": "string"
+        },
+        {
+          "name": "cod_linea",
+          "type": "string"
+        },
+        {
+          "name": "cod_grupo",
+          "type": "string"
+        },
+        {
+          "name": "cod_subgrupo",
+          "type": "string"
+        },
+        {
+          "name": "cod_categoria",
+          "type": "string"
+        },
+        {
+          "name": "cod_estado_producto",
+          "type": "string"
+        },
+        {
+          "name": "cod_estado_marca",
+          "type": "string"
+        },
+        {
+          "name": "cod_tipo_producto",
+          "type": "string"
+        },
+        {
+          "name": "cod_capacidad",
+          "type": "string"
+        },
+        {
+          "name": "cod_tipo_procedencia",
+          "type": "string"
+        },
+        {
+          "name": "cod_color",
+          "type": "string"
+        },
+        {
+          "name": "cod_eficiencia",
+          "type": "string"
+        },
+        {
+          "name": "cod_planificable",
+          "type": "string"
+        },
+        {
+          "name": "cod_fabricacion",
+          "type": "string"
+        },
+        {
+          "name": "des_producto",
+          "type": "string"
+        },
+        {
+          "name": "des_marca",
+          "type": "string"
+        },
+        {
+          "name": "des_linea",
+          "type": "string"
+        },
+        {
+          "name": "des_grupo",
+          "type": "string"
+        },
+        {
+          "name": "des_subgrupo",
+          "type": "string"
+        },
+        {
+          "name": "des_categoria",
+          "type": "string"
+        },
+        {
+          "name": "categoria_comercial",
+          "type": "string"
+        },
+        {
+          "name": "des_grupo_asistencia",
+          "type": "string"
+        },
+        {
+          "name": "des_tipo_producto",
+          "type": "string"
+        },
+        {
+          "name": "des_capacidad",
+          "type": "string"
+        },
+        {
+          "name": "des_tipo_procedencia",
+          "type": "string"
+        },
+        {
+          "name": "des_color",
+          "type": "string"
+        },
+        {
+          "name": "des_eficiencia",
+          "type": "string"
+        },
+        {
+          "name": "des_estado_producto",
+          "type": "string"
+        },
+        {
+          "name": "des_estado_marca",
+          "type": "string"
+        },
+        {
+          "name": "des_tipo_palet",
+          "type": "string"
+        },
+        {
+          "name": "des_pertenencia_marca",
+          "type": "string"
+        },
+        {
+          "name": "ind_presupuesta",
+          "type": "string"
+        },
+        {
+          "name": "ind_ingreso_compra",
+          "type": "string"
+        },
+        {
+          "name": "cod_proveedor",
+          "type": "string"
+        },
+        {
+          "name": "cobertura_ce",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "cobertura_dm",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "cant_por_palet",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "ancho",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "ancho_um",
+          "type": "string"
+        },
+        {
+          "name": "altura",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "altura_um",
+          "type": "string"
+        },
+        {
+          "name": "longitud",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "longitud_um",
+          "type": "string"
+        },
+        {
+          "name": "pies_cubicos",
+          "type": "decimal(10,4)"
+        },
+        {
+          "name": "maximo_gex1",
+          "type": "double"
+        },
+        {
+          "name": "maximo_gex2",
+          "type": "double"
+        },
+        {
+          "name": "ind_gex",
+          "type": "string"
+        },
+        {
+          "name": "cod_estado",
+          "type": "string"
+        }
+      ],
+      "updated_at": 1767843416702
+    },
+    {
+      "entity": "dlh_cresa.staging.temp_tipo_marca_web_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "ItemNumber",
+          "type": "varchar(100)"
+        },
+        {
+          "name": "tipo_marca",
+          "type": "string"
+        }
+      ],
+      "updated_at": 1789552226415
+    },
+    {
+      "entity": "dlh_cresa.staging.temp_producto_anio_fabricacion_dim",
+      "status": "EXISTS",
+      "format": "DELTA",
+      "columns": [
+        {
+          "name": "cod_producto",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "atributo",
+          "type": "varchar(20)"
+        },
+        {
+          "name": "tipo_atributo",
+          "type": "int"
+        }
+      ],
+      "updated_at": 1789552241869
+    }
+  ]
+}

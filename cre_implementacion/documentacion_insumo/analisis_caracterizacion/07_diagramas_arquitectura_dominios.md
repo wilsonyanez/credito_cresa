@@ -1,3 +1,5 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Diagramas de Arquitectura y Dominios — Fase 3 (CRESA)
 
 > Adaptado del anexo equivalente de Almar Fase 3. Diferencia clave: aquí el catálogo (`dlh_cresa`) y los esquemas por capa (`bronze`, `silver`, `gold`, `staging`, `src`, `externo_cresa`) **ya existen y están en producción** — los diagramas muestran cómo conformar Cliente/Producto dentro de esa estructura, no cómo crearla desde cero.

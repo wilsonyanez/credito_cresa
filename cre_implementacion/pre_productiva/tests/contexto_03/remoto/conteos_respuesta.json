@@ -1,0 +1,119 @@
+{
+  "manifest": {
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_count": 19,
+        "row_offset": 0
+      }
+    ],
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 2,
+      "columns": [
+        {
+          "name": "entidad",
+          "position": 0,
+          "type_name": "STRING",
+          "type_text": "STRING"
+        },
+        {
+          "name": "filas",
+          "position": 1,
+          "type_name": "LONG",
+          "type_text": "BIGINT"
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "total_row_count": 19,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "data_array": [
+      [
+        "/Volumes/dlh_cresa/bronze/vol_bronze_siac/genvtclientedirecciontelef_cresa/",
+        "377482"
+      ],
+      [
+        "/Volumes/dlh_cresa/bronze/vol_bronze_siac/genmtelefono_cresa/",
+        "2490209"
+      ],
+      [
+        "/Volumes/dlh_cresa/bronze/vol_bronze_siac/genmpersona_cresa/",
+        "1131674"
+      ],
+      [
+        "/Volumes/dlh_cresa/bronze/vol_bronze_metas_dwtanque_cresa/tbl_proveedores_mktpl/tbl_proveedores_mktpl.parquet",
+        "55516"
+      ],
+      [
+        "dlh_cresa.bronze.AddressCities",
+        "234"
+      ],
+      [
+        "dlh_cresa.bronze.d365_CustomersV3_OPT",
+        "808211"
+      ],
+      [
+        "dlh_cresa.bronze.AddressStates",
+        "24"
+      ],
+      [
+        "dlh_cresa.bronze.ProductReceiptLines",
+        "181291"
+      ],
+      [
+        "dlh_cresa.bronze.purchaseorderheadersv2",
+        "115217"
+      ],
+      [
+        "dlh_cresa.src.xls_comercial_categoria",
+        "28"
+      ],
+      [
+        "dlh_cresa.src.xls_comercial_grupo_asistencia",
+        "31"
+      ],
+      [
+        "dlh_cresa.bronze.ProductAttributeValuesV3",
+        "538672"
+      ],
+      [
+        "dlh_cresa.bronze.CommercialHeirarchyCategories",
+        "8621"
+      ],
+      [
+        "dlh_cresa.bronze.ProductGroups",
+        "133"
+      ],
+      [
+        "dlh_cresa.bronze.ProductLifecycleStates",
+        "11"
+      ],
+      [
+        "dlh_cresa.bronze.InventPackagingGroups",
+        "4361"
+      ],
+      [
+        "dlh_cresa.bronze.d365_sums",
+        "8637632"
+      ],
+      [
+        "dlh_cresa.bronze.d365_ReleasedProductsV2",
+        "70457"
+      ],
+      [
+        "dlh_cresa.src.xls_tipo_marca",
+        "628"
+      ]
+    ],
+    "row_count": 19,
+    "row_offset": 0
+  },
+  "statement_id": "01f1b13b-0c1c-1f24-b35f-e89818fdceb7",
+  "status": {
+    "state": "SUCCEEDED"
+  }
+}

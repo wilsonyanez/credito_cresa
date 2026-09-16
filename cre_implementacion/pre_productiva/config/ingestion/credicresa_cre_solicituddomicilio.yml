@@ -1,0 +1,150 @@
+config_version: 1
+source_name: credicresa
+source_schema: landing
+source_table: cre_solicituddomicilio
+source_table_normalized: cre_solicituddomicilio
+enabled: true
+description: Catálogo de configuración control solicitud de domicilio desde CRESA (proyecto credicresa).
+  Ingesta a Bronze para consumo de dominios. Campos explicitados para ingesta incremental/validación.
+priority:
+  wave: fase_3_ingesta
+  score: 5
+  reason: Tabla de maestro usada por procesos de normalización y reporting.
+load_strategy:
+  initial_mode: full_snapshot
+  incremental_mode: full_snapshot
+  watermark_column: null
+  sequence_column: null
+  delta_lookback_days: 0
+  delete_detection: false
+read:
+  mode: table
+query:
+  custom_sql: null
+  where_clause: null
+  order_by: null
+primary_key:
+  columns:
+  - id
+  enforced_in_source: false
+natural_key:
+  columns:
+  - id
+  - solicitud_id
+  - provincia_id
+  - canton_id
+  - parroquia_id
+columns:
+  include:
+  - id
+  - solicitud_id
+  - provincia_id
+  - canton_id
+  - parroquia_id
+  - direccion
+  - sector
+  - calle_principal
+  - calle_transversal
+  - tipo_domicilio
+  - referencia
+  - telefono_fijo
+  - celular
+  - tipo_propiedad
+  - tipo_vivienda
+  - tiempo_residencia
+  - ubicacion_longitud
+  - ubicacion_latitud
+  - ubicacion_mapa
+  - es_actual
+  - manzana
+  - villa
+  - actualizado
+  - actualizado_por
+  - creado
+  - creado_por
+  exclude: []
+  rename: {}
+  pii_columns: []
+  restricted_columns: []
+  types:
+    id: BIGINT
+    solicitud_id: BIGINT
+    provincia_id: INT
+    canton_id: INT
+    parroquia_id: INT
+    direccion: STRING
+    sector: STRING
+    calle_principal: STRING
+    calle_transversal: STRING
+    tipo_domicilio: STRING
+    referencia: STRING
+    telefono_fijo: STRING
+    celular: STRING
+    tipo_propiedad: STRING
+    tipo_vivienda: STRING
+    tiempo_residencia: INT
+    ubicacion_longitud: DOUBLE
+    ubicacion_latitud: DOUBLE
+    ubicacion_mapa: STRING
+    es_actual: BOOLEAN
+    manzana: STRING
+    villa: STRING
+    actualizado: STRING
+    actualizado_por: INT
+    creado: STRING
+    creado_por: INT
+  source_types:
+    id: BIGINT
+    solicitud_id: BIGINT
+    provincia_id: INT
+    canton_id: INT
+    parroquia_id: INT
+    direccion: VARCHAR(500)
+    sector: VARCHAR(200)
+    calle_principal: VARCHAR(200)
+    calle_transversal: VARCHAR(100)
+    tipo_domicilio: VARCHAR(6)
+    referencia: VARCHAR(200)
+    telefono_fijo: VARCHAR(20)
+    celular: VARCHAR(10)
+    tipo_propiedad: VARCHAR(6)
+    tipo_vivienda: VARCHAR(6)
+    tiempo_residencia: INT
+    ubicacion_longitud: FLOAT(53)
+    ubicacion_latitud: FLOAT(53)
+    ubicacion_mapa: VARCHAR(200)
+    es_actual: BIT
+    manzana: VARCHAR(10)
+    villa: VARCHAR(10)
+    actualizado: VARCHAR(27)
+    actualizado_por: INT
+    creado: VARCHAR(27)
+    creado_por: INT
+target:
+  bronze_catalog: cresa
+  bronze_schema: bronze
+  bronze_table: credicresa_cre_solicituddomicilio_bronze
+  write_mode_initial: overwrite
+  write_mode_delta: overwrite
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+governance:
+  domain_official: Maestro
+  sensitivity: Interno
+  data_owner: Equipo de Datos - Maestro (por asignar oficialmente)
+  purview_collection: 01_Maestros
+control_plane:
+  run_table: cresa.audit01.credicresa_ingestion_runs
+  watermark_table: cresa.audit01.credicresa_ingestion_watermarks
+  error_table: cresa.audit01.credicresa_ingestion_table_runs
+dictionary:
+  file: sql/02_credicresa_catalogos.sql
+  schema: credicresa
+  table: cre_solicituddomicilio
+  attributes_not_selected: []
+schema_evolution:
+  mode: strict
+  type_widening: fail

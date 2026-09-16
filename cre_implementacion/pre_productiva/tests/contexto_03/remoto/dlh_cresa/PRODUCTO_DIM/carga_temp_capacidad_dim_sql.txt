@@ -1,0 +1,38 @@
+-- Databricks notebook source
+--DROP TABLE IF EXISTS dlh_cresa.staging.temp_capacidad_dim;
+--CREATE OR REPLACE TABLE IF NOT EXISTS
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_capacidad_dim (
+  id_empresa VARCHAR(20) COMMENT 'dataAreaId',
+  --cod_capacidad VARCHAR(20) COMMENT 'APCodeSubgroup', --inicial
+  cod_capacidad VARCHAR(20) COMMENT 'CapacityCategory',  -- actual
+  des_capacidad VARCHAR(60) COMMENT 'APCapacityCategoryName'
+  --campo_x varchar(20) COMMENT '',  -- campos que se requieran crear
+)
+COMMENT 'Tabla temporal para procesos de construir dimension (temp_capacidad_dim)';
+
+
+
+-- COMMAND ----------
+
+
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_subgrupo_parquet
+as 
+select *from -- parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_dynamics/commercialheirarchycategory/commercialheirarchycategory.parquet`;
+dlh_cresa.bronze.CommercialHeirarchyCategories;
+
+--select *from carga_temp_subgrupo_parquet;
+--DESCRIBE TABLE carga_temp_subgrupo_parquet;
+--SHOW VIEWS;
+
+TRUNCATE TABLE dlh_cresa.staging.temp_capacidad_dim;  
+
+INSERT INTO dlh_cresa.staging.temp_capacidad_dim
+select distinct
+  dataAreaId as id_empresa,
+  CapacityCategory as cod_capacidad,
+  APCapacityCategoryName as des_capacidad
+from carga_temp_subgrupo_parquet
+where CapacityCategory not in (0);
+

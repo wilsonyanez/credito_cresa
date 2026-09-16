@@ -1,0 +1,19 @@
+# Destino autorizado el 2026-09-10; autenticacion externa OAuth.
+client: cresa
+project: credicresa
+catalog: cresa
+source: credicresa
+workspace_url: https://dbc-d87ef1e3-6c95.cloud.databricks.com
+workspace_id: '7474649840848388'
+auth_name: cresa-dev
+databricks_user: wilsonyanez@hotmail.com
+resource_id: aws:us-east-2:3ead0e85-1c45-485a-81c7-e6d4710c9d0d
+workspace_path: /Workspace/Users/wilsonyanez@hotmail.com/.git/cresa/credicresa
+sql_warehouse_id: 61b8feaf5fbd763d
+compute: serverless
+repository_reference: https://github.com/wilsonyanez/credito_cresa/tree/main/cre_implementacion
+artifact_source: local_validated_package
+log_path: tests/credicresa_desplegar.log
+max_database_objects: 45
+selected_entities: 14
+bootstrap_only: true

@@ -1,0 +1,92 @@
+config_version: 1
+source_name: credicresa
+source_schema: landing
+source_table: cat_origen
+source_table_normalized: cat_origen
+enabled: true
+description: Catálogo de origenes desde CRESA (proyecto credicresa). Ingesta a Bronze para consumo
+  de dominios.
+priority:
+  wave: fase_3_ingesta
+  score: 5
+  reason: Tabla de maestro usada por procesos de normalización y reporting.
+load_strategy:
+  initial_mode: full_snapshot
+  incremental_mode: incremental_datetime
+  watermark_column: fecha_modificacion
+  sequence_column: null
+  delta_lookback_days: 2
+  delete_detection: false
+read:
+  mode: table
+query:
+  custom_sql: null
+  where_clause: null
+  order_by: null
+primary_key:
+  columns:
+  - id
+  enforced_in_source: false
+natural_key:
+  columns:
+  - nombre
+columns:
+  include:
+  - id
+  - nombre
+  - es_activo
+  - fecha_creacion
+  - actualizado
+  - creado_por
+  - actualizado_por
+  - codigo_externo
+  exclude: []
+  rename: {}
+  pii_columns: []
+  restricted_columns: []
+  types:
+    id: STRING
+    nombre: STRING
+    es_activo: BOOLEAN
+    fecha_creacion: STRING
+    actualizado: STRING
+    creado_por: INT
+    actualizado_por: INT
+    codigo_externo: INT
+  source_types:
+    id: VARCHAR(10)
+    nombre: VARCHAR(100)
+    es_activo: BIT
+    fecha_creacion: VARCHAR(27)
+    actualizado: VARCHAR(27)
+    creado_por: INT
+    actualizado_por: INT
+    codigo_externo: INT
+target:
+  bronze_catalog: cresa
+  bronze_schema: bronze
+  bronze_table: credicresa_cat_origen_bronze
+  write_mode_initial: overwrite
+  write_mode_delta: overwrite
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+governance:
+  domain_official: Maestro
+  sensitivity: Interno
+  data_owner: Equipo de Datos - Maestro (por asignar oficialmente)
+  purview_collection: 01_Maestros
+control_plane:
+  run_table: cresa.audit01.credicresa_ingestion_runs
+  watermark_table: cresa.audit01.credicresa_ingestion_watermarks
+  error_table: cresa.audit01.credicresa_ingestion_table_runs
+dictionary:
+  file: sql/02_credicresa_catalogos.sql
+  schema: credicresa
+  table: cat_origen
+  attributes_not_selected: []
+schema_evolution:
+  mode: strict
+  type_widening: fail

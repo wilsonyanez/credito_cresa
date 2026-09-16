@@ -1,0 +1,110 @@
+config_version: 1
+source_name: credicresa
+source_schema: landing
+source_table: ver_respuesta_proveedor
+source_table_normalized: ver_respuesta_proveedor
+enabled: true
+description: Catálogo de configuración control respuesta proveedor desde CRESA (proyecto credicresa).
+  Ingesta a Bronze para consumo de dominios. Campos explicitados para ingesta incremental/validación.
+priority:
+  wave: fase_3_ingesta
+  score: 5
+  reason: Tabla de maestro usada por procesos de normalización y reporting.
+load_strategy:
+  initial_mode: full_snapshot
+  incremental_mode: full_snapshot
+  watermark_column: null
+  sequence_column: null
+  delta_lookback_days: 0
+  delete_detection: false
+read:
+  mode: table
+query:
+  custom_sql: null
+  where_clause: null
+  order_by: null
+primary_key:
+  columns:
+  - id
+  enforced_in_source: false
+natural_key:
+  columns:
+  - id
+  - verificacion_id
+  - solicitud_id
+  - gestor_id
+columns:
+  include:
+  - id
+  - verificacion_id
+  - solicitud_id
+  - gestor_id
+  - motivo
+  - fecha_resolucion
+  - estado
+  - evidencia_url
+  - comentario
+  - creado
+  - actualizado
+  - creado_por
+  - actualizado_por
+  exclude: []
+  rename: {}
+  pii_columns: []
+  restricted_columns: []
+  types:
+    id: BIGINT
+    verificacion_id: BIGINT
+    solicitud_id: BIGINT
+    gestor_id: INT
+    motivo: STRING
+    fecha_resolucion: STRING
+    estado: STRING
+    evidencia_url: STRING
+    comentario: STRING
+    creado: STRING
+    actualizado: STRING
+    creado_por: INT
+    actualizado_por: INT
+  source_types:
+    id: BIGINT
+    verificacion_id: BIGINT
+    solicitud_id: BIGINT
+    gestor_id: INT
+    motivo: TEXT
+    fecha_resolucion: VARCHAR(27)
+    estado: VARCHAR(100)
+    evidencia_url: TEXT
+    comentario: TEXT
+    creado: VARCHAR(27)
+    actualizado: VARCHAR(27)
+    creado_por: INT
+    actualizado_por: INT
+target:
+  bronze_catalog: cresa
+  bronze_schema: bronze
+  bronze_table: credicresa_ver_respuesta_proveedor_bronze
+  write_mode_initial: overwrite
+  write_mode_delta: overwrite
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+governance:
+  domain_official: Maestro
+  sensitivity: Interno
+  data_owner: Equipo de Datos - Maestro (por asignar oficialmente)
+  purview_collection: 01_Maestros
+control_plane:
+  run_table: cresa.audit01.credicresa_ingestion_runs
+  watermark_table: cresa.audit01.credicresa_ingestion_watermarks
+  error_table: cresa.audit01.credicresa_ingestion_table_runs
+dictionary:
+  file: sql/02_credicresa_catalogos.sql
+  schema: credicresa
+  table: ver_respuesta_proveedor
+  attributes_not_selected: []
+schema_evolution:
+  mode: strict
+  type_widening: fail

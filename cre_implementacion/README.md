@@ -1,33 +1,33 @@
-# CRESA Fase 3 — Gobierno e ingesta de datos
+# CRESA — ingesta y MDM de clientes y productos
 
-Repositorio organizado para recrear y caracterizar las entidades de CRESA íntegramente dentro de Azure Databricks mediante un pipeline metadata-driven por fuente.
+Revisión documental: 2026-09-16. Paquete activo: `pre_productiva/`.
 
-## Estructura vigente
+## Documentación vigente
 
-```text
-cre_implementacion/
-├── documentacion_insumo/          # análisis y evidencia; no desplegable
-├── construccion_tecnica_previa/   # archivo histórico; no ejecutar
-└── pre_productiva/                # paquete único para pruebas y despliegue
-```
+- [Estado, alcance e índice documental](pre_productiva/docs/ESTADO_VIGENTE.md).
+- [Arquitectura, volúmenes y nombres por ambiente](pre_productiva/docs/17_CRESA_DATABRICK_DEFINICION_INICIAL.md).
+- [Entidades, brechas e insumos de los maestros](pre_productiva/docs/20_CRESA_MDM_ANALISIS_EXTENDIDO.md).
+- [Operación del paquete y validación local](pre_productiva/README.md).
 
-## Empezar por aquí
+Desarrollo del cliente usa `dev_dlh_cresa` y el almacenamiento `devstgdlh02`, con **1,2 TB disponibles declarados, sin restricción de espacio en esta etapa**. Producción usa `dlh_cresa`. El catálogo `cresa` corresponde al piloto de pruebas; no se confunden sus resultados con el MDM.
 
-1. Leer `pre_productiva/README.md`.
-2. Configurar la fuente en `pre_productiva/config/sources/credito_cresa.yml`.
-3. Revisar los 34 YAML en `pre_productiva/config/ingestion/`.
-4. Ejecutar los SQL de `pre_productiva/sql/` en orden.
-5. Desplegar el notebook y el job consolidado de `pre_productiva/`.
+| Dominio | Silver — nombre conservado entre ambientes | Gold — nombre conservado entre ambientes |
+|---|---|---|
+| Cliente | `dw_cresa_cliente_conformado` | `dw_cresa_maestro_cliente` |
+| Producto | `dw_cresa_producto_conformado` | `dw_cresa_maestro_producto` |
 
-## Principios actuales
+Los nombres completos usan `<catalogo>.silver.<objeto>` y `<catalogo>.gold.<objeto>`. El proyecto mantiene `mdm_clientes_productos` en volúmenes, código y operación.
 
-- Un pipeline por fuente, no un pipeline por YAML.
-- Descubrimiento recursivo de entidades mediante metadatos.
-- Base fuente de prueba recreada como tablas Parquet en Databricks.
-- Tipos preservados/inferidos desde semillas; `STRING` explícito cuando no existen datos ni diccionario.
-- Datos y caracterización en Parquet.
-- Control plane transaccional en Delta.
-- Primera ejecución secuencial para proteger la fuente.
-- Credenciales únicamente en Secret Scope.
+## Estructura y alcance
 
-Los artefactos históricos se conservan, pero no forman parte del paquete desplegable.
+| Carpeta | Uso |
+|---|---|
+| `pre_productiva/` | Paquete técnico activo, documentos vigentes y evidencia fechada |
+| `documentacion_insumo/` | Mapa de maestros y análisis funcional; métricas históricas identificadas |
+| `construccion_tecnica_previa/` | Archivo de solo lectura; no desplegar ni ejecutar sus comandos |
+
+La fuente activa se configura en `pre_productiva/config/sources/credicresa.yml`; existen **34 YAML y 451 atributos** derivados del diccionario SQL. El lanzador `pre_productiva/scripts/cresa_credicresa_desplegar.ps1` valida localmente por defecto y conserva un piloto de 14 entidades, 42 vistas y una tabla de auditoría. El job único se denomina `JOB_CRE_00_CARGA_DATOS_CREDI_CRESA`; la plantilla por período está en `pre_productiva/config/jobs/job_credicresa_ingesta_periodo.json`.
+
+Datos del paquete en Parquet y control plane en Delta. No existe conexión activa a SQL Server; no se habilitan JDBC, incrementalidad ni certificación de maestros mediante esta revisión documental. Las fuentes productivas Delta se conservan y cualquier exportación se realiza mediante lectura de tablas, no copia de archivos internos.
+
+La publicación en Git reúne los cambios locales; no ejecuta un despliegue en Databricks. Los resultados de pruebas y sus limitaciones están en el estado vigente.

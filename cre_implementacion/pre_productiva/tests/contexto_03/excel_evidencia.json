@@ -1,0 +1,2319 @@
+[
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 1,
+    "celdas": {
+      "A": "Entorno",
+      "B": "Fuente/Contexto",
+      "C": "Fuente Tipo Base",
+      "D": "Fuente Servidor/Base/Nube",
+      "E": "Destino Tipo Base",
+      "F": "Destino Servidor/Base/Nube",
+      "G": "Proceso Macro",
+      "H": "Proceso Previo",
+      "I": "Desc_Proceso",
+      "J": "Entorno_proceso",
+      "K": "Herramienta_Proceso",
+      "L": "Ruta_Proceso",
+      "M": "Nombre_Proceso / JOB",
+      "N": "Legueje Proceso",
+      "O": "Fecuencia",
+      "P": "Hora Inicio",
+      "Q": "Hora Fin",
+      "R": "Tabla",
+      "S": "Tablas C1"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 2,
+    "celdas": {
+      "A": "onpremise",
+      "B": "credicresa",
+      "C": "MSSQL",
+      "D": "192.168.81.152",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Extracción de datos resuelve",
+      "H": "",
+      "I": "ETL Extracción credicresa a tanque",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/CRESA_CREDITO/EXTRACCIONES/JOBS",
+      "M": "JOB_CRE_00_CARGA_DATOS_CREDI_CRESA",
+      "N": "SQL",
+      "O": "Diario",
+      "P": "4.1666666666666664E-2",
+      "Q": "6.25E-2",
+      "R": "DWTANQUESGIMA.credicresa.cat_nacionalidad, DWTANQUESGIMA.credicresa.cat_sexo, DWTANQUESGIMA.credicresa.cat_estadocivil, DWTANQUESGIMA.credicresa.cat_nivelinstruccion, DWTANQUESGIMA.credicresa.cat_provincia, DWTANQUESGIMA.credicresa.cat_canton,DWTANQUESGIMA.credicresa.cat_parroquia,DWTANQUESGIMA.credicresa.cat_solicitud_estados,DWTANQUESGIMA.credicresa.cat_almacen,DWTANQUESGIMA.credicresa.cat_modelo_aprobador,DWTANQUESGIMA.credicresa.cat_origen,DWTANQUESGIMA.credicresa.cat_modelo_calificacion,DWTANQUESGIMA.credicresa.cat_tipovinculo,DWTANQUESGIMA.credicresa.cat_tipoverificacion,DWTANQUESGIMA.credicresa.cat_estadoverificacion,DWTANQUESGIMA.credicresa.cat_sector,DWTANQUESGIMA.credicresa.cat_sector_riesgo_geocerca,DWTANQUESGIMA.credicresa.cat_estadoverificacion,DWTANQUESGIMA.credicresa.cat_profesion,DWTANQUESGIMA.credicresa.sec_usuario,DWTANQUESGIMA.credicresa.cfg_controlsecuencia,DWTANQUESGIMA.credicresa.cre_solicitante,DWTANQUESGIMA.credicresa.cre_solicitante_mina,DWTANQUESGIMA.credicresa.cre_solicitud,DWTANQUESGIMA.credicresa.cre_solicitudlaboral,DWTANQUESGIMA.credicresa.cre_solicituddomicilio,DWTANQUESGIMA.credicresa.cre_solicitudreferencia,DWTANQUESGIMA.credicresa.cre_solicitud_bitacora,DWTANQUESGIMA.credicresa.ver_transaccional_verificacion,DWTANQUESGIMA.credicresa.ver_respuesta_proveedor,DWTANQUESGIMA.credicresa.lcr_cuentas,DWTANQUESGIMA.credicresa.lcr_reserva_cuotas,DWTANQUESGIMA.credicresa.lcr_graduacion,DWTANQUESGIMA.credicresa.sis_peticiones",
+      "S": ""
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 3,
+    "celdas": {
+      "A": "nube",
+      "B": "credicresa",
+      "D": "192.168.80.250",
+      "E": "MSSQL",
+      "F": "Nube",
+      "G": "Subida de datos a la nube",
+      "I": "Volcado tablas a databricks",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "DataFactory",
+      "M": "ppl_cresa_credicresa",
+      "O": "Diario",
+      "P": "0.14583333333333334",
+      "Q": "0.14930555555555555",
+      "R": "[DWTANQUE_CRESA].[dbo].[tbl_temp_solicitud_dim],[DWTANQUE_CRESA].[dbo].[tbl_temp_segmento_venta]"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 4,
+    "celdas": {
+      "A": "nube",
+      "B": "comercial",
+      "D": "Azure",
+      "E": "Azure",
+      "F": "Azure",
+      "G": "Modelo comercial",
+      "I": "Proceso modelo comercial",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "DataFactory",
+      "M": "ppl_cresa_procesar_modelo_comercial",
+      "O": "Diario",
+      "P": "0.18402777777777779",
+      "Q": "0.25416666666666665",
+      "R": "Dimensiones:dw_cresa_empresa_dim,dw_cresa_persona_dim,dw_cresa_tienda_dim,dw_cresa_almacen_dim,dw_cresa_tipo_documento_dim,dw_cresa_canal_dim,dw_cresa_categoria_financiera_dim,dw_cresa_unidad_negocio_dim,dw_cresa_multinivel_dim,dw_cresa_producto_dim,dw_cresa_vendedor_dim,dw_cresa_distribuidor_dim, dw_cresa_detalle_representante_dim, dw_cresa_clasificacion_clientes_dim, Fac:dw_cresa_detalle_venta_fact,dw_cresa_detalle_facturacion_fact,dw_cresa_billete_comprador_detalle_fact,dw_cresa_cuotas_gratis_fact,dw_cresa_cancelaciones_af_pyg_fact,dw_cresa_tienda_m2_fact,dw_cresa_cluster_tienda_fact,dw_cresa_numero_vendedores_fact",
+      "S": "dw_cresa_detalle_venta_Fact"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 5,
+    "celdas": {
+      "A": "onpremise",
+      "B": "CrediCresa",
+      "C": "MSSQL",
+      "D": "192.168.80.250",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Proceso tablas CrediCresa",
+      "H": "JOB_CRE_00_CARGA_DATOS_CREDI_CRESA",
+      "I": "ETL Genera tablas CrediCresa",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/CRESA_CREDITO/MODELADO/JOBS",
+      "M": "JOB_CRE_00_CARGA_MODELO_CREDI_CRESA",
+      "N": "sql",
+      "O": "Diario",
+      "P": "0.25",
+      "Q": "0.26041666666666669",
+      "R": "dw_cresa_verificaciones_credi_cresa,dw_cresa_solicitudes_credi_cresa",
+      "S": "dw_cresa_solicitudes_credi_cresa"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 6,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cobranza",
+      "C": "Databricks",
+      "D": "Azure",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso cobranza",
+      "H": "ppl_cresa_procesar_modelo_cartera",
+      "I": "ETL Genera replicas cobranza y actualiza cubo",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/COBRANZA WEB/JOBS",
+      "M": "JOB_CRE_00_CARGA_COBRANZA_CRESA",
+      "N": "sql",
+      "O": "Diario",
+      "P": "0.27083333333333331",
+      "Q": "0.28125",
+      "R": "carga_dim_pagos,carga_operacion_dim,carga_persona_dim,carga_fac_cobranza,com_cub_cobros_cuotas_cresa_tb",
+      "S": "carga_dim_pagos,carga_operacion_dim,carga_fac_cobranza"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 7,
+    "celdas": {
+      "A": "Nube",
+      "B": "Cartera",
+      "C": "Databricks",
+      "D": "Azure",
+      "E": "Azure",
+      "F": "Nube",
+      "G": "Proceso Cartera",
+      "H": "ppl_cresa_siac_prod_01",
+      "I": "ETL Genera tablas Cartera y Cobranza",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_cresa_procesar_modelo_cartera",
+      "N": "SQL/Python",
+      "O": "Diario",
+      "P": "0.25",
+      "Q": "0.27777777777777779",
+      "R": "dw_cresa_amortizacion_fact,dw_cresa_cartera_saldos_fact,dw_diario_cartera_cresa_rpt,dw_cresa_detalle_operacion_dim,dw_cresa_marca_multinivel_dim,dw_cresa_solicitud_dim,dw_cresa_operacion_dim,dw_cresa_persona_siac_dim,dw_cresa_cobro_cuotas,dw_cresa_pagos_dim,dw_cresa_cobro_cuotas_fact,dw_det_cotizacion_fact,dw_cresa_medicion_cuota_cero,evolutivo_medicion_shareMora_cresa,dw_cresa_share_vendedor_cresa,dw_det_cotizacion_fact ",
+      "S": "dw_cresa_amortizacion_fact,dw_cresa_cartera_saldos_fact,dw_diario_cartera_cresa_rpt,dw_cresa_marca_multinivel_dim,dw_cresa_solicitud_dim,dw_cresa_operacion_dim,dw_cresa_persona_siac_dim"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 8,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "Databricks",
+      "D": "Azure",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso Cartera",
+      "H": "ppl_cresa_procesar_modelo_cartera",
+      "I": "ETL Genera replicas crédito y actualiza cubo",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPLICAS/JOBS",
+      "M": "JOB_CRESA_06_REPLICA_DATABRICKS_DLH_ICEUIONFBDDREP_DWH_CRESA_P1",
+      "N": "sql",
+      "O": "Diario",
+      "P": "0.28472222222222221",
+      "Q": "0.2986111111111111",
+      "R": "dwh_cresa.dw_cresa_amortizacion_fact,dwh_cresa.tbl_rpt_diario_cartera_cresa",
+      "S": "dwh_cresa.dw_cresa_amortizacion_fact,dwh_cresa.tbl_rpt_diario_cartera_cresa"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 9,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "Databricks",
+      "D": "Azure",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso Cartera",
+      "H": "ppl_cresa_procesar_modelo_cartera",
+      "I": "ETL Genera replicas crédito y actualiza cubo",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPLICAS/JOBS",
+      "M": "JOB_CRESA_07_REPLICA_DATABRICKS_DLH_ICEUIONFBDDREP_DWH_CRESA_P2",
+      "N": "SQL/Python",
+      "O": "Diario",
+      "P": "0.28472222222222221",
+      "Q": "0.30208333333333331",
+      "R": "carga_generico_dim,carga_solicitud_dim,carga_marca_multinivel_dim,carga_vendedores_dim,dw_cartera_saldos_fac,",
+      "S": "dw_cartera_saldos_fac"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 10,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "Databricks",
+      "D": "Azure",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso Cartera",
+      "H": "ppl_cresa_procesar_modelo_cartera",
+      "I": "ETL Genera replicas crédito y actualiza cubo",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPLICAS/JOBS",
+      "M": "JOB_CRESA_08_REPLICA_DATABRICKS_DLH_ICEUIONFBDDREP_DWH_CRESA_P3",
+      "N": "sql",
+      "O": "Diario",
+      "P": "0.28472222222222221",
+      "Q": "0.28819444444444448",
+      "R": "dwh_cresa.dw_cresa_estados_tienda,dwh_cresa.dw_cresa_share_almacen_cresa,dwh_cresa.dw_cresa_share_vendedor_cresa,dwh_cresa.tbl_rpt_notas_credito,dwh_cresa.tbl_rpt_seguimiento_negociacion,dwh_cresa.dw_cresa_planes_financieros_dim"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 11,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "MSSQL",
+      "D": "192.168.81.147",
+      "E": "MSSQL",
+      "F": "192.168.81.146,192.168.81.147,192,168,80,250",
+      "G": "Proceso cuota cero y deterioro",
+      "H": "JOB_CRESA_07_REPLICA_DATABRICKS_DLH_ICEUIONFBDDREP_DWH_CRESA_P2",
+      "I": "ETL Genera tablas cuota cero y deterioro",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/COBRANZA WEB/JOBS",
+      "M": "JOB_CRE_02_CARGA_DATA_PDV_CARTERA",
+      "N": "sql",
+      "O": "Diario",
+      "P": "0.2986111111111111",
+      "Q": "0.3",
+      "R": "dwh_cresa.tbl_rpt_asignacion_preliminar,dwh_cresa.tbl_tiendas_asignacion_deterioro,dwh.dw_cresa_cuota_cero_tiendas,\ndwh.dw_cresa_deterioro_tiendas,staging_cresa.base_cuota_cero_vendedores,",
+      "S": "dwh_cresa.tbl_rpt_asignacion_preliminar"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 12,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "MSSQL",
+      "D": "192.168.81.147,192.168.80.250,192.168.81.146",
+      "E": "MSSQL",
+      "F": "192.168.81.146",
+      "G": "Proceso Cartera",
+      "H": "JOB_CRESA_07_REPLICA_DATABRICKS_DLH_ICEUIONFBDDREP_DWH_CRESA_P2, JOB_CRE_03_REPLICA_ACTUALIZA_CUBO_VENTAS_TOTAL, JOB_CRE_00_CARGA_COBRANZA_CRESA,JOB_CRE_02_ASIGNACION_CRESA_DIA_DOS,JOB_CRE_06_GENERA_TEMP_CATALOGACION_DIARIA,JOB_CRE_07_REPLICA_CARHCATALOGACIONDIARIA_CRESA",
+      "I": "ETL Genera tabla para panel Indicadores de Crédito",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPORTES_CRESA/CREDITO/JOBS",
+      "M": "JOB_CRE_01_INDICADORES_ASIGNACION_CRESA",
+      "N": "sql",
+      "O": "Diario",
+      "P": "0.33333333333333331",
+      "Q": "0.36458333333333331",
+      "R": "dwh.tbl_rpt_asignacion_nuevos_indicadores_cresa",
+      "S": "dwh.tbl_rpt_asignacion_nuevos_indicadores_cresa"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 13,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "MSSQL",
+      "D": "192.168.81.116",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso Cartera",
+      "I": "ETL replica Asignación 1ro mes",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPORTES_CRESA/CREDITO/JOBS/JOB_CRE_02_ASIGNACION_CRESA_DIA_DOS",
+      "M": "JOB_CRE_02_ASIGNACION_CRESA_DIA_DOS",
+      "N": "sql",
+      "O": "Mensual 1ro de mes",
+      "P": "0.25",
+      "Q": "0.26041666666666669",
+      "R": "tbl_rpt_asignacion_cresa,CARHASIGNACIONCARTERA_CRESA",
+      "S": "tbl_rpt_asignacion_cresa"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 14,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "MSSQL",
+      "D": "192.168.81.116",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso Cartera",
+      "I": "ETL replica Asignación 1ro mes",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPORTES_CRESA/CREDITO/JOBS/JOB_CRE_02_ASIGNACION_CRESA_DIA_DOS",
+      "M": "JOB_CRE_02_ASIGNACION_CRESA_DIA_DOS",
+      "N": "sql",
+      "O": "Mensual 2do de mes",
+      "P": "0.25",
+      "Q": "0.26041666666666669",
+      "R": "tbl_rpt_asignacion_cresa,CARHASIGNACIONCARTERA_CRESA",
+      "S": "tbl_rpt_asignacion_cresa"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 15,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "MSSQL",
+      "D": "192.168.81.116",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso Cartera",
+      "I": "ETL replica Asignación 1ro mes",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPORTES_CRESA/CREDITO/JOBS/JOB_CRE_06_GENERA_TEMP_CATALOGACION_DIARIA",
+      "M": "JOB_CRE_06_GENERA_TEMP_CATALOGACION_DIARIA",
+      "N": "sql",
+      "O": "Mensual 2do de mes",
+      "P": "0.25",
+      "Q": "0.26041666666666669",
+      "R": "temp_catalogacion_diaria_cresa_2",
+      "S": "temp_catalogacion_diaria_cresa_2"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 16,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cartera",
+      "C": "MSSQL",
+      "D": "192.168.81.116",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso Cartera",
+      "I": "ETL replica Asignación 1ro mes",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPORTES_CRESA/CREDITO/JOBS/JOB_CRE_07_REPLICA_CARHCATALOGACIONDIARIA_CRESA",
+      "M": "JOB_CRE_07_REPLICA_CARHCATALOGACIONDIARIA_CRESA",
+      "N": "sql",
+      "O": "Diario",
+      "P": "0.33333333333333331",
+      "Q": "0.375",
+      "R": "tbl_rpt_carh_catalogacion_diaria_cresa",
+      "S": "tbl_rpt_carh_catalogacion_diaria_cresa"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 3,
+    "celdas": {
+      "A": "Entorno"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 4,
+    "celdas": {
+      "A": "Fuente/Contexto"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 5,
+    "celdas": {
+      "A": "Fuente Tipo Base"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 6,
+    "celdas": {
+      "A": "Fuente Servidor/Base/Nube"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 7,
+    "celdas": {
+      "A": "Destino Tipo Base"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 8,
+    "celdas": {
+      "A": "Destino Servidor/Base/Nube"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 9,
+    "celdas": {
+      "A": "Proceso Macro"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 10,
+    "celdas": {
+      "A": "Proceso Previo"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 11,
+    "celdas": {
+      "A": "Desc_Proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 12,
+    "celdas": {
+      "A": "Entorno_proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 13,
+    "celdas": {
+      "A": "Herramienta_Proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 14,
+    "celdas": {
+      "A": "Ruta_Proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 15,
+    "celdas": {
+      "A": "Nombre_Proceso / JOB"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 16,
+    "celdas": {
+      "A": "Legueje Proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 17,
+    "celdas": {
+      "A": "Fecuencia"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 18,
+    "celdas": {
+      "A": "Hora Inicio"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 19,
+    "celdas": {
+      "A": "Hora Fin"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 20,
+    "celdas": {
+      "A": "Tabla"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "12_Procesos_Credito_Cartera.xlsx",
+    "hoja": "Hoja1",
+    "fila": 21,
+    "celdas": {
+      "A": "Tablas C1"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 1,
+    "celdas": {
+      "A": "Entorno",
+      "B": "Fuente/Contexto",
+      "C": "Fuente Tipo Base",
+      "D": "Fuente Servidor/Base/Nube",
+      "E": "Destino Tipo Base",
+      "F": "Destino Servidor/Base/Nube",
+      "G": "Proceso Macro",
+      "H": "Proceso Previo",
+      "I": "Desc_Proceso",
+      "J": "Entorno_proceso",
+      "K": "Herramienta_Proceso",
+      "L": "Ruta_Proceso",
+      "M": "Nombre_Proceso / JOB",
+      "N": "Legueje Proceso",
+      "O": "Fecuencia",
+      "P": "Hora Inicio",
+      "Q": "Hora Fin",
+      "R": "Tabla",
+      "S": "Tablas C1"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 2,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Liquidweb",
+      "C": "MySQL",
+      "D": "172.20.10.121",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Extracción fuentes para Concreción/Storecheck",
+      "I": "ETL Extracción liquidweb a tanque",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/LIQUIDWEB/WEB/EXTRACCION/JOBS",
+      "M": "JOB_CRE_00_EXTRAE_BASES_LIQUIDWEB",
+      "N": "SQL",
+      "O": "Diario",
+      "P": "0.16666666666666666",
+      "Q": "0.1736111111111111",
+      "R": "DWTANQUE_CRESA.tbl_sc_control_almacen,STAGING_CRESA.lw_tbl_solicitudes_credito,STAGING_CRESA.lw_tbl_vendedores,\nSTAGING_CRESA.lw_tbl_gestion_cotizaciones,STAGING_CRESA.lw_tbl_base_clientes,STAGING_CRESA.lw_tbl_almacenes,\nSTAGING_CRESA.lw_tbl_zonas_jefes,DWTANQUE_CRESA.tbl_compras_web_por_cadenas"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 3,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Concreción/Storecheck",
+      "C": "MSSQL",
+      "D": "192.168.80.250",
+      "E": "MSSQL",
+      "F": "192.168.81.146",
+      "G": "Proceso tablas Concreción/Storecheck",
+      "H": "Extracción Liquidweb",
+      "I": "ETL genera tablas Concreción/Storecheck",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/LIQUIDWEB/WEB/MODELO/JOBS",
+      "M": "JOB_CRE_00_CARGA_DATOS_STORECHECK_CONCRECION",
+      "O": "Diario",
+      "P": "0.25",
+      "Q": "0.25694444444444442",
+      "R": "dwh.dw_cresa_storecheck_tiendas_fact,dwh.dw_cresa_solicitudes_cotizacion"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 4,
+    "celdas": {
+      "A": "onpremise",
+      "B": "CrediCresa",
+      "C": "MSSQL",
+      "D": "192.168.81.152",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Extrae tablas CrediCresa",
+      "I": "ETL Extracción CrediCresa",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/CRESA_CREDITO/EXTRACCIONES/JOBS",
+      "M": "JOB_CRE_00_CARGA_DATOS_CREDI_CRESA",
+      "N": "",
+      "O": "Diario",
+      "P": "4.1666666666666664E-2",
+      "Q": "4.7222222222222221E-2",
+      "R": "DWTANQUESIGMA.cat_nacionalidad,DWTANQUESIGMA.cat_sexo,DWTANQUESIGMA.cat_estadocivil,DWTANQUESIGMA.cat_nivelinstruccion,\nDWTANQUESIGMA.cat_provincia,DWTANQUESIGMA.cat_canton,DWTANQUESIGMA.cat_parroquia,DWTANQUESIGMA.cat_solicitud_estados,\nDWTANQUESIGMA.cat_almacen,DWTANQUESIGMA.cat_modelo_aprobador,DWTANQUESIGMA.cat_origen,DWTANQUESIGMA.modelo_calificacion,\nDWTANQUESIGMA.cat_tipo_vinculo,DWTANQUESIGMA.cat_tipo_verificacion,DWTANQUESIGMA.cat_estado_verificacio,DWTANQUESIGMA.cat_sector,\nDWTANQUESIGMA.cat_sector_riesgo,DWTANQUESIGMA.cat_estado_verificacion,DWTANQUESIGMA.cat_profesion,DWTANQUESIGMA.sis_peticiones,\nDWTANQUESIGMA.sec_usuario,DWTANQUESIGMA.control_secuencia,DWTANQUESIGMA.cre_solicitante,DWTANQUESIGMA.cre_solicitante_mina,\nDWTANQUESIGMA.cre_solicitud,DWTANQUESIGMA.cre_solicitud_laboral,DWTANQUESIGMA.cre_solicitud_domicilio,DWTANQUESIGMA.cre_solicitud_referencia,\nDWTANQUESIGMA.cre_solicitud_bitacora,DWTANQUESIGMA.ver_transaccional,verificacion,DWTANQUESIGMA.ver_respuesta_proveedor,\nDWTANQUESIGMA.lcr_cuentas,DWTANQUESIGMA.lcr_reserva_cuotas"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 5,
+    "celdas": {
+      "A": "onpremise",
+      "B": "SIAC",
+      "C": "MSSQL",
+      "D": "192.168.81.116",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Extrae tablas SIAC",
+      "I": "ETL Extracción SIAC",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/DLH_SIAC_CRESA/JOBS",
+      "M": "JOB_CRE_00_CARGA_DATOS_SIAC_CRESA",
+      "N": "",
+      "O": "Diario",
+      "P": "0.125",
+      "Q": "0.15347222222222223",
+      "R": "DWTANQUE_CRESA.CARTOPERACION_CRESA,DWTANQUE_CRESA.CARTCUOTA_CRESA,DWTANQUE_CRESA.CARTCUOTADETALLE_CRESA,DWTANQUE_CRESA.CARTRECIBODETALLE_CRESA,\nDWTANQUE_CRESA.GENMCLIENTEFORMALIDAD_CRESA,DWTANQUE_CRESA.GENPCLASIFICADOR_CRESA,DWTANQUE_CRESA.GENMCLIENTECALIFICACION_CRESA,\nDWTANQUE_CRESA.GENMCLIENTE_CRESA,DWTANQUE_CRESA.GENMPERSONA_CRESA,DWTANQUE_CRESA.GENMTELEFONO_CRESA,DWTANQUE_CRESA.GENVTCLIENTEDIRECCIONTELEF_CRESA,\nDWTANQUE_CRESA.CARPMOTIVO_CRESA,DWTANQUE_CRESA.CARTOPERACIONPRODUCTO_CRESA,DWTANQUE_CRESA.CARHCONSUMOSALDO_CRESA,\nDWTANQUE_CRESA.CARTRECIBOFORMAPAGO_CRESA,DWTANQUE_CRESA.CARTRECIBO_CRESA,DWTANQUE_CRESA.GENPFORMAPAGO_CRESA,DWTANQUE_CRESA.FINPPRODUCTOFINANCIERO_CRESA,\nDWTANQUE_CRESA.GENMDIRECCION_CRESA,DWTANQUE_CRESA.GENVTCLIENTE_CRESA,DWTANQUE_CRESA.CREHBITACORATARJETA_CRESA,DWTANQUE_CRESA.GENMCLIENTETARJETA_CRESA,\nDWTANQUE_CRESA.GENMCLIENTECUPO_CRESA,DWTANQUE_CRESA.CRETSOLICITUD_CRESA,DWTANQUE_CRESA.FINPPRODUCTOFINANCIEROCUOTAGRATIS_CRESA,\nDWTANQUE_CRESA.FINPPRODUCTOFINANCIERODETALLE_CRESA,DWTANQUE_CRESA.PEDTPEDIDO_CRESA,DWTANQUE_CRESA.GENMUSUARIO_CRESA,\nDWTANQUE_CRESA.PEDTPEDIDODETALLE_CRESA,DWTANQUE_CRESA.CARPTIPOOPERACION_CRESA,DWTANQUE_CRESA.GENPALMACEN_CRESA,DWTANQUE_CRESA.CARPNEGOCIACION_CRESA,\nDWTANQUE_CRESA.CMCMVENDEDORES_CRESA,DWTANQUE_CRESA.CAJTRECIBO_CRESA,DWTANQUE_CRESA.CAJTDATOSFLUJOFACTURACION_CRESA,\nDWTANQUE_CRESA.CAJTRECIBOFORMAPAGO_CRESA,DWTANQUE_CRESA.CAJTMEDIOSELECTRONICOS_CRESA,DWTANQUE_CRESA.CAJTBILLETECOMPRADOR_CRESA,\nDWTANQUE_CRESA.CARTTRASLADOVENCIMIENTO_CRESA,DWTANQUE_CRESA.CARTTRASLADOVENCIMIENTODETALLE_CRESA,DWTANQUE_CRESA.CARTRECIBOPROMOCION_CRESA,\nDWTANQUE_CRESA.GENPPARAMINCENTIVOCOMPRA_CRESA,DWTANQUE_CRESA.CARTEXONERACION_CRESA,DWTANQUE_CRESA.CARTEXONERACIONDETALLE_CRESA,\nDWTANQUE_CRESA.CARTACUERDONEGOCIACION_CRESA,DWTANQUE_CRESA.CARTACUERDONEGOCIACIONDETALLE_CRESA,DWTANQUE_CRESA.CARPRECIBOORIGENPROCESO\n\n\n"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 6,
+    "celdas": {
+      "A": "onpremise",
+      "B": "CrediCresa",
+      "C": "MSSQL",
+      "D": "192.168.80.250",
+      "E": "MSSQL",
+      "F": "192.168.81.146",
+      "G": "Proceso tablas CrediCresa",
+      "H": "Extrae tablas CrediCresa",
+      "I": "ETL Genera tablas CrediCresa",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/CRESA_CREDITO/MODELADO/JOBS",
+      "M": "JOB_CRE_00_CARGA_MODELO_CREDI_CRESA",
+      "N": "",
+      "O": "Diario",
+      "P": "0.25",
+      "Q": "0.26041666666666669",
+      "R": "dwh.dw_cresa_verificaciones_credi_cresa,dwh.dw_cresa_solicitudes_credi_cresa"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 7,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Cobranza",
+      "D": "Azure",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso cobranza",
+      "H": "Proceso cobranza en azure",
+      "I": "ETL Genera recplicas cobranza y actualiza cubo",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/COBRANZA WEB/JOBS",
+      "M": "JOB_CRE_00_CARGA_COBRANZA_CRESA",
+      "N": "",
+      "O": "Diario",
+      "P": "0.27083333333333331",
+      "Q": "0.28125",
+      "R": "carga_dim_pagos,carga_operacion_dim,carga_persona_dim,carga_fac_cobranza,com_cub_cobros_cuotas_cresa_tb"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 8,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Crédito",
+      "D": "Azure",
+      "E": "MSSQL",
+      "F": "192.168.81.147",
+      "G": "Proceso crédito",
+      "H": "Proceso crédito en azure",
+      "I": "ETL Genera recplicas crédito y actualiza cubo",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPLICAS/JOBS",
+      "M": "JOB_CRESA_01_REPLICA_DATABRICKS_DLH_ICEUIONFBDDREP_DWH_CRESA",
+      "N": "SQL/Python",
+      "O": "Diario",
+      "P": "0.27083333333333331",
+      "Q": "0.28125",
+      "R": "carga_detalle_operacion_dim,carga_generico_dim,carga_solicitud_dim,carga_marca_multinivel_dim,carga_vendedores_dim,\ncarga_cartera_saldos_fac,dwh_cresa.dw_cresa_amortizacion_fact,dwh_cresa.tbl_rpt_diario_cartera_cresa,\ndwh_cresa.dw_cresa_estados_tienda,dwh_cresa.dw_cresa_share_almacen_cresa,dwh_cresa.dw_cresa_share_vendedor_cresa,\ndwh_cresa.tbl_rpt_notas_credito,dwh_cresa.tbl_rpt_seguimiento_negociacion,dwh_cresa.dw_cresa_planes_financieros_dim"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 9,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Crédito",
+      "C": "MSSQL",
+      "D": "192.168.81.147",
+      "E": "MSSQL",
+      "F": "192.168.81.146,192.168.81.147,192,168,80,250",
+      "G": "Proceso cuota cero y deterioro",
+      "H": "Proceso crédito",
+      "I": "ETL Genera tablas cuota cero y deterioro",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/COBRANZA WEB/JOBS",
+      "M": "JOB_CRE_02_CARGA_DATA_PDV_CARTERA",
+      "N": "",
+      "O": "Diario",
+      "P": "0.2986111111111111",
+      "Q": "0.3",
+      "R": "dwh_cresa.tbl_rpt_asignacion_preliminar,dwh_cresa.tbl_tiendas_asignacion_deterioro,dwh.dw_cresa_cuota_cero_tiendas,\ndwh.dw_cresa_deterioro_tiendas,staging_cresa.base_cuota_cero_vendedores,"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 10,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Venta",
+      "D": "Azure",
+      "E": "MSSQL",
+      "F": "192.168.81.146",
+      "G": "Proceso Replica Venta",
+      "H": "Proceso Comercial Venta",
+      "I": "ETL Genera replicas y actualiza cubo ventas",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/ACTUALIZA_CUBOS/JOBS",
+      "M": "JOB_CRE_03_REPLICA_ACTUALIZA_CUBO_VENTAS_TOTAL",
+      "N": "",
+      "O": "Diario",
+      "P": "0.3125",
+      "Q": "0.33333333333333331",
+      "R": "dwh.dw_cresa_detalle_venta_fact,dwh.dw_cresa_persona_dim,dwh.dw_cresa_planes_financieros_dim,dwh.dw_cresa_producto_dim,\ndwh.dw_cresa_representante_dim,dwh.dw_cresa_tiempo_dim,dwh.dw_cresa_tienda_dim,dwh.dw_cresa_tipo_producto_dim,\ndwh.dw_cresa_vendedor_dim,dwh.dw_cresa_detalle_facturacion_Fact"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 11,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Inventario",
+      "D": "Azure",
+      "E": "MSSQL",
+      "F": "192.168.81.146",
+      "G": "Proceso Replica Inventario",
+      "H": "Proceso Comercial Inventario",
+      "I": "ETL Genera replicas y actualiza cubo inventario",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/ACTUALIZA_CUBOS/JOBS",
+      "M": "JOB_CRE_01_ACTUALIZA_CUBO_INVENTARIO",
+      "N": "",
+      "O": "Diario",
+      "P": "0.25",
+      "Q": "0.27083333333333331",
+      "R": "dwh.dw_cresa_producto_dim,dwh.dw_cresa_inventario_diario_fact,dwh.dw_cresa_inventario_semanal_fact,dwh.dw_cresa_inventario_mensual_Fact"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 12,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Venta",
+      "C": "MSSQL",
+      "D": "192.168.81.146",
+      "E": "MSSQL",
+      "F": "192,.168.81.146",
+      "G": "Proceso Replica Venta",
+      "H": "Venta y actualiza Venta",
+      "I": "ETL Genera replicas venta",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPLICAS/JOBS",
+      "M": "JOB_CRESA_00_REPLICA_AZURE_DLH_ICEUIODWH2_DWH",
+      "N": "",
+      "O": "Diario",
+      "P": "0.35416666666666669",
+      "Q": "0.3611111111111111",
+      "R": "dw_cresa_detalle_venta_fact,dw_cresa_almacen_dim,dw_cresa_persona_dim,dw_cresa_producto_dim,dw_cresa_tiempo_dim,dw_cresa_tienda_dim,dw_cresa_ubicacion_almacen_dim,dw_cresa_presupuesto_almacen_fact,dw_cresa_vendedor_dim,dw_cresa_peso_presupuesto_diario_fact,dw_cresa_persona_siac_dim,dw_cresa_planes_financieros_dim,dw_cresa_distribuidor_dim,dw_cresa_pesos_diario_presupuesto_multinivel_fact,dw_cresa_metas_multinivel_fact,dw_cresa_metas_embudo_multinivel_fact,dw_cresa_metas_embudo_retail_multinivel_fact,dw_cresa_inventario_monitoreo_fac"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 13,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Crédito",
+      "C": "MSSQL",
+      "D": "192.168.81.147,192.168.80.250,192.168.81.146",
+      "E": "MSSQL",
+      "F": "192.168.81.146",
+      "G": "Proceso Asignacion de cartera",
+      "H": "cartera, venta, cobranza",
+      "I": "ETL Genera asignación cartera",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPORTES_CRESA/CREDITO/JOBS",
+      "M": "JOB_CRE_01_INDICADORES_ASIGNACION_CRESA",
+      "N": "",
+      "O": "Diario",
+      "P": "0.33333333333333331",
+      "Q": "0.36458333333333331",
+      "R": "dwh.tbl_rpt_asignacion_nuevos_indicadores_cresa"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 14,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Comercial",
+      "C": "MSSQL",
+      "D": "192.168.81.146",
+      "G": "Proceso Reporte SVT",
+      "H": "Replicas Venta",
+      "I": "ETL Genera reporte SVT",
+      "J": "Onpremise",
+      "K": "Pentaho (192.168.81.148)",
+      "L": "/public/REPORTES_CRESA/COMERCIAL/JOBS",
+      "M": "JOB_CRE_02_ENVIA_VENTAS_SVT",
+      "N": "",
+      "O": "Diario",
+      "P": "0.41666666666666669",
+      "Q": "0.4236111111111111"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 15,
+    "celdas": {
+      "A": "Nube",
+      "B": "Inventario",
+      "D": "Dynamics",
+      "G": "Modelo Inventaerio",
+      "I": "Extraccion sum",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_dynamics_ingest_modelo_inventario_batch",
+      "O": "Diario",
+      "P": "5.5555555555555552E-2",
+      "Q": "6.9444444444444448E-2",
+      "R": "InventTransReverses,d365_sums"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 16,
+    "celdas": {
+      "A": "Onpremise",
+      "B": "Comercial",
+      "C": "Archivos Planos",
+      "D": "192.168.80.250\\G:\\DLH_Archivos_Planos\\Ventas",
+      "G": "Modelo Comercial",
+      "I": "Volcado de archivos a databricks",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_extraccion_archivos_planos",
+      "N": "",
+      "O": "Diario",
+      "P": "6.25E-2",
+      "Q": "6.3194444444444442E-2"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 17,
+    "celdas": {
+      "A": "Nube",
+      "B": "Logistica",
+      "D": "Dynamics",
+      "G": "Modelo Logistica",
+      "I": "Extraccion de Dinamycs primera parte de vistas",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_dynamics_extracion_modelo_logistica_seg1",
+      "O": "Diario",
+      "P": "0.9375",
+      "Q": "0.99305555555555547",
+      "R": "RemissionGuideTables,TransferOrderHeaders,TransferOrderLines,CDSSalesOrderHeaders,CDSSalesOrderLinesV2"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 18,
+    "celdas": {
+      "A": "Nube",
+      "B": "Logistica",
+      "D": "Dynamics",
+      "G": "Modelo Logistica",
+      "I": "Extraccion de Dinamycs segunda parte de vistas",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_dynamics_extracion_modelo_logistica_seg2",
+      "O": "Diario",
+      "P": "6.9444444444444441E-3",
+      "Q": "0.19444444444444445",
+      "R": "APSaleslines_logistica,InventTrans,TransOrigins"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 19,
+    "celdas": {
+      "A": "Onpremise",
+      "B": "Comercial",
+      "D": "192.168.80.250",
+      "G": "Modelo Comercial",
+      "H": "Extrae_CRESA_D365_SIAC_Metas",
+      "I": "Volcado de tablas a Databricks",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_cresa_tablas_metas",
+      "O": "Diario",
+      "P": "8.3333333333333329E-2",
+      "Q": "9.375E-2",
+      "R": "cmcmpesovacaciones,tbl_compras_web_por_cadenas,cmct_reporte_comisiones,tbl_proveedores_mktpl,dw_cresa_presupuesto_almacen_fact,dw_cresa_peso_presupuesto_diario_fact,dw_cresa_presupuesto_af_fact"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 20,
+    "celdas": {
+      "A": "Nube",
+      "B": "Financiero",
+      "D": "Dynamics",
+      "G": "Modelo Financiero",
+      "I": "Volcado de tablas a Databricks",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_dynamics_ingest_modelo_saldo_proveedores",
+      "O": "Diario",
+      "P": "8.3333333333333329E-2",
+      "Q": "0.10069444444444443",
+      "R": "vendtransopens,VendorsV3,VendTrans,purchaseorderlinesv2,apvendinvoicejours,purchaseorderheaders"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 21,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "D": "Dynamics",
+      "G": "Modelo Comercial",
+      "I": "Volcado de tablas a Databricks",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_dynamics_ingest_modelo_comercial",
+      "N": "",
+      "O": "Diario",
+      "P": "0.11458333333333333",
+      "Q": "0.18402777777777779",
+      "R": "SalesInvoiceHeadersV2,APECCustInvoiceJours,SalesInvoiceV2Lines,SalesOrderHeadersV2,SalesOrderLines,APSalesHeaders,BankAcquiringComisionTables,APSalesLines,SalesOrderConfirmationHeaders\n\n"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 22,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "D": "Dynamics",
+      "G": "Modelo Comercial",
+      "I": "Volcado de tablas a Databricks",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_dynamics_ingest_modelo_comercial_full",
+      "O": "Diario",
+      "P": "0.9375",
+      "Q": "0.97916666666666663",
+      "R": "AddressCities,FinancialDimensionValues,Warehouses,CommercialHeirarchyCategories,ReleasedProductsV2,Companies,Employees,TypeDocuments,InventPackagingGroups,ProductGroups,AddressStates,EntrepreneurIndeps,WarehouseLocations,ProductLifecycleStates,AddressCities,ProductAttributeValuesV3,Stores"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 23,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "D": "Dynamics",
+      "G": "Modelo Comercial",
+      "I": "Volcado PyG comercial",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "dynamics_ingest_modelo_comisiones_tc",
+      "O": "Diario",
+      "P": "0.16666666666666666",
+      "Q": "0.17708333333333334",
+      "R": "FinancialPlanTables,BankAcquiringComisionTables,BankAcquiringDetailsTables\n"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 24,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "D": "Dynamics",
+      "G": "Modelo Comercial",
+      "H": "ppl_cresa_tablas_metas",
+      "I": "Procesa metas",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_cresa_procesar_metas_comerciales",
+      "O": "Diario",
+      "P": "0.18055555555555555",
+      "Q": "0.19444444444444445",
+      "R": "dw_cresa_metas_tienda_diario_fact,dw_cresa_metas_margen_bruto_fact,dw_cresa_metas_marcas_propias_fact,dw_cresa_metas_multinivel_fact,dw_cresa_pesos_diario_presupuesto_multinivel_fact,dw_cresa_metas_credito_puro_fact,dw_cresa_metas_embudo_multinivel_fact ,dw_cresa_metas_clientes_buenos_fact,dw_cresa_metas_embudo_retail_fact,dw_cresa_metas_margen_lineas_fact,dw_cresa_metas_marketplace_fact,dw_cresa_metas_embudo_retail_multinivel_fact,dw_cresa_metas_web_vtex_fact,dw_cresa_metas_inventario_almacenes_fact"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 25,
+    "celdas": {
+      "A": "Onpremise",
+      "B": "Comercial",
+      "D": "192.168.80.250",
+      "G": "Modelo Comercial",
+      "H": "Extrae_CRESA_DYNAMICS_Clientes",
+      "I": "Volcado Persona",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_cresa_diario_01_dynamics",
+      "O": "Diario",
+      "P": "0.19097222222222221",
+      "Q": "0.19444444444444445",
+      "R": "CustomerV3"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 26,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "D": "Databricks",
+      "G": "Modelo Comercial",
+      "H": "ppl_dynamics_ingest_modelo_comercial,ppl_dynamics_ingest_modelo_comercial_full,ppl_extraccion_archivos_planos,ppl_cresa_siac_prod,ppl_cresa_credicresa,ppl_cresa_diario_01_dynamics",
+      "I": "Procesa modelo comerciar",
+      "J": "Nube",
+      "K": "Azure",
+      "L": "Data Factory",
+      "M": "ppl_cresa_procesar_modelo_comercial",
+      "O": "Diario",
+      "P": "0.20833333333333334",
+      "Q": "0.27083333333333331",
+      "R": "Dimensiones:dw_cresa_empresa_dim,dw_cresa_persona_dim,dw_cresa_tienda_dim,dw_cresa_almacen_dim,dw_cresa_tipo_documento_dim,dw_cresa_canal_dim,dw_cresa_categoria_financiera_dim,dw_cresa_unidad_negocio_dim,dw_cresa_multinivel_dim,dw_cresa_producto_dim,dw_cresa_vendedor_dim,dw_cresa_distribuidor_dim, dw_cresa_detalle_representante_dim, dw_cresa_clasificacion_clientes_dim, Fac:dw_cresa_detalle_venta_fact,dw_cresa_detalle_facturacion_fact,dw_cresa_billete_comprador_detalle_fact,dw_cresa_cuotas_gratis_fact,dw_cresa_cancelaciones_af_pyg_fact,dw_cresa_tienda_m2_fact,dw_cresa_cluster_tienda_fact,dw_cresa_numero_vendedores_fact"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 27,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Liquidweb",
+      "C": "MySQL",
+      "D": "172.20.10.121",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Extracción tablas multinivel",
+      "I": "Extracción de vistas Multinivel",
+      "J": "Onpremise",
+      "K": "192.168.80.250(Integration service)",
+      "L": "D:\\Fuentes_TFS\\SSIS_NS_CRESA_Extracciones\\SSIS_LIQUIDWEB_SRVDWHBI",
+      "M": "Extrae Liquid Web",
+      "O": "Diario",
+      "P": "4.1666666666666664E-2",
+      "Q": "6.8750000000000006E-2",
+      "R": "tbl_t_adm_agencia,tbl_t_adm_colaborador,tbl_t_adm_califica,tbl_t_adm_credicresa_consulta,\ntbl_t_adm_credicresa_solicitud,tbl_t_adm_emprendedor,tbl_t_adm_motivo,tbl_t_adm_solicitud_efectivo_registros\n,tbl_t_adm_prospecto,tbl_t_adm_zona,tbl_t_adm_zonificacion"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 29,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Sistema Geenera",
+      "C": "MSSQL",
+      "D": "SRVBDGE (Sistema Geenera)",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Tablero Recurso Humano",
+      "I": "Estraccion de Empleados CRESA y Gestion de Nomina Comercial",
+      "J": "Onpremise",
+      "K": "SSIS ( 192.168.80.250 )",
+      "L": "SRVDWHBI (JOBS)",
+      "M": "Extrae_GEENERA_CRESA_Empleados",
+      "O": "Diario",
+      "P": "0.53472222222222221",
+      "Q": "0.53819444444444442",
+      "R": "Varios"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 30,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Comercial",
+      "D": "Dynamics",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Extracion de D365",
+      "I": "Extraccion Odata vista Cliente",
+      "M": "Extrae_CRESA_DYNAMICS_Clientes",
+      "O": "Diario",
+      "P": "0.90625",
+      "Q": "0.23611111111111113",
+      "R": "customersv3"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 31,
+    "celdas": {
+      "A": "onpremise",
+      "B": "Sistema SIAC",
+      "C": "MSSQL",
+      "D": "SIAC",
+      "E": "MSSQL",
+      "F": "192.168.80.250",
+      "G": "Modelo Comercial",
+      "I": "Proceso para generar o actualizar metas Comerciales ",
+      "J": "Onpremise",
+      "K": "SSIS ( 192.168.80.250 )",
+      "L": "SRVDWHBI (JOBS)",
+      "M": "Extrae_CRESA_D365_SIAC_Metas",
+      "O": "Diario",
+      "P": "4.1666666666666664E-2",
+      "Q": "6.9444444444444434E-2",
+      "R": "Varios"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Procesos | JOBs",
+    "fila": 34,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "https://adb-1077365077848684.4.azuredatabricks.net/browse/folders/3562868614456619?o=1077365077848684",
+      "R": "dlh_cresa.gold.dw_cresa_persona_dim"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 1,
+    "celdas": {
+      "A": "Entorno"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 2,
+    "celdas": {
+      "A": "Fuente/Contexto"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 3,
+    "celdas": {
+      "A": "Fuente Tipo Base"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 4,
+    "celdas": {
+      "A": "Fuente Servidor/Base/Nube"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 5,
+    "celdas": {
+      "A": "Destino Tipo Base"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 6,
+    "celdas": {
+      "A": "Destino Servidor/Base/Nube"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 7,
+    "celdas": {
+      "A": "Proceso Macro"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 8,
+    "celdas": {
+      "A": "Proceso Previo"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 9,
+    "celdas": {
+      "A": "Desc_Proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 10,
+    "celdas": {
+      "A": "Entorno_proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 11,
+    "celdas": {
+      "A": "Herramienta_Proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 12,
+    "celdas": {
+      "A": "Ruta_Proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 13,
+    "celdas": {
+      "A": "Nombre_Proceso / JOB"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 14,
+    "celdas": {
+      "A": "Legueje Proceso"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 15,
+    "celdas": {
+      "A": "Fecuencia"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 16,
+    "celdas": {
+      "A": "Hora Inicio"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 17,
+    "celdas": {
+      "A": "Hora Fin"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 18,
+    "celdas": {
+      "A": "Tabla"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 20,
+    "celdas": {
+      "F": "Campos sugeridos"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 22,
+    "celdas": {
+      "F": "Colocar IP del server o recurso ( Fuente o Destino )"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 23,
+    "celdas": {
+      "F": "Ruta y archivo llamado o codigo utilizado ( ejemplo , archivo tipo Python , Storedprocedure, etc)"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 24,
+    "celdas": {
+      "F": "Tipo resultado (Tabla, cubo, etc)"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 27,
+    "celdas": {
+      "F": "Observaciones:"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja1",
+    "fila": 28,
+    "celdas": {
+      "F": "Especificar la naturaleza y/o tipo de lectura de  Data ( atbal sql, tabla delta, tabla parquet, etc )"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 2,
+    "celdas": {
+      "N": "Azure"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 3,
+    "celdas": {
+      "N": "DF",
+      "P": "LakeFlow",
+      "Q": "Databricks"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 6,
+    "celdas": {
+      "T": "Silver "
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 7,
+    "celdas": {
+      "G": "Produccion",
+      "K": "Volcado Onpremises",
+      "P": "Bronze",
+      "T": "Gold"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 9,
+    "celdas": {
+      "G": "SQL_Sdata",
+      "K": "Tanque",
+      "L": ".250",
+      "P": "parquet"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 10,
+    "celdas": {
+      "K": "Staging",
+      "P": ""
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 11,
+    "celdas": {
+      "P": "delta"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 14,
+    "celdas": {
+      "H": "Pentaho",
+      "P": "",
+      "U": "Replica"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja2",
+    "fila": 28,
+    "celdas": {
+      "O": "VPN"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 1,
+    "celdas": {
+      "A": "Entorno",
+      "B": "Fuente/Contexto",
+      "C": "Fuente Tipo Base",
+      "D": "Fuente Servidor/Base/Nube",
+      "E": "Destino Tipo Base",
+      "F": "Destino Servidor/Base/Nube",
+      "G": "Proceso Macro",
+      "H": "Proceso Previo",
+      "I": "Desc_Proceso",
+      "J": "Entorno_proceso",
+      "K": "Herramienta_Proceso",
+      "L": "Ruta_Proceso",
+      "M": "Nombre_Proceso / JOB",
+      "N": "Legueje Proceso",
+      "O": "Fecuencia",
+      "P": "Hora Inicio",
+      "Q": "Hora Fin",
+      "R": "Tabla",
+      "S": "Tablas C1",
+      "T": "Dominio/Colección",
+      "U": "Nombre_Maestro",
+      "V": "Observaciones"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 2,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "Jobs & Pipelines",
+      "M": "ExtraccionCatalogosFull - CustomersV3_OPT_zip",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.bronze.d365_CustomersV3_OPT",
+      "T": "Cliente",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 3,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/sp_persona_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_persona_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_persona_dim",
+      "T": "Cliente",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 4,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/sp_persona_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_provincia_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_provincia_dim",
+      "T": "Cliente",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 5,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/sp_persona_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_ciudad_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.bronze.AddressCities;",
+      "T": "Cliente",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 6,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/sp_persona_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_dw_cresa_persona_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.gold.dw_cresa_persona_dim",
+      "T": "Cliente",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 8,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "Jobs & Pipelines",
+      "M": "ExtraccionCatalogosFull - ReleasedProductsV2_zip",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.bronze.d365_ReleasedProductsV2",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 9,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_producto_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_producto_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 10,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_marca_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_marca_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 11,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_linea_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_linea_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 12,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_grupo_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_grupo_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 13,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_subgrupo_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_subgrupo_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 14,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_categoria_producto_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_categoria_producto_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 15,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_atributos_producto_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_atributos_producto_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 16,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_ciclo_producto_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_ciclo_producto_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 17,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_capacidad_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_capacidad_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 18,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_proveedores_mktpl_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_proveedores_mktpl_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 19,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_tipo_marca_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_tipo_marca_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 20,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_procedencia_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_producto_procedencia_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 21,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_tipo_producto_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.staging.temp_tipo_producto_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 22,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_dw_cresa_producto_dim_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.gold.dw_cresa_producto_dim",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Diciconario Azurian",
+    "fila": 23,
+    "celdas": {
+      "A": "Nube",
+      "B": "Comercial",
+      "C": "Vistas/Entidades",
+      "D": "Dynamics365",
+      "E": "Databricks (U.C.)",
+      "F": "Azure",
+      "G": "Dimensiones",
+      "H": "ExtraccionCatalogosFull",
+      "J": "Nube",
+      "K": "Databricks",
+      "L": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+      "M": "/Workspace/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_dw_cresa_fechas_recepcion_producto_sql",
+      "N": "SQL",
+      "O": "Diario",
+      "R": "dlh_cresa.silver.dw_cresa_fechas_recepcion_producto",
+      "T": "Producto",
+      "U": "definir"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Estructuras",
+    "fila": 3,
+    "celdas": {
+      "A": "Directorio de como estan las diferetes estructuras",
+      "B": "/Workspace/Shared/DLHCRESA01/ADMINISTRADOR/1_ESTRUCTURAS"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 4,
+    "celdas": {
+      "M": "Productos"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 5,
+    "celdas": {
+      "G": "Databricks"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 7,
+    "celdas": {
+      "B": "Nube",
+      "D": "D365",
+      "H": "0.4",
+      "N": "0.4"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 8,
+    "celdas": {
+      "G": "cliente_dim",
+      "H": "conjunto_ventas",
+      "M": "cliente_peoduct_1"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 9,
+    "celdas": {
+      "G": "700000",
+      "M": ""
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 11,
+    "celdas": {
+      "D": "SIAC",
+      "J": "cliente_unificado_dim",
+      "K": "1"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 12,
+    "celdas": {
+      "B": "Onpremises",
+      "D": "RESUELVE",
+      "H": "0.6",
+      "N": "0.6"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 13,
+    "celdas": {
+      "G": "Cliente_Credito_Cobranza",
+      "H": "conjunto_credito",
+      "M": "Cliente_Producto_2"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 14,
+    "celdas": {
+      "G": "600000"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 27,
+    "celdas": {
+      "I": "0.4",
+      "J": "C1"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 28,
+    "celdas": {
+      "H": "cliente_dim"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 32,
+    "celdas": {
+      "I": "0.6"
+    },
+    "formulas": {}
+  },
+  {
+    "archivo": "13_Procesos_Producto_Cliente.xlsx",
+    "hoja": "Hoja5",
+    "fila": 33,
+    "celdas": {
+      "H": "Cliente_Credito_Cobranza",
+      "J": "C2"
+    },
+    "formulas": {}
+  }
+]

@@ -1,0 +1,190 @@
+{
+  "utc": "2026-09-10T20:47:41.623294+00:00",
+  "catalog": "credicresa",
+  "job_id": 770511509944147,
+  "run_id": 689244546482216,
+  "status": "DEPLOY_VERIFIED",
+  "database_objects": 43,
+  "volumes": 3,
+  "schemas": 4,
+  "inventory": [
+    {
+      "entity": "cat_almacen",
+      "selected": true,
+      "attributes": 15
+    },
+    {
+      "entity": "cat_canton",
+      "selected": true,
+      "attributes": 9
+    },
+    {
+      "entity": "cat_estadocivil",
+      "selected": true,
+      "attributes": 2
+    },
+    {
+      "entity": "cat_estadoverificacion",
+      "selected": true,
+      "attributes": 6
+    },
+    {
+      "entity": "cat_modelo_aprobador",
+      "selected": true,
+      "attributes": 22
+    },
+    {
+      "entity": "cat_modelo_calificacion",
+      "selected": true,
+      "attributes": 9
+    },
+    {
+      "entity": "cat_nacionalidad",
+      "selected": true,
+      "attributes": 3
+    },
+    {
+      "entity": "cat_nivelinstruccion",
+      "selected": true,
+      "attributes": 2
+    },
+    {
+      "entity": "cat_origen",
+      "selected": true,
+      "attributes": 8
+    },
+    {
+      "entity": "cat_parroquia",
+      "selected": true,
+      "attributes": 9
+    },
+    {
+      "entity": "cat_profesion",
+      "selected": true,
+      "attributes": 3
+    },
+    {
+      "entity": "cat_provincia",
+      "selected": true,
+      "attributes": 8
+    },
+    {
+      "entity": "cat_sector",
+      "selected": true,
+      "attributes": 9
+    },
+    {
+      "entity": "cat_sector_riesgo_geocerca",
+      "selected": true,
+      "attributes": 8
+    },
+    {
+      "entity": "cat_sexo",
+      "selected": false,
+      "attributes": 2
+    },
+    {
+      "entity": "cat_solicitud_estados",
+      "selected": false,
+      "attributes": 7
+    },
+    {
+      "entity": "cat_tipoverificacion",
+      "selected": false,
+      "attributes": 9
+    },
+    {
+      "entity": "cat_tipovinculo",
+      "selected": false,
+      "attributes": 3
+    },
+    {
+      "entity": "cfg_controlsecuencia",
+      "selected": false,
+      "attributes": 2
+    },
+    {
+      "entity": "cobro_tipo_credito_tb",
+      "selected": false,
+      "attributes": 3
+    },
+    {
+      "entity": "com_cub_cobros_cuotas_cresa_tb",
+      "selected": false,
+      "attributes": 21
+    },
+    {
+      "entity": "cre_solicitante",
+      "selected": false,
+      "attributes": 33
+    },
+    {
+      "entity": "cre_solicitante_mina",
+      "selected": false,
+      "attributes": 4
+    },
+    {
+      "entity": "cre_solicitud",
+      "selected": false,
+      "attributes": 59
+    },
+    {
+      "entity": "cre_solicitud_bitacora",
+      "selected": false,
+      "attributes": 5
+    },
+    {
+      "entity": "cre_solicituddomicilio",
+      "selected": false,
+      "attributes": 26
+    },
+    {
+      "entity": "cre_solicitudlaboral",
+      "selected": false,
+      "attributes": 27
+    },
+    {
+      "entity": "cub_cobro_cuotas",
+      "selected": false,
+      "attributes": 23
+    },
+    {
+      "entity": "lcr_cuentas",
+      "selected": false,
+      "attributes": 21
+    },
+    {
+      "entity": "lcr_graduacion",
+      "selected": false,
+      "attributes": 45
+    },
+    {
+      "entity": "lcr_reserva_cuotas",
+      "selected": false,
+      "attributes": 13
+    },
+    {
+      "entity": "sec_usuario",
+      "selected": false,
+      "attributes": 12
+    },
+    {
+      "entity": "sis_peticiones",
+      "selected": false,
+      "attributes": 10
+    },
+    {
+      "entity": "ver_respuesta_proveedor",
+      "selected": false,
+      "attributes": 13
+    }
+  ],
+  "notebook_sha256": "fecea06cc08f2f7405b17cfce72d5ef43bd3377eef6e661e90d95b0de0d14293",
+  "result": {
+    "status": "VERIFIED",
+    "views": 42,
+    "rows": 0,
+    "gold_status": "TEMPORAL_NO_CERTIFICADO",
+    "audit_run": "1b76d52a6f644275a18dec139bee7970"
+  }
+}

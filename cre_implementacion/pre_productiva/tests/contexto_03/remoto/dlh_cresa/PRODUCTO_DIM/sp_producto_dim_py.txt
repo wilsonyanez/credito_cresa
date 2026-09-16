@@ -1,0 +1,69 @@
+# Databricks notebook source
+import requests
+
+# Función para enviar un mensaje usando la API personalizada
+def send_telegram_message(resultado_ejecucion, detalle_ejecucion):
+    # Ahora solo enviamos los parámetros 'ResultadoEjecucion' y 'DetalleEjecucion'
+    url = f"http://200.7.249.20/api/v1/insertar_log?CodigoProceso=11&ResultadoEjecucion={resultado_ejecucion}&DetalleEjecucion={detalle_ejecucion}"
+    
+    response = requests.get(url)
+    if response.status_code != 200:
+        print(f"Error enviando mensaje a la API: {response.text}")
+
+# Lista de notebooks a ejecutar
+notebooks = [
+    "./PROCESOS/carga_temp_producto_dim_sql",
+    "./PROCESOS/carga_temp_marca_dim_sql",
+    "./PROCESOS/carga_temp_linea_dim_sql",
+    "./PROCESOS/carga_temp_grupo_dim_sql",
+    "./PROCESOS/carga_temp_subgrupo_dim_sql",
+    "./PROCESOS/carga_temp_categoria_producto_dim_sql",
+    "./PROCESOS/carga_temp_atributos_producto_dim_sql",
+    "./PROCESOS/carga_temp_ciclo_producto_dim_sql",
+    "./PROCESOS/carga_temp_capacidad_dim_sql",
+    "./PROCESOS/carga_temp_proveedores_mktpl_dim_sql",
+    "./PROCESOS/carga_temp_tipo_marca_dim_sql",
+    "./PROCESOS/carga_temp_procedencia_dim_sql",
+    "./PROCESOS/carga_temp_tipo_producto_dim_sql",
+    "./PROCESOS/carga_dw_cresa_producto_dim_sql",
+    "./PROCESOS/carga_dw_cresa_fechas_recepcion_producto_sql"
+]
+
+# Tiempo de espera para cada notebook (en segundos)
+timeout = 7200  # 2 horas
+
+# Ejecutar los notebooks
+for notebook in notebooks:
+    try:
+        # Ejecutar el notebook
+        result = dbutils.notebook.run(notebook, timeout)
+        print(f"Resultado del notebook {notebook}: {result}")
+    
+    except Exception as e:
+        # Enviar solo el nombre del cuaderno en el nuevo campo 'DetalleEjecucion' cuando ocurre un error
+        #print(f"Error" + str(e))
+        send_telegram_message(resultado_ejecucion=1, detalle_ejecucion=notebook)
+        
+        # Continuar con el siguiente notebook
+        continue
+        #break
+
+#import requests
+#print(dbutils.notebook.run("./PROCESOS/dw_cresa_dim_pagos_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_dw_cresa_persona_siac_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_dw_cresa_operacion_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/dwh_cresa_fac_cobro_cuotas_sql",7200))
+
+# COMMAND ----------
+
+
+#print(dbutils.notebook.run("./PROCESOS/carga_temp_producto_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_temp_marca_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_temp_linea_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_temp_grupo_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_temp_subgrupo_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_temp_categoria_producto_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_temp_atributos_producto_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_temp_ciclo_producto_dim_sql",7200))
+#print(dbutils.notebook.run("./PROCESOS/carga_dw_cresa_producto_dim_sql",7200))
+#print("a")

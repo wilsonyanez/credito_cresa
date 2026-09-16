@@ -1,11 +1,11 @@
 -- Control plane de ingestas CRESA.
--- Para producción, cambiar cresa_dev por el catálogo autorizado (por ejemplo,
+-- Para producción, cambiar cresa por el catálogo autorizado (por ejemplo,
 -- dlh_cresa) después de revisar compatibilidad con las tablas audit01 existentes.
 
-CREATE SCHEMA IF NOT EXISTS cresa_dev.audit01
+CREATE SCHEMA IF NOT EXISTS cresa.audit01
 COMMENT 'Control plane transaccional de pipelines de datos';
 
-CREATE TABLE IF NOT EXISTS cresa_dev.audit01.ingestion_runs (
+CREATE TABLE IF NOT EXISTS cresa.audit01.credicresa_ingestion_runs (
   run_id                 STRING NOT NULL,
   source_name            STRING NOT NULL,
   status                 STRING NOT NULL,
@@ -22,9 +22,7 @@ CREATE TABLE IF NOT EXISTS cresa_dev.audit01.ingestion_runs (
   error_message          STRING,
   created_by             STRING,
   updated_at             TIMESTAMP NOT NULL,
-  CONSTRAINT ingestion_runs_pk PRIMARY KEY (run_id) NOT ENFORCED,
-  CONSTRAINT ingestion_runs_status_ck
-    CHECK (status IN ('RUNNING', 'SUCCEEDED', 'PARTIAL', 'FAILED'))
+  CONSTRAINT credicresa_ingestion_runs_pk PRIMARY KEY (run_id) NOT ENFORCED
 )
 USING DELTA
 COMMENT 'Una fila por ejecución del pipeline de una fuente'
@@ -34,7 +32,7 @@ TBLPROPERTIES (
   'delta.autoOptimize.autoCompact' = 'true'
 );
 
-CREATE TABLE IF NOT EXISTS cresa_dev.audit01.ingestion_table_runs (
+CREATE TABLE IF NOT EXISTS cresa.audit01.credicresa_ingestion_table_runs (
   run_id                 STRING NOT NULL,
   source_name            STRING NOT NULL,
   config_path            STRING,
@@ -46,9 +44,7 @@ CREATE TABLE IF NOT EXISTS cresa_dev.audit01.ingestion_table_runs (
   started_at             TIMESTAMP,
   finished_at            TIMESTAMP NOT NULL,
   detail                 STRING,
-  output_path            STRING,
-  CONSTRAINT ingestion_table_runs_status_ck
-    CHECK (status IN ('LOADED', 'CHARACTERIZED', 'ERROR', 'CONFIG_ERROR'))
+  output_path            STRING
 )
 USING DELTA
 PARTITIONED BY (source_name)
@@ -59,7 +55,7 @@ TBLPROPERTIES (
   'delta.autoOptimize.autoCompact' = 'true'
 );
 
-CREATE TABLE IF NOT EXISTS cresa_dev.audit01.ingestion_columns (
+CREATE TABLE IF NOT EXISTS cresa.audit01.credicresa_ingestion_columns (
   run_id                 STRING NOT NULL,
   source_name            STRING NOT NULL,
   source_schema          STRING NOT NULL,
@@ -81,7 +77,7 @@ TBLPROPERTIES (
   'delta.autoOptimize.autoCompact' = 'true'
 );
 
-CREATE TABLE IF NOT EXISTS cresa_dev.audit01.ingestion_watermarks (
+CREATE TABLE IF NOT EXISTS cresa.audit01.credicresa_ingestion_watermarks (
   source_name            STRING NOT NULL,
   source_table           STRING NOT NULL,
   watermark_column       STRING,
@@ -89,25 +85,39 @@ CREATE TABLE IF NOT EXISTS cresa_dev.audit01.ingestion_watermarks (
   last_successful_run_id STRING,
   last_successful_at     TIMESTAMP,
   updated_at             TIMESTAMP NOT NULL,
-  CONSTRAINT ingestion_watermarks_pk
+  CONSTRAINT credicresa_ingestion_watermarks_pk
     PRIMARY KEY (source_name, source_table) NOT ENFORCED
 )
 USING DELTA
-COMMENT 'Último punto de lectura exitoso; reservado para futuras cargas incrementales';
+COMMENT 'Último punto de lectura exitoso, reservado para futuras cargas incrementales';
 
 -- Vista operativa: última ejecución por fuente.
-CREATE OR REPLACE VIEW cresa_dev.audit01.v_latest_ingestion_run AS
+CREATE OR REPLACE VIEW cresa.audit01.credicresa_v_latest_ingestion_run AS
 SELECT * EXCEPT (run_order)
 FROM (
   SELECT *, ROW_NUMBER() OVER (PARTITION BY source_name ORDER BY started_at DESC) AS run_order
-  FROM cresa_dev.audit01.ingestion_runs
+  FROM cresa.audit01.credicresa_ingestion_runs
 )
 WHERE run_order = 1;
 
 -- Vista operativa: errores recientes por tabla.
-CREATE OR REPLACE VIEW cresa_dev.audit01.v_ingestion_errors AS
+CREATE OR REPLACE VIEW cresa.audit01.credicresa_v_ingestion_errors AS
 SELECT
   run_id, source_name, source_table, target_table,
   status, started_at, finished_at, detail
-FROM cresa_dev.audit01.ingestion_table_runs
+FROM cresa.audit01.credicresa_ingestion_table_runs
 WHERE status IN ('ERROR', 'CONFIG_ERROR');
+
+CREATE TABLE IF NOT EXISTS cresa.audit01.credicresa_medallion_runs (
+  run_id STRING, period STRING, input_batch STRING, layer STRING, entity STRING,
+  status STRING, row_count BIGINT, certification_status STRING, business_rules STRING,
+  started_at TIMESTAMP, finished_at TIMESTAMP
+) USING DELTA COMMENT 'CRESA credicresa pre_productiva';
+
+-- Diagnosticos agregados: no contiene valores de personas ni filas rechazadas.
+CREATE TABLE IF NOT EXISTS cresa.audit01.credicresa_quality_results (
+  run_id STRING, period STRING, input_batch STRING, layer STRING, entity STRING,
+  rule_id STRING, rule_type STRING, columns_json STRING, total_rows BIGINT,
+  affected_rows BIGINT, status STRING, action STRING, key_authority STRING,
+  certification_status STRING, evaluated_at TIMESTAMP
+) USING DELTA COMMENT 'CRESA credicresa pre_productiva';

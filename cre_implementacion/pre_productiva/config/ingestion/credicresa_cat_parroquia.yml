@@ -1,0 +1,99 @@
+config_version: 1
+source_name: credicresa
+source_schema: landing
+source_table: cat_parroquia
+source_table_normalized: cat_parroquia
+enabled: true
+description: Catálogo de parroquias desde CRESA (proyecto credicresa). Ingesta a Bronze para consumo
+  de dominios.
+priority:
+  wave: fase_3_ingesta
+  score: 5
+  reason: Tabla de maestro usada por procesos de normalización y reporting.
+load_strategy:
+  initial_mode: full_snapshot
+  incremental_mode: incremental_datetime
+  watermark_column: fecha_modificacion
+  sequence_column: null
+  delta_lookback_days: 2
+  delete_detection: false
+read:
+  mode: table
+query:
+  custom_sql: null
+  where_clause: null
+  order_by: null
+primary_key:
+  columns:
+  - id
+  enforced_in_source: false
+natural_key:
+  columns:
+  - canton_id
+  - cod
+  - pais_cod
+  - provincia_cod
+  - canton_cod
+columns:
+  include:
+  - id
+  - canton_id
+  - pais_cod
+  - provincia_cod
+  - canton_cod
+  - cod
+  - nombre
+  - cinec
+  - es_activo
+  exclude: []
+  rename: {}
+  pii_columns: []
+  restricted_columns: []
+  types:
+    id: INT
+    canton_id: INT
+    pais_cod: STRING
+    provincia_cod: STRING
+    canton_cod: STRING
+    cod: STRING
+    nombre: STRING
+    cinec: STRING
+    es_activo: BOOLEAN
+  source_types:
+    id: INT
+    canton_id: INT
+    pais_cod: VARCHAR(3)
+    provincia_cod: VARCHAR(6)
+    canton_cod: VARCHAR(6)
+    cod: VARCHAR(6)
+    nombre: VARCHAR(100)
+    cinec: VARCHAR(8)
+    es_activo: BIT
+target:
+  bronze_catalog: cresa
+  bronze_schema: bronze
+  bronze_table: credicresa_cat_parroquia_bronze
+  write_mode_initial: overwrite
+  write_mode_delta: overwrite
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+governance:
+  domain_official: Maestro
+  sensitivity: Interno
+  data_owner: Equipo de Datos - Maestro (por asignar oficialmente)
+  purview_collection: 01_Maestros
+control_plane:
+  run_table: cresa.audit01.credicresa_ingestion_runs
+  watermark_table: cresa.audit01.credicresa_ingestion_watermarks
+  error_table: cresa.audit01.credicresa_ingestion_table_runs
+dictionary:
+  file: sql/02_credicresa_catalogos.sql
+  schema: credicresa
+  table: cat_parroquia
+  attributes_not_selected: []
+schema_evolution:
+  mode: strict
+  type_widening: fail

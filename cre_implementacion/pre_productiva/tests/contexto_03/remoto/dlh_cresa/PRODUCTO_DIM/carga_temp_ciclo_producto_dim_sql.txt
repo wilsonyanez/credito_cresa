@@ -1,0 +1,37 @@
+-- Databricks notebook source
+--DROP TABLE IF EXISTS dlh_cresa.staging.temp_ciclo_producto_dim;
+--CREATE OR REPLACE TABLE IF NOT EXISTS
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_ciclo_producto_dim (
+  LifecycleStateId VARCHAR(20) COMMENT '',
+  LifecycleStateDescription VARCHAR(60) COMMENT '',
+  IsDefaultOnProductRelease VARCHAR(20) COMMENT '', 
+  IsActiveForPlanning VARCHAR(20) COMMENT ''
+  --campo_x varchar(20) COMMENT '',  -- campos que se requieran crear
+)
+COMMENT 'Tabla temporal para procesos de construir dimension (temp_ciclo_producto_dim)';
+
+
+
+
+
+-- COMMAND ----------
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_ciclo_producto_parquet
+as 
+select *from -- parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_dynamics/productlifecyclestatus/productlifecyclestatus.parquet`
+dlh_cresa.bronze.ProductLifecycleStates;
+
+--select *from carga_temp_ciclo_producto_parquet;
+--DESCRIBE TABLE carga_temp_ciclo_producto_parquet;
+--SHOW VIEWS;
+
+TRUNCATE TABLE dlh_cresa.staging.temp_ciclo_producto_dim;  
+
+INSERT INTO dlh_cresa.staging.temp_ciclo_producto_dim
+select 
+  LifecycleStateId,
+  LifecycleStateDescription,
+  IsDefaultOnProductRelease,
+  IsActiveForPlanning
+from carga_temp_ciclo_producto_parquet;

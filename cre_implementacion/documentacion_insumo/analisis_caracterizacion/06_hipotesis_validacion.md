@@ -1,3 +1,5 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Hipótesis a Validar y Decisiones a Escalar (CRESA, Fase 3)
 
 > Consolidado de `../../Implementación/ROADMAP_GOBIERNO_DATOS.md` §5 y `MAPEO_CASOS_USO_FUENTES.md` §8, en el mismo formato de "hipótesis a validar con datos reales" que usa Almar Fase 3. Ninguno de estos puntos es resoluble desde el equipo técnico — todos requieren una persona o comité específico.

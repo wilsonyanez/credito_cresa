@@ -1,0 +1,43 @@
+-- Databricks notebook source
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_proveedores_mktpl_dim (
+  cod_producto VARCHAR(60) COMMENT 'codigo_producto',
+  ruc_proveedor VARCHAR(20) COMMENT '', 
+  codigo_proveedor VARCHAR(20) COMMENT '', 
+  razon_social_proveedor VARCHAR(350) COMMENT ''
+ 
+)
+COMMENT 'Tabla temporal para procesos de construir dimension (temp_proveedores_mktpl_dim)';
+
+
+
+-- COMMAND ----------
+
+
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_proveedores_mktpl_parquet
+as 
+select *from parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_metas_dwtanque_cresa/tbl_proveedores_mktpl/tbl_proveedores_mktpl.parquet`;
+
+-- se quita duplicado si existe
+CREATE OR REPLACE TEMPORARY VIEW max_proveedor as
+select codigo_producto,max(id) id  from carga_temp_proveedores_mktpl_parquet
+group by codigo_producto;
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_proveedores_mktpl_final as
+select  a.* from carga_temp_proveedores_mktpl_parquet a
+inner join max_proveedor b
+on a.codigo_producto=b.codigo_producto
+and a.id=b.id;
+
+
+TRUNCATE TABLE dlh_cresa.staging.temp_proveedores_mktpl_dim;  
+
+INSERT INTO dlh_cresa.staging.temp_proveedores_mktpl_dim
+select 
+ codigo_producto as cod_producto,
+  ruc_proveedor , 
+   codigo_proveedor , 
+  razon_social_proveedor 
+from carga_temp_proveedores_mktpl_final;
+

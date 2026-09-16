@@ -1,0 +1,525 @@
+-- Databricks notebook source
+-- DBTITLE 1,PROCESO TEMP INICIAL
+CREATE OR REPLACE TEMPORARY VIEW temp_dw_cresa_producto_dim
+as 
+select 
+  '00000' as id_empresa,
+	'00000' as cod_producto,
+	'00000' as num_motor,
+	'00000' as serie_chasis,
+	NULL as fecha_ingreso,
+	'00000' as cod_marca, --varchar(60) COMMENT '',
+	'00000' as cod_linea,--varchar(60) COMMENT '',
+	'00000' as cod_grupo,--varchar(60) COMMENT '',
+	'00000' as cod_subgrupo,--varchar(60) COMMENT '',
+	'00000' as cod_categoria,--varchar(60) COMMENT '',
+	'00000' as cod_estado_producto,--varchar(60) COMMENT '',
+	'00000' as cod_estado_marca,--varchar(60) COMMENT '',
+	'00000' as cod_tipo_producto,--varchar(60) COMMENT '',
+	'00000' as cod_capacidad,--varchar(60) COMMENT '',
+	'00000' as cod_tipo_procedencia,--varchar(60) COMMENT '',
+	'00000' as cod_color,--varchar(60) COMMENT '',
+	'00000' as cod_eficiencia,--varchar(60) COMMENT '',
+	'00000' as cod_planificable,--varchar(60) COMMENT '',
+	'00000' as cod_fabricacion,--varchar(60) COMMENT '',
+	'SIN DEFINIR' as des_producto,--varchar(150) COMMENT '',
+	'SIN DEFINIR' as des_marca,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_linea,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_grupo,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_subgrupo,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_categoria,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_categoria_comercial,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_grupo_asistencia,-- varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_tipo_producto,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_capacidad,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_tipo_procedencia,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_color,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_eficiencia,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_estado_producto,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_estado_marca,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_tipo_palet,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_pertenencia_marca,--varchar(80) COMMENT '',
+	'0' as ind_presupuesta,--varchar(1) COMMENT '',
+	'0' as ind_ingreso_compra,--varchar(1) COMMENT '',
+	'00000' as cod_proveedor,--varchar(10) COMMENT '',
+	0 as cobertura_ce, --DECIMAL(10, 4) COMMENT '',
+	0 as cobertura_dm, -- DECIMAL(10, 4) COMMENT '',
+	0 as cant_por_palet, -- DECIMAL(10, 4) COMMENT '',
+	0 as ancho, -- DECIMAL(10, 4) COMMENT '',
+	'0' as ancho_um,--varchar(4) COMMENT '',
+	0 as altura, -- DECIMAL(10, 4) COMMENT '',
+	'0' as altura_um,--varchar(4) COMMENT '',
+	0 as longitud, -- DECIMAL(10, 4) COMMENT '',
+	'0' as longitud_um,--varchar(4) COMMENT '',
+	0 as pies_cubicos, -- DECIMAL(10, 4) COMMENT '',
+	0 as maximo_gex1, -- float COMMENT '',
+	0 as maximo_gex2, -- float COMMENT '',
+	'0' as ind_gex,--varchar(4) COMMENT '',
+	'0' as cod_estado, -- char(1) COMMENT 'estado',
+	'SIN DEFINIR' tipo_marca,
+  null as ruc_proveedor , 
+  null as codigo_proveedor , 
+  null as razon_social_proveedor ,
+	'SIN DEFINIR' as  des_subtipo_producto,
+	'SIN DEFINIR' as des_origen_producto,
+  1900 anio_fabricacion,
+  'SIN DEFINIR' des_producto_full
+
+UNION
+
+select 
+  coalesce(t.dataAreaId, '00000') as id_empresa,
+	coalesce(t.ItemNumber,'00000') as cod_producto,
+	coalesce(t.InventBatchId,'00000') as num_motor,
+	coalesce(t.InventSerialId,'00000') as serie_chasis,
+	coalesce(t.SellStartDate,NULL) as fecha_ingreso,
+	coalesce(t.PackagingGroupId, NULL) as cod_marca, --varchar(60) COMMENT '',
+	CAST(coalesce(t.APLineCategory,NULL)AS STRING) as cod_linea,--varchar(60) COMMENT '',
+	CAST(coalesce(t.APGroupCategory,NULL) AS STRING) as cod_grupo,--varchar(60) COMMENT '',
+	CAST(coalesce(t.APSubGroupCategory,NULL) AS STRING) as cod_subgrupo, --varchar(60) COMMENT '',
+	coalesce(t.ProductGroupId,NULL) as cod_categoria,--varchar(60) COMMENT '',
+	coalesce(t.ProductLifecycleStateId,NULL) as cod_estado_producto,--varchar(60) COMMENT '',
+	NULL as cod_estado_marca,--varchar(60) COMMENT '',
+	NULL as cod_tipo_producto,--varchar(60) COMMENT '',
+	CAST(coalesce(t.APCapacityCategory,NULL) AS STRING) as cod_capacidad,--varchar(60) COMMENT '',
+	NULL as cod_tipo_procedencia,--varchar(60) COMMENT '',
+	NULL as cod_color,--varchar(60) COMMENT '',
+	NULL as cod_eficiencia,--varchar(60) COMMENT '',
+	NULL as cod_planificable,--varchar(60) COMMENT '',
+	NULL as cod_fabricacion,--varchar(60) COMMENT '',
+	coalesce(t.ProductSearchName,NULL) as des_producto,--varchar(150) COMMENT '',
+	NULL as des_marca,--varchar(80) COMMENT '',
+	NULL as des_linea,--varchar(80) COMMENT '',
+	NULL as des_grupo,--varchar(80) COMMENT '',
+	NULL as des_subgrupo,--varchar(80) COMMENT '',
+	NULL as des_categoria,--varchar(80) COMMENT '',
+	'SIN DEFINIR' as des_categoria_comercial,
+	'SIN DEFINIR' as des_grupo_asistencia,-- varchar(80) COMMENT '',
+	coalesce(t.Producttype,'SIN DEFINIR') as des_tipo_producto,--varchar(80) COMMENT '',
+	NULL as des_capacidad,--varchar(80) COMMENT '',
+	NULL as des_tipo_procedencia,--varchar(80) COMMENT '',
+	NULL as des_color,--varchar(80) COMMENT '',
+	NULL as des_eficiencia,--varchar(80) COMMENT '',
+	NULL as des_estado_producto,--varchar(80) COMMENT '',
+	NULL as des_estado_marca,--varchar(80) COMMENT '',
+	NULL as des_tipo_palet,--varchar(80) COMMENT '',
+	NULL as des_pertenencia_marca,--varchar(80) COMMENT '',
+	NULL as ind_presupuesta,--varchar(1) COMMENT '',
+	NULL as ind_ingreso_compra,--varchar(1) COMMENT '',
+	NULL as cod_proveedor,--varchar(10) COMMENT '',
+	NULL as cobertura_ce, --DECIMAL(10, 4) COMMENT '',
+	NULL as cobertura_dm, -- DECIMAL(10, 4) COMMENT '',
+	NULL as cant_por_palet, -- DECIMAL(10, 4) COMMENT '',
+	coalesce(t.GrossProductWidth,NULL) as ancho, -- DECIMAL(10, 4) COMMENT '',
+	NULL as ancho_um,--varchar(4) COMMENT '',
+	NULL as altura, -- DECIMAL(10, 4) COMMENT '',
+	NULL as altura_um,--varchar(4) COMMENT '',
+	coalesce(t.GrossDepth,NULL) as longitud, -- DECIMAL(10, 4) COMMENT '',
+	NULL as longitud_um,--varchar(4) COMMENT '',
+	NULL as pies_cubicos, -- DECIMAL(10, 4) COMMENT '',
+	NULL as maximo_gex1, -- float COMMENT '',
+	NULL as maximo_gex2, -- float COMMENT '',
+	NULL as ind_gex,--varchar(4) COMMENT '',
+	NULL as cod_estado, -- char(1) COMMENT 'estado',
+'SIN DEFINIR' tipo_marca,  
+  cast(null as varchar(20)) as ruc_proveedor , 
+  cast(null as varchar(20)) as codigo_proveedor , 
+  cast(null as varchar(350)) as razon_social_proveedor, 
+	t.ProductSubtype as des_subtipo_producto,
+	'Dynamics' des_origen_producto,
+  1900 anio_fabricacion ,
+  t.productname  des_producto_full
+  --PackagingGroupId,
+  --ProductGroupId,
+  --ProductLifecycleStateId,
+  --ProductSearchName,
+  --ProductType,
+  --SellStartDate,
+  --UnitCost,
+from dlh_cresa.staging.temp_producto_dim t
+
+UNION 
+
+select  id_empresa, cod_producto, num_motor, serie_chasis,
+ fecha_ingreso,cod_marca,cod_linea,cod_grupo,cod_subgrupo,cod_categoria,
+cod_estado_producto,cod_estado_marca,
+cod_tipo_producto,
+cod_capacidad,
+cod_tipo_procedencia,
+cod_color,
+cod_eficiencia,
+cod_planificable,
+cod_fabricacion,
+des_producto,
+des_marca,
+des_linea,
+des_grupo,
+des_subgrupo,
+des_categoria,
+categoria_comercial,
+des_grupo_asistencia,
+'SIN DEFINIR' des_tipo_producto,
+des_capacidad,
+des_tipo_procedencia,
+des_color,
+des_eficiencia,
+des_estado_producto,
+des_estado_marca,
+des_tipo_palet,
+des_pertenencia_marca,
+ind_presupuesta,
+ind_ingreso_compra,
+cod_proveedor,
+cobertura_ce,
+cobertura_dm,
+cant_por_palet,
+ancho,
+ancho_um,
+altura,
+altura_um,
+longitud,
+longitud_um,
+pies_cubicos,
+maximo_gex1,
+maximo_gex2,
+ind_gex,
+cod_estado,
+'SIN DEFINIR' tipo_marca,
+null as ruc_proveedor , 
+null as codigo_proveedor , 
+null as razon_social_proveedor,
+'SIN DEFINIR' des_subtipo_producto,
+'Historico' des_origen_producto,
+  1900 anio_fabricacion ,
+'SIN DEFINIR' des_producto_full
+from
+dlh_cresa.staging.temp_dw_cresa_producto_dim_his;
+
+--SELECT DISTINCT * FROM temp_dw_cresa_producto_dim where id_empresa IS NULL;
+
+
+
+-- COMMAND ----------
+
+-- DBTITLE 1,PROCESO INSERT
+
+ALTER TABLE dlh_cresa.gold.dw_cresa_producto_dim ALTER COLUMN id_dlh_producto SYNC IDENTITY;
+
+-- INSERTAR EN TABLA EN TABLA DE ESQUEMA GOLD
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim d
+USING (SELECT DISTINCT *
+  FROM temp_dw_cresa_producto_dim where cod_producto IS NOT NULL and cod_producto not in ('00000','') ) temp
+ON  d.id_empresa = temp.id_empresa AND d.cod_producto = temp.cod_producto 
+and d.num_motor = temp.num_motor and d.serie_chasis = temp.serie_chasis
+WHEN MATCHED THEN
+  UPDATE SET
+    d.des_producto = temp.des_producto,
+		d.cod_marca = temp.cod_marca,
+		d.cod_linea = temp.cod_linea,
+		d.cod_grupo = temp.cod_grupo,
+    d.cod_subgrupo = temp.cod_subgrupo,
+		d.cod_categoria = temp.cod_categoria,
+		d.cod_estado_producto = temp.cod_estado_producto,
+		d.cod_capacidad= temp.cod_capacidad
+		-----
+		,
+		d.des_tipo_producto=temp.des_tipo_producto,
+		d.des_subtipo_producto=temp.des_subtipo_producto,
+		d.des_origen_producto=temp.des_origen_producto,
+		d.des_producto_full=temp.des_producto_full
+WHEN NOT MATCHED
+  --THEN INSERT *;
+  THEN INSERT (
+    id_empresa,
+		cod_producto,
+		num_motor,
+	  serie_chasis,
+		fecha_ingreso,
+		cod_marca,
+		cod_linea,
+		cod_grupo,
+		cod_subgrupo,
+		cod_categoria,
+		cod_estado_producto,
+		cod_estado_marca,
+		cod_tipo_producto,
+		cod_capacidad,
+		cod_tipo_procedencia,
+		cod_color,
+		cod_eficiencia,
+		cod_planificable,
+		cod_fabricacion,
+		des_producto,
+		des_marca,
+		des_linea,
+		des_grupo,
+		des_subgrupo,
+		des_categoria,
+		des_categoria_comercial,
+	  des_grupo_asistencia,
+		des_tipo_producto,
+		des_capacidad,
+		des_tipo_procedencia,
+		des_color,
+		des_eficiencia,
+		des_estado_producto,
+		des_estado_marca,
+		des_tipo_palet,
+		des_pertenencia_marca,
+		ind_presupuesta,
+		ind_ingreso_compra,
+		cod_proveedor,
+		cobertura_ce,
+		cobertura_dm,
+		cant_por_palet,
+		ancho,
+		ancho_um,
+		altura,
+		altura_um,
+		longitud,
+		longitud_um,
+		pies_cubicos,
+		maximo_gex1,
+		maximo_gex2,
+		ind_gex,
+		cod_estado,
+		tipo_marca,
+   ruc_proveedor , 
+   codigo_proveedor , 
+   razon_social_proveedor,
+	 des_subtipo_producto,
+	 des_origen_producto,
+	 anio_fabricacion,
+	 des_producto_full
+  ) VALUES (
+    temp.id_empresa,
+		temp.cod_producto,
+		temp.num_motor,
+	  temp.serie_chasis,
+		temp.fecha_ingreso,
+		temp.cod_marca,
+		temp.cod_linea,
+		temp.cod_grupo,
+		temp.cod_subgrupo,
+		temp.cod_categoria,
+		temp.cod_estado_producto,
+		temp.cod_estado_marca,
+		temp.cod_tipo_producto,
+		temp.cod_capacidad,
+		temp.cod_tipo_procedencia,
+		temp.cod_color,
+		temp.cod_eficiencia,
+		temp.cod_planificable,
+		temp.cod_fabricacion,
+		temp.des_producto,
+		temp.des_marca,
+		temp.des_linea,
+		temp.des_grupo,
+		temp.des_subgrupo,
+		temp.des_categoria,
+		temp.des_categoria_comercial,
+	  temp.des_grupo_asistencia,
+		temp.des_tipo_producto,
+		temp.des_capacidad,
+		temp.des_tipo_procedencia,
+		temp.des_color,
+		temp.des_eficiencia,
+		temp.des_estado_producto,
+		temp.des_estado_marca,
+		temp.des_tipo_palet,
+		temp.des_pertenencia_marca,
+		temp.ind_presupuesta,
+		temp.ind_ingreso_compra,
+		temp.cod_proveedor,
+		temp.cobertura_ce,
+		temp.cobertura_dm,
+		temp.cant_por_palet,
+		temp.ancho,
+		temp.ancho_um,
+		temp.altura,
+		temp.altura_um,
+		temp.longitud,
+		temp.longitud_um,
+		temp.pies_cubicos,
+		temp.maximo_gex1,
+		temp.maximo_gex2,
+		temp.ind_gex,
+		temp.cod_estado,
+		temp.tipo_marca,
+    temp.ruc_proveedor , 
+    temp.codigo_proveedor , 
+    temp.razon_social_proveedor,
+		temp.des_subtipo_producto,
+		temp.des_origen_producto,
+		temp.anio_fabricacion,
+		temp.des_producto_full
+  );
+
+
+
+-- COMMAND ----------
+
+-- DBTITLE 1,ADICIONAR CATALOGOS
+
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_marca_dim m
+ON  p.id_empresa = m.id_empresa -- AND p.cod_marca = m.cod_marca
+and upper(p.cod_marca)  = UPPER(m.cod_marca)
+-- or p.cod_marca  =INITCAP(m.cod_marca)
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_marca = m.des_marca;
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_linea_dim l
+ON p.id_empresa = l.id_empresa AND p.cod_linea = l.cod_linea
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_linea = l.des_linea;
+
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_grupo_dim g
+ON p.id_empresa = g.id_empresa AND p.cod_grupo = g.cod_grupo
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_grupo = g.des_grupo;
+
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_subgrupo_dim sg
+ON p.id_empresa = sg.id_empresa AND p.cod_subgrupo = sg.cod_subgrupo
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_subgrupo = sg.des_subgrupo;
+
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_categoria_producto_dim c
+ON p.id_empresa = c.id_empresa AND p.cod_categoria = c.cod_categoria
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_categoria = c.des_categoria;
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_ciclo_producto_dim c
+ON p.cod_estado_producto = c.LifecycleStateId --p.id_empresa = c.id_empresa
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_estado_producto = c.LifecycleStateId;
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_capacidad_dim sg
+ON p.id_empresa = sg.id_empresa AND p.cod_capacidad = sg.cod_capacidad
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_capacidad = sg.des_capacidad;
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_proveedores_mktpl_dim sg
+ON  p.cod_producto = sg.cod_producto
+WHEN MATCHED THEN
+  UPDATE SET
+    p.ruc_proveedor= sg.ruc_proveedor, 
+    p.codigo_proveedor= sg.codigo_proveedor , 
+    p.razon_social_proveedor = sg.razon_social_proveedor;  
+
+-- COMMAND ----------
+
+-- DBTITLE 1,CATALOGOS ESPECIALES
+MERGE INTO  dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.src.xls_comercial_categoria c
+ON  p.cod_linea = c.cod_linea
+--ON  p.cod_categoria = c.dynamics_linea
+--p.id_empresa = m.id_empresa 
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_categoria_comercial = c.comercial_categoria;
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.src.xls_comercial_grupo_asistencia c
+ON  p.cod_producto = c.cod_producto
+--p.id_empresa = m.id_empresa 
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_grupo_asistencia = c.grupo_asistencia;
+
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_tipo_marca_dim c
+ON  p.des_marca = upper(c.des_marca)
+--p.id_empresa = m.id_empresa 
+WHEN MATCHED THEN
+  UPDATE SET
+    p.tipo_marca = c.tipo_marca;
+
+    update dlh_cresa.gold.dw_cresa_producto_dim a
+    SET a.tipo_marca ='Marca no Propia'
+    WHERE a.tipo_marca IS NULL;
+
+    update dlh_cresa.gold.dw_cresa_producto_dim a
+    SET a.tipo_marca ='Marca no Propia'
+    WHERE a.tipo_marca='SIN DEFINIR';
+
+-- actualiza tipo marcas de producto web
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_tipo_marca_web_dim c
+ON  p.cod_producto = c.ItemNumber
+--p.id_empresa = m.id_empresa 
+WHEN MATCHED THEN
+  UPDATE SET
+    p.tipo_marca = c.tipo_marca;
+
+
+-- actualiza procedencia de producto
+MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING dlh_cresa.staging.temp_producto_procedencia_dim c
+ON  p.cod_producto = c.cod_producto
+--p.id_empresa = m.id_empresa 
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_tipo_procedencia = c.tipo_atributo;
+
+    update dlh_cresa.gold.dw_cresa_producto_dim a
+    SET a.des_tipo_procedencia ='SIN DEFINIR'
+    WHERE a.des_tipo_procedencia IS NULL;
+
+    update dlh_cresa.gold.dw_cresa_producto_dim a
+    SET a.des_tipo_procedencia ='SIN DEFINIR'
+    WHERE a.des_tipo_procedencia ='Seleccionar';
+
+     update dlh_cresa.gold.dw_cresa_producto_dim a
+    SET a.des_tipo_procedencia ='Importado'
+    WHERE a.des_tipo_procedencia ='IMPORTADO';
+
+         update dlh_cresa.gold.dw_cresa_producto_dim a
+    SET a.des_tipo_procedencia ='Local'
+    WHERE a.des_tipo_procedencia ='LOCAL';
+
+        update dlh_cresa.gold.dw_cresa_producto_dim a
+    SET a.des_tipo_procedencia ='SIN DEFINIR'
+    WHERE a.des_tipo_procedencia ='POR DEFINIR';
+
+   
+-- ACTUALIZA TIPO PRODUCTO 
+    MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING  dlh_cresa.staging.temp_tipo_producto_dim c
+ON  p.cod_producto = c.itemNumber
+--p.id_empresa = m.id_empresa 
+WHEN MATCHED THEN
+  UPDATE SET
+    p.replica_producto = c.replicaProducto,
+    p.web_producto= c.webProducto,
+    p.calificado_producto=c.calificadoProducto,
+    p.exhibicion_producto= c.exihibicionProducto,
+    p.moto_caso3=c.caso3Producto;
+
+
+ -- Actualiza Año
+    MERGE INTO dlh_cresa.gold.dw_cresa_producto_dim p
+USING  dlh_cresa.staging.temp_producto_anio_fabricacion_dim c
+ON  p.cod_producto = c.cod_producto
+WHEN MATCHED THEN
+  UPDATE SET
+    p.anio_fabricacion = c.tipo_atributo
+

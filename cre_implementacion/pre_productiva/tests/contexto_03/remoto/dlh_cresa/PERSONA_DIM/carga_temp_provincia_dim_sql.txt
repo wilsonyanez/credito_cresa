@@ -1,0 +1,35 @@
+-- Databricks notebook source
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_provincia_dim (
+  cod_pais VARCHAR(20) COMMENT 'CountryRegionId',
+  cod_provincia VARCHAR(20) COMMENT 'State',
+  des_provincia VARCHAR(100) COMMENT 'Name',
+  cod_provincia_d365 VARCHAR(20) COMMENT 'APProvinceCodeId'
+)
+COMMENT 'Tabla temporal para procesos de construcción de dimensiones de la temporal de persona'
+
+
+
+
+-- COMMAND ----------
+
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_provincia_parquet
+AS
+select * from dlh_cresa.bronze.AddressStates;
+-- SELECT * FROM PARQUET.`/Volumes/dlh_cresa/bronze/vol_bronze_dynamics/addressstate/addressstate.parquet`;
+
+
+--SELECT * FROM carga_temp_provincia_parquet;
+--DESCRIBE TABLE carga_temp_provincia_parquet;
+
+
+TRUNCATE TABLE dlh_cresa.staging.temp_provincia_dim;
+
+INSERT INTO dlh_cresa.staging.temp_provincia_dim
+SELECT   
+  CountryRegionId,
+  State,
+  Name,
+  APProvinceCodeId
+FROM carga_temp_provincia_parquet;

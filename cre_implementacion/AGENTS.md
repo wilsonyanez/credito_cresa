@@ -14,9 +14,9 @@ El repositorio recrea una fuente de prueba y ejecuta su ingesta íntegramente de
 |---|---|
 | Recrear fuente | `pre_productiva/notebooks/01_create_source_database.py` |
 | Pipeline activo | `pre_productiva/notebooks/ingest_databricks_source_to_parquet.py` |
-| Configuración de fuente | `pre_productiva/config/sources/credito_cresa.yml` |
+| Configuración de fuente | `pre_productiva/config/sources/credicresa.yml` |
 | Entidad | `pre_productiva/config/ingestion/<entidad>.yml` |
-| Job consolidado | `pre_productiva/config/jobs/ingest_credito_cresa_source.json` |
+| Job consolidado | `pre_productiva/config/jobs/job_credicresa_ingesta_periodo.json` |
 | Ambiente/control plane | `pre_productiva/sql/` |
 | Operación | `pre_productiva/docs/PIPELINE_POR_FUENTE.md` |
 | Contexto funcional | `documentacion_insumo/analisis_caracterizacion/` |
@@ -49,3 +49,7 @@ No cargar en bloque los 34 YAML ni la construcción previa. Buscar primero por f
 3. Confirmar cobertura de los 34 YAML.
 4. Verificar ausencia de secretos.
 5. No afirmar éxito remoto si solo se validó localmente.
+
+## Estado documental vigente
+
+La arquitectura MDM y los nombres Silver/Gold por ambiente se definen en `pre_productiva/docs/17_CRESA_DATABRICK_DEFINICION_INICIAL.md`; la cobertura y brechas, en `20_CRESA_MDM_ANALISIS_EXTENDIDO.md`. El índice `pre_productiva/docs/ESTADO_VIGENTE.md` distingue piloto, propuesta MDM e históricos. Desarrollo: `dev_dlh_cresa`, almacenamiento `devstgdlh02`, 1,2 TB disponibles declarados, sin restricción de espacio para esta etapa. El piloto local sigue limitado a 14 entidades entre 34 contratos; no equivale al despliegue del MDM.

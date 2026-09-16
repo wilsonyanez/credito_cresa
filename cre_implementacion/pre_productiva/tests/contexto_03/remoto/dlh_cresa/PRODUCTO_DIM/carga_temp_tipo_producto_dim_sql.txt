@@ -1,0 +1,28 @@
+-- Databricks notebook source
+-- DBTITLE 1,PRODUCTO REPLICA
+
+create or replace table dlh_cresa.staging.temp_tipo_producto_dim
+select distinct 
+ItemNumber,
+case 
+when ItemNumber like '%-RP' then 'SI'
+else 'NO'
+end replicaProducto,
+case 
+when ItemNumber like '%-W' then 'SI'
+else 'NO'
+end webProducto,
+case 
+when ProductLifecycleStateId  in ('Calificado') then 'SI'
+-- when itemNumber like '2900%'and IsMarketPlace='No' then 'SI'
+else 'NO' 
+end calificadoProducto,
+case 
+when ItemNumber like '%-EX' then 'SI'
+else 'NO'
+end exihibicionProducto,
+case 
+when ItemNumber like '%-C3' then 'SI'
+else 'NO'
+end caso3Producto
+from dlh_cresa.bronze.d365_ReleasedProductsV2;

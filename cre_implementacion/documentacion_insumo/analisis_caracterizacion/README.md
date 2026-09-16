@@ -1,3 +1,5 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Índice de Entregables — Caracterización Fase 3 (CRESA)
 
 Carpeta generada: `Fase 3/analisis_caracterizacion`. Estructura calcada de `Almar/Fase 3/analisis_caracterizacion`, con contenido propio de CRESA (dominios Cliente y Producto, catálogo `dlh_cresa` ya productivo).
@@ -30,7 +32,7 @@ Carpeta generada: `Fase 3/templates_ingenieria`
 | `config/ingestion/ingestion_table_template.yml` | Plantilla de ingesta paramétrica Bronze — igual, reservada para fuentes nuevas. |
 | `config/silver/silver_entity_template.yml` | Plantilla de cleansing, homologación y calidad diagnóstica Silver — usar para `dw_cresa_cliente_conformado` / `dw_cresa_producto_conformado`. |
 | `config/gold/gold_product_template.yml` | Plantilla de contrato, certificación y publicación Gold — usar para los golden records y el quick win de Salesforce. |
-| `config/environments/environment_template.yml` | Plantilla de parámetros por ambiente — hoy solo `prod` es real en CRESA (sin DEV/TEST separados). |
+| `config/environments/environment_template.yml` | Plantilla de parámetros por ambiente — propuesta histórica; hoy se identifican `dlh_cresa` y `dev_dlh_cresa`, según el documento 17. |
 | `notebooks/template_pipeline_metadata_driven.ipynb` | Notebook base metadata-driven para Databricks, adaptado al catálogo `dlh_cresa`. |
 | `docs/template_documentacion_pipeline.md` | Plantilla Markdown de documentación operativa por pipeline. |
 

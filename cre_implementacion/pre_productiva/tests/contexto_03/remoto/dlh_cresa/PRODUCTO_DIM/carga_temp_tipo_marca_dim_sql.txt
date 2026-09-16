@@ -1,0 +1,26 @@
+-- Databricks notebook source
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_tipo_marca_dim (
+  id_empresa VARCHAR(20) ,
+  des_marca VARCHAR(20) ,
+  tipo_marca VARCHAR(60) 
+);
+
+
+
+-- COMMAND ----------
+
+truncate table dlh_cresa.staging.temp_tipo_marca_dim;
+
+insert into dlh_cresa.staging.temp_tipo_marca_dim
+select 
+'001' id_empresa,
+Marca des_marca,
+Tipo__Marca tipo_marca
+from dlh_cresa.src.xls_tipo_marca
+
+-- COMMAND ----------
+
+-- DBTITLE 1,PRODUCTOS WEB MARCA NO PROPIA
+create or replace table dlh_cresa.staging.temp_tipo_marca_web_dim as
+SELECT distinct ItemNumber,'Marca no Propia' tipo_marca FROM dlh_cresa.staging.temp_producto_dim
+where ItemNumber like '%-W'

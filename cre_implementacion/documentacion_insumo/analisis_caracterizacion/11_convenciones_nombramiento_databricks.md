@@ -1,3 +1,5 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Convenciones de Nombramiento Databricks — Fase 3 (CRESA)
 
 ## Propósito
@@ -11,7 +13,7 @@ A diferencia de Almar (convenciones definidas desde cero sobre un catálogo nuev
 | Prefijo de fuente | `d365_customerv3`, `d365_releasedproductsv2` | Dynamics 365 | Consistente |
 | Sin prefijo, mismo origen aparente | `customersv3`, `cecustomers` | Dynamics 365 (¿mismo pipeline que `d365_*`?) | **No está claro si son duplicados, versiones migradas, o dos pipelines paralelos** — resolver antes de decidir cuál es la fuente Bronze del maestro de Cliente |
 | Prefijo `dw_cresa_` para Gold dimensional | `dw_cresa_persona_dim`, `dw_cresa_producto_dim` | Interno (ETL corporativo) | Consistente y maduro — se adopta como base para nombres nuevos |
-| Sufijos de no-producción en catálogo productivo | `_test`, `_bk`, `_backup`, `_bckup` (>15 solo en `gold`) | Ad-hoc | Sin ambientes DEV/TEST separados, todo convive en el único catálogo productivo — 5 versiones de `dw_cresa_producto_dim` sin marca de vigente |
+| Sufijos de no-producción en catálogo productivo | `_test`, `_bk`, `_backup`, `_bckup` (>15 solo en `gold`) | Ad-hoc | Diagnóstico histórico de coexistencia en Producción; Desarrollo está identificado ahora como dev_dlh_cresa — 5 versiones de `dw_cresa_producto_dim` sin marca de vigente |
 
 ## Regla general para tablas nuevas de Fase 3
 
@@ -72,7 +74,9 @@ Ejemplos:
 dlh_cresa.gold.dw_cresa_cliente_campos_salesforce
 ```
 
-### Control de gobierno (extiende `audit01` ya existente)
+### Antecedente de control de gobierno
+
+El documento 17 propone `audit01.mdm_clientes_productos_*`; los nombres `gobierno_*` siguientes corresponden al diseño anterior y no se presentan como implementados.
 
 ```text
 dlh_cresa.audit01.gobierno_<capa>_<entidad>
@@ -93,7 +97,7 @@ dlh_cresa.audit01.gobierno_gold_publicacion
 |---|---|
 | Entidad Silver | `config/silver/<dominio>.<entidad>.yml` |
 | Producto Gold | `config/gold/<dominio>.<producto>.yml` |
-| Ambiente | `config/environments/<ambiente>.yml` — hoy solo `prod.yml` es real (sin DEV/TEST separados) |
+| Ambiente | `config/environments/<ambiente>.yml` — propuesta de configuración; ambientes identificados: `dlh_cresa` y `dev_dlh_cresa`; no afirmar que estos archivos estén implementados |
 
 Ejemplos:
 
@@ -105,7 +109,9 @@ config/gold/cliente.dw_cresa_cliente_campos_salesforce.yml
 config/gold/producto.dw_cresa_maestro_producto.yml
 ```
 
-## Notebooks y jobs
+## Antecedente de notebooks y jobs
+
+La convención vigente del documento 17 usa un job por fuente y un orquestador de maestros; los ejemplos por entidad siguientes quedan como referencia anterior y no deben multiplicarse en el despliegue.
 
 | Artefacto | Patrón |
 |---|---|

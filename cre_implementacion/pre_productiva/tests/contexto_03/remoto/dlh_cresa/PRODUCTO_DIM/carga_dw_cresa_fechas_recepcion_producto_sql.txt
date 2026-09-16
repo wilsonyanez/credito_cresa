@@ -1,0 +1,75 @@
+-- Databricks notebook source
+
+-- primera fecha recepcion 
+
+create or replace table min_ProductReceiptDate as
+select min(ProductReceiptDate) ProductReceiptDate ,ItemNumber
+ from dlh_cresa.bronze.ProductReceiptLines 
+group by ItemNumber;
+
+create or replace table temp_ProductReceiptLines_min  as
+Select a.* from dlh_cresa.bronze.ProductReceiptLines a
+inner join min_ProductReceiptDate b
+on a.ItemNumber=b.ItemNumber
+and a.ProductReceiptDate=b.ProductReceiptDate;
+
+-- recordid
+create or replace table min_record_ProductReceiptDate as
+select min(RecordId) RecordId ,ItemNumber
+ from temp_ProductReceiptLines_min
+group by ItemNumber;
+
+-- final
+create or replace table temp_min_ProductReceiptLines  as
+Select a.* from temp_ProductReceiptLines_min a
+inner join min_record_ProductReceiptDate b
+on a.ItemNumber=b.ItemNumber
+and a.RecordId=b.RecordId;
+
+--/// fecha ultima ///---
+
+create or replace table max_ProductReceiptDate as
+select max(ProductReceiptDate) ProductReceiptDate ,ItemNumber
+ from dlh_cresa.bronze.ProductReceiptLines 
+group by ItemNumber;
+
+create or replace table temp_ProductReceiptLines_max as
+Select a.* from dlh_cresa.bronze.ProductReceiptLines a
+inner join max_ProductReceiptDate b
+on a.ItemNumber=b.ItemNumber
+and a.ProductReceiptDate=b.ProductReceiptDate;
+
+-- recordid
+create or replace table max_record_ProductReceiptDate as
+select max(RecordId) RecordId ,ItemNumber
+ from temp_ProductReceiptLines_max
+group by ItemNumber;
+
+-- final
+create or replace table temp_max_ProductReceiptLines  as
+Select a.* from temp_ProductReceiptLines_max a
+inner join max_record_ProductReceiptDate b
+on a.ItemNumber=b.ItemNumber
+and a.RecordId=b.RecordId;
+
+
+-- se crea la entidad
+create or replace table dlh_cresa.silver.dw_cresa_fechas_recepcion_producto  as
+Select 
+a.ItemNumber  cod_producto,
+ from_utc_timestamp(b.ProductReceiptDate, 'GMT-5') ultima_fecha_recepcion, 
+ from_utc_timestamp(a.ProductReceiptDate, 'GMT-5') primera_fecha_recepcion, 
+ b.PurchaseOrderNumber ultima_orden_compra, 
+ a.PurchaseOrderNumber primera_orden_compra,
+ c.OrderVendorAccountNumber num_proveedor_ult_compra,  
+ c.PurchaseOrderName proveedor_ult_compra, 
+ d.OrderVendorAccountNumber num_proveedor_pri_compra, 
+ d.PurchaseOrderName proveedor_pri_compra
+ from  temp_min_ProductReceiptLines a
+ left join temp_max_ProductReceiptLines b
+ on a.ItemNumber=b.ItemNumber
+ left join dlh_cresa.bronze.purchaseorderheadersv2 c
+ on  b.PurchaseOrderNumber=c.PurchaseOrderNumber
+ left join dlh_cresa.bronze.purchaseorderheadersv2 d
+ on a.PurchaseOrderNumber=d.PurchaseOrderNumber
+ ;

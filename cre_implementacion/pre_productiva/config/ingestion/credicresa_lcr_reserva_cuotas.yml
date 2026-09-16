@@ -1,0 +1,112 @@
+config_version: 1
+source_name: credicresa
+source_schema: landing
+source_table: lcr_reserva_cuotas
+source_table_normalized: lcr_reserva_cuotas
+enabled: true
+description: Catálogo de configuración control reserva cuotas respuesta proveedor
+  desde CRESA (proyecto credicresa). Ingesta a Bronze para consumo de dominios. Campos explicitados
+  para ingesta incremental/validación.
+priority:
+  wave: fase_3_ingesta
+  score: 5
+  reason: Tabla de maestro usada por procesos de normalización y reporting.
+load_strategy:
+  initial_mode: full_snapshot
+  incremental_mode: full_snapshot
+  watermark_column: null
+  sequence_column: null
+  delta_lookback_days: 0
+  delete_detection: false
+read:
+  mode: table
+query:
+  custom_sql: null
+  where_clause: null
+  order_by: null
+primary_key:
+  columns:
+  - id
+  enforced_in_source: false
+natural_key:
+  columns:
+  - cuenta_id
+  - empresa_id
+  - almacen_id
+  - origen
+  - pedido_id
+columns:
+  include:
+  - id
+  - cuenta_id
+  - empresa_id
+  - almacen_id
+  - origen
+  - pedido_id
+  - monto
+  - es_activo
+  - creado_por
+  - creado
+  - actualizado_por
+  - actualizado
+  - sobre_cupo
+  exclude: []
+  rename: {}
+  pii_columns: []
+  restricted_columns: []
+  types:
+    id: BIGINT
+    cuenta_id: BIGINT
+    empresa_id: STRING
+    almacen_id: STRING
+    origen: STRING
+    pedido_id: STRING
+    monto: DECIMAL(18,6)
+    es_activo: BOOLEAN
+    creado_por: INT
+    creado: STRING
+    actualizado_por: INT
+    actualizado: STRING
+    sobre_cupo: DECIMAL(18,6)
+  source_types:
+    id: BIGINT
+    cuenta_id: BIGINT
+    empresa_id: VARCHAR(6)
+    almacen_id: VARCHAR(6)
+    origen: VARCHAR(10)
+    pedido_id: VARCHAR(10)
+    monto: DECIMAL(18,6)
+    es_activo: BIT
+    creado_por: INT
+    creado: VARCHAR(27)
+    actualizado_por: INT
+    actualizado: VARCHAR(27)
+    sobre_cupo: DECIMAL(18,6)
+target:
+  bronze_catalog: cresa
+  bronze_schema: bronze
+  bronze_table: credicresa_lcr_reserva_cuotas_bronze
+  write_mode_initial: overwrite
+  write_mode_delta: overwrite
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+governance:
+  domain_official: Maestro
+  sensitivity: Interno
+  data_owner: Equipo de Datos - Maestro (por asignar oficialmente)
+  purview_collection: 01_Maestros
+control_plane:
+  run_table: cresa.audit01.credicresa_ingestion_runs
+  watermark_table: cresa.audit01.credicresa_ingestion_watermarks
+  error_table: cresa.audit01.credicresa_ingestion_table_runs
+dictionary:
+  file: sql/02_credicresa_catalogos.sql
+  schema: credicresa
+  table: lcr_reserva_cuotas
+  attributes_not_selected: []
+schema_evolution:
+  mode: strict
+  type_widening: fail

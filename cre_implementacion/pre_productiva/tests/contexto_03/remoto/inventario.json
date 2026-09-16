@@ -1,0 +1,366 @@
+[
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/sp_persona_dim_py",
+    "error": "Error: Get \"https://adb-1077365077848684.4.azuredatabricks.net/api/2.0/workspace/export?path=%2FShared%2FDLHCRESA01%2FTRANSFORMACIONES%2FDIMENSIONES_GENERALES%2FPERSONA_DIM%2Fsp_persona_dim_py\": dial tcp 52.234.168.240:443: connectex: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión."
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM",
+    "listing": {
+      "objects": [
+        {
+          "directory_info": {
+            "is_git_folder": false
+          },
+          "object_id": 3562868614456620,
+          "object_type": "DIRECTORY",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS",
+          "resource_id": "3562868614456620"
+        },
+        {
+          "created_at": 1728948363516,
+          "language": "PYTHON",
+          "modified_at": 1787972188890,
+          "object_id": 3562868614456671,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/sp_persona_dim_py",
+          "resource_id": "3562868614456671"
+        }
+      ]
+    }
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_ciudad_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PERSONA_DIM\\carga_temp_ciudad_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_provincia_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PERSONA_DIM\\carga_temp_provincia_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_dw_cresa_persona_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PERSONA_DIM\\carga_dw_cresa_persona_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_persona_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PERSONA_DIM\\carga_temp_persona_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS",
+    "listing": {
+      "objects": [
+        {
+          "created_at": 1728948363724,
+          "language": "SQL",
+          "modified_at": 1775576084195,
+          "object_id": 3562868614456706,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_ciudad_dim_sql",
+          "resource_id": "3562868614456706"
+        },
+        {
+          "created_at": 1728948363717,
+          "language": "SQL",
+          "modified_at": 1770244040100,
+          "object_id": 3562868614456703,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_provincia_dim_sql",
+          "resource_id": "3562868614456703"
+        },
+        {
+          "created_at": 1728948363833,
+          "language": "SQL",
+          "modified_at": 1789492743481,
+          "object_id": 3562868614456713,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_dw_cresa_persona_dim_sql",
+          "resource_id": "3562868614456713"
+        },
+        {
+          "created_at": 1728948363844,
+          "language": "SQL",
+          "modified_at": 1783446773751,
+          "object_id": 3562868614456719,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS/carga_temp_persona_dim_sql",
+          "resource_id": "3562868614456719"
+        }
+      ]
+    }
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\sp_producto_dim_py.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM",
+    "listing": {
+      "objects": [
+        {
+          "directory_info": {
+            "is_git_folder": false
+          },
+          "object_id": 1014832794310357,
+          "object_type": "DIRECTORY",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS",
+          "resource_id": "1014832794310357"
+        },
+        {
+          "created_at": 1730904730199,
+          "language": "PYTHON",
+          "modified_at": 1789049152342,
+          "object_id": 1014832794310388,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/sp_producto_dim_py",
+          "resource_id": "1014832794310388"
+        }
+      ]
+    }
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_procedencia_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_procedencia_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_capacidad_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_capacidad_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_dw_cresa_fechas_recepcion_producto_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_dw_cresa_fechas_recepcion_producto_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_tipo_producto_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_tipo_producto_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_proveedores_mktpl_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_proveedores_mktpl_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_tipo_marca_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_tipo_marca_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_marca_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_marca_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_producto_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_producto_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_categoria_producto_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_categoria_producto_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_dw_cresa_producto_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_dw_cresa_producto_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_ciclo_producto_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_ciclo_producto_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_atributos_producto_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_atributos_producto_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_linea_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_linea_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_grupo_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_grupo_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_subgrupo_dim_sql",
+    "local": "tests\\contexto_03\\remoto\\dlh_cresa\\PRODUCTO_DIM\\carga_temp_subgrupo_dim_sql.txt"
+  },
+  {
+    "profile": "dlh_cresa",
+    "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS",
+    "listing": {
+      "objects": [
+        {
+          "created_at": 1750879817628,
+          "language": "PYTHON",
+          "modified_at": 1789056898654,
+          "object_id": 1022383759831970,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_procedencia_dim_sql",
+          "resource_id": "1022383759831970"
+        },
+        {
+          "created_at": 1741895073634,
+          "language": "SQL",
+          "modified_at": 1780414056826,
+          "object_id": 576423378816933,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_capacidad_dim_sql",
+          "resource_id": "576423378816933"
+        },
+        {
+          "created_at": 1773939746522,
+          "language": "PYTHON",
+          "modified_at": 1789057344015,
+          "object_id": 759453147538106,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_dw_cresa_fechas_recepcion_producto_sql",
+          "resource_id": "759453147538106"
+        },
+        {
+          "created_at": 1759769224252,
+          "language": "PYTHON",
+          "modified_at": 1786046890810,
+          "object_id": 3982533200057731,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_tipo_producto_dim_sql",
+          "resource_id": "3982533200057731"
+        },
+        {
+          "created_at": 1748290863661,
+          "language": "SQL",
+          "modified_at": 1775576619624,
+          "object_id": 2164144531111243,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_proveedores_mktpl_dim_sql",
+          "resource_id": "2164144531111243"
+        },
+        {
+          "created_at": 1746466066990,
+          "language": "PYTHON",
+          "modified_at": 1783970320413,
+          "object_id": 716522981743527,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_tipo_marca_dim_sql",
+          "resource_id": "716522981743527"
+        },
+        {
+          "created_at": 1730904730021,
+          "language": "SQL",
+          "modified_at": 1785181089930,
+          "object_id": 1014832794310361,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_marca_dim_sql",
+          "resource_id": "1014832794310361"
+        },
+        {
+          "created_at": 1730904730040,
+          "language": "SQL",
+          "modified_at": 1787947990900,
+          "object_id": 1014832794310364,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_producto_dim_sql",
+          "resource_id": "1014832794310364"
+        },
+        {
+          "created_at": 1730904730002,
+          "language": "SQL",
+          "modified_at": 1757003826306,
+          "object_id": 1014832794310358,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_categoria_producto_dim_sql",
+          "resource_id": "1014832794310358"
+        },
+        {
+          "created_at": 1730904730140,
+          "language": "SQL",
+          "modified_at": 1787948232089,
+          "object_id": 1014832794310377,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_dw_cresa_producto_dim_sql",
+          "resource_id": "1014832794310377"
+        },
+        {
+          "created_at": 1730904730163,
+          "language": "SQL",
+          "modified_at": 1757003854041,
+          "object_id": 1014832794310382,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_ciclo_producto_dim_sql",
+          "resource_id": "1014832794310382"
+        },
+        {
+          "created_at": 1730904730063,
+          "language": "SQL",
+          "modified_at": 1786550172333,
+          "object_id": 1014832794310368,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_atributos_producto_dim_sql",
+          "resource_id": "1014832794310368"
+        },
+        {
+          "created_at": 1730904730095,
+          "language": "SQL",
+          "modified_at": 1775576314717,
+          "object_id": 1014832794310371,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_linea_dim_sql",
+          "resource_id": "1014832794310371"
+        },
+        {
+          "created_at": 1730904730120,
+          "language": "SQL",
+          "modified_at": 1775576345341,
+          "object_id": 1014832794310374,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_grupo_dim_sql",
+          "resource_id": "1014832794310374"
+        },
+        {
+          "created_at": 1730904730182,
+          "language": "SQL",
+          "modified_at": 1756933331855,
+          "object_id": 1014832794310385,
+          "object_type": "NOTEBOOK",
+          "path": "/Shared/DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS/carga_temp_subgrupo_dim_sql",
+          "resource_id": "1014832794310385"
+        }
+      ]
+    }
+  },
+  {
+    "profile": "dev-dlh_cresa",
+    "path": "/Shared/DEV-DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM",
+    "error": "Error: Path (/Shared/DEV-DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM) doesn't exist."
+  },
+  {
+    "profile": "dev-dlh_cresa",
+    "path": "/Shared/DEV-DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS",
+    "error": "Error: Path (/Shared/DEV-DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PERSONA_DIM/PROCESOS) doesn't exist."
+  },
+  {
+    "profile": "dev-dlh_cresa",
+    "path": "/Shared/DEV-DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM",
+    "error": "Error: Path (/Shared/DEV-DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM) doesn't exist."
+  },
+  {
+    "profile": "dev-dlh_cresa",
+    "path": "/Shared/DEV-DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS",
+    "error": "Error: Path (/Shared/DEV-DLHCRESA01/TRANSFORMACIONES/DIMENSIONES_GENERALES/PRODUCTO_DIM/PROCESOS) doesn't exist."
+  }
+]

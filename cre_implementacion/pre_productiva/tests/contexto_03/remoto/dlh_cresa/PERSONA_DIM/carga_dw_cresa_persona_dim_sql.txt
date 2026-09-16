@@ -1,0 +1,337 @@
+-- Databricks notebook source
+--select *from dlh_cresa.staging.temp_persona_dim
+--describe table dlh_cresa.staging.temp_persona_dim
+--describe table dlh_cresa.gold.dw_cresa_persona_dim
+
+
+CREATE OR REPLACE TEMPORARY VIEW temp_dw_cresa_persona_dim
+as 
+select 
+    '00000' as id_persona,
+    '00000' AS id_empresa,
+    '00000' as cod_persona,
+    '00000' as cod_cliente,
+    '00000' as cod_calificacion,
+    '00000' as cod_formalidad,
+    '00000' as cod_tipo_identificacion,
+    '00000' as num_identificacion,
+    '00000' as num_identificacion_conyuge,
+    '00000' as num_identificacion_cliente_ref,
+    cast(null as timestamp) fecha_nacimiento,
+    NULL as fecha_ingreso_trabajo,
+    0 as cant_cargas_familiares,
+    NULL AS estabilidad_residencial,
+    NULL AS estabilidad_laboral,
+    NULL AS monto_ingresos,
+    NULL AS des_nombre_completo,
+    NULL AS des_tipo_cliente,
+    NULL AS des_formalidad,
+    '0' as ind_exento_impuestos,
+    
+    '0' as ind_separacion_bienes,
+    NULL AS des_sexo,
+    NULL AS des_genero,
+    NULL AS des_nacionalidad,
+    NULL AS des_cargo_profesion,
+    NULL AS des_estado_civil,
+    
+    '00000' as cod_direccion_particular_pais,
+    '00000' as cod_direccion_particular_provincia,
+    'SIN DEFINIR' AS des_direccion_particular_provincia,
+    '00000' as cod_direccion_particular_ciudad,
+    'SIN DEFINIR' AS des_direccion_particular_ciudad,
+    NULL AS des_direccion_particular_sector,
+    NULL AS des_direccion_particular,
+    
+    NULL AS des_direccion_particular_telefono,
+    NULL AS des_direccion_particular_observacion,
+    NULL AS des_nombre_trabajo,
+    NULL AS des_direccion_trabajo,
+    NULL AS des_direccion_trabajo_sector,
+    NULL AS des_direccion_trabajo_ciudad,
+    NULL AS des_direccion_trabajo_provincia,
+    NULL AS des_telefono_trabajo,
+    NULL AS des_direccion_trabajo_observacion,
+    NULL AS des_envio_correspondencia,
+    NULL AS des_direccion_correspondencia,
+    NULL AS des_casilla_correspondencia,
+    NULL AS des_nivel_educacion,
+    NULL AS des_email,
+    '0' as cod_estado,
+    NULL as des_telefono2,
+    0 edad
+
+UNION
+
+select 
+    coalesce(t.CustomerAccount,NULL) id_persona,
+    coalesce(t.dataAreaId, NULL) as id_empresa,
+    NULL AS cod_persona,
+    NULL AS cod_cliente,
+    NULL AS cod_calificacion,
+    NULL AS cod_formalidad,
+    NULL AS cod_tipo_identificacion,
+    coalesce(t.VATNum, NULL) AS num_identificacion,
+    NULL AS num_identificacion_conyuge,
+    NULL AS num_identificacion_cliente_ref,
+    case 
+    when cast(t.fecha_nacimiento as date)>='2025-01-01' then '1900-01-01T00:00:00.000+00:00'
+    when year(t.fecha_nacimiento) <='1799' then cast(null as timestamp)
+    else t.fecha_nacimiento
+    end fecha_nacimiento, -- T.PersonBirthDay
+    NULL AS fecha_ingreso_trabajo,
+    NULL AS cant_cargas_familiares,
+    NULL AS estabilidad_residencial,
+    NULL AS estabilidad_laboral,
+    NULL AS monto_ingresos,
+    substring(coalesce(t.OrganizationName, NULL), 1, 120) AS des_nombre_completo,
+    --coalesce(t.OrganizationName,NULL) as des_nombre_completo,
+    coalesce(t.NatureOfAssessee,NULL) as des_tipo_cliente,
+    NULL AS des_formalidad,
+    NULL AS ind_exento_impuestos,
+    
+    NULL AS ind_separacion_bienes,
+    NULL AS des_sexo,
+    NULL AS des_genero,
+    NULL AS des_nacionalidad,
+    NULL AS des_cargo_profesion,
+    NULL AS des_estado_civil,
+
+    coalesce(t.AddresscountryRegionId,NULL) as cod_direccion_particular_pais, --AddresscountryRegionISOCode
+    coalesce(t.AddressState,'00000') as cod_direccion_particular_provincia,
+    NULL AS des_direccion_particular_provincia,
+    coalesce(t.AddressCity,'00000') as cod_direccion_particular_ciudad,
+    NULL AS des_direccion_particular_ciudad,
+    NULL AS des_direccion_particular_sector,
+    coalesce(t.AddressStreet,NULL) as des_direccion_particular,
+
+    NULL AS des_direccion_particular_telefono,
+    NULL AS des_direccion_particular_observacion,
+    NULL AS des_nombre_trabajo,
+    NULL AS des_direccion_trabajo,
+    NULL AS des_direccion_trabajo_sector,
+    NULL AS des_direccion_trabajo_ciudad,
+    NULL AS des_direccion_trabajo_provincia,
+    PrimaryContactPhone AS des_telefono_trabajo,
+    NULL AS des_direccion_trabajo_observacion,
+    NULL AS des_envio_correspondencia,
+    NULL AS des_direccion_correspondencia,
+    NULL AS des_casilla_correspondencia,
+    NULL AS des_nivel_educacion,
+    primarycontactemail AS des_email,
+    NULL AS cod_estado,
+    PrimaryContactTelex as des_telefono2,
+    FLOOR(months_between(current_date(), t.fecha_nacimiento) / 12) edad
+
+from dlh_cresa.staging.temp_persona_dim t;
+
+
+-- INSERTAR EN TABLA EN TABLA DE ESQUEMA GOLD
+MERGE INTO dlh_cresa.gold.dw_cresa_persona_dim d
+USING temp_dw_cresa_persona_dim temp
+ON d.id_empresa = temp.id_empresa and d.id_persona = temp.id_persona
+WHEN MATCHED THEN
+  UPDATE SET
+    d.des_nombre_completo = temp.des_nombre_completo,
+    d.fecha_nacimiento = temp.fecha_nacimiento,
+    d.edad = temp.edad,
+    d.des_email=temp.des_email
+WHEN NOT MATCHED
+  --THEN INSERT *;
+  THEN INSERT (
+    id_persona,
+    id_empresa,
+    cod_persona,
+    cod_cliente,
+    cod_calificacion,
+    cod_formalidad,
+    cod_tipo_identificacion,
+    num_identificacion,
+    num_identificacion_conyuge,
+    num_identificacion_cliente_ref,
+    fecha_nacimiento,
+    fecha_ingreso_trabajo,
+    cant_cargas_familiares,
+    estabilidad_residencial,
+    estabilidad_laboral,
+    monto_ingresos,
+    des_nombre_completo,
+    des_tipo_cliente,
+    des_formalidad,
+    ind_exento_impuestos,
+    
+    ind_separacion_bienes,
+    des_sexo,
+    des_genero,
+    des_nacionalidad,
+    des_cargo_profesion,
+    des_estado_civil,
+
+    cod_direccion_particular_pais,
+    cod_direccion_particular_provincia,
+    des_direccion_particular_provincia,
+    cod_direccion_particular_ciudad,
+    des_direccion_particular_ciudad,
+    des_direccion_particular_sector,
+    des_direccion_particular,
+
+    
+    des_direccion_particular_telefono,
+    des_direccion_particular_observacion,
+    des_nombre_trabajo,
+    des_direccion_trabajo,
+    des_direccion_trabajo_sector,
+    des_direccion_trabajo_ciudad,
+    des_direccion_trabajo_provincia,
+    des_telefono_trabajo,
+    des_direccion_trabajo_observacion,
+    des_envio_correspondencia,
+    des_direccion_correspondencia,
+    des_casilla_correspondencia,
+    des_nivel_educacion,
+    des_email,
+    cod_estado,
+    des_telefono2,
+    edad
+
+  ) VALUES (
+    temp.id_persona,
+    temp.id_empresa,
+    temp.cod_persona,
+    temp.cod_cliente,
+    temp.cod_calificacion,
+    temp.cod_formalidad,
+    temp.cod_tipo_identificacion,
+    temp.num_identificacion,
+    temp.num_identificacion_conyuge,
+    temp.num_identificacion_cliente_ref,
+    temp.fecha_nacimiento,
+    temp.fecha_ingreso_trabajo,
+    temp.cant_cargas_familiares,
+    temp.estabilidad_residencial,
+    temp.estabilidad_laboral,
+    temp.monto_ingresos,
+    temp.des_nombre_completo,
+    temp.des_tipo_cliente,
+    temp.des_formalidad,
+    temp.ind_exento_impuestos,
+    
+    temp.ind_separacion_bienes,
+    temp.des_sexo,
+    temp.des_genero,
+    temp.des_nacionalidad,
+    temp.des_cargo_profesion,
+    temp.des_estado_civil,
+
+    temp.cod_direccion_particular_pais,
+    temp.cod_direccion_particular_provincia,
+    temp.des_direccion_particular_provincia,
+    temp.cod_direccion_particular_ciudad,
+    temp.des_direccion_particular_ciudad,
+    temp.des_direccion_particular_sector,
+    temp.des_direccion_particular,
+    
+    temp.des_direccion_particular_telefono,
+    temp.des_direccion_particular_observacion,
+    temp.des_nombre_trabajo,
+    temp.des_direccion_trabajo,
+    temp.des_direccion_trabajo_sector,
+    temp.des_direccion_trabajo_ciudad,
+    temp.des_direccion_trabajo_provincia,
+    temp.des_telefono_trabajo,
+    temp.des_direccion_trabajo_observacion,
+    temp.des_envio_correspondencia,
+    temp.des_direccion_correspondencia,
+    temp.des_casilla_correspondencia,
+    temp.des_nivel_educacion,
+    temp.des_email,
+    temp.cod_estado,
+    temp.des_telefono2,
+    temp.edad
+  );
+
+
+-- COMMAND ----------
+
+
+
+MERGE INTO dlh_cresa.gold.dw_cresa_persona_dim p
+USING dlh_cresa.staging.temp_provincia_dim m
+ON  p.cod_direccion_particular_provincia = m.cod_provincia
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_direccion_particular_provincia = m.des_provincia;
+
+
+MERGE INTO dlh_cresa.gold.dw_cresa_persona_dim p
+USING dlh_cresa.staging.temp_ciudad_dim m
+ON p.cod_direccion_particular_provincia = m.cod_provincia AND p.cod_direccion_particular_ciudad = m.cod_ciudad
+WHEN MATCHED THEN
+  UPDATE SET
+    p.des_direccion_particular_ciudad = m.des_ciudad;
+
+   /* update dlh_cresa.gold.dw_cresa_persona_dim a
+    SET a.fecha_nacimiento ='1900-01-01T00:00:00.000+00:00'
+    WHERE a.fecha_nacimiento is null;
+
+    update dlh_cresa.gold.dw_cresa_persona_dim a
+    SET a.edad =000
+    WHERE a.edad is null;*/
+
+
+
+-- COMMAND ----------
+
+-- actualiza des_teleofno 2
+CREATE OR REPLACE TEMPORARY VIEW tmp_telefono
+as 
+select CNUMEROIDENTIFICACION,
+CNUMERO ,
+max(DFECHAINGRESO) max
+from parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_siac/genvtclientedirecciontelef_cresa/`
+where CCODIGOTIPOTELEFONO='002'
+and CDESCRIPCION='Domicilio'
+group by CNUMEROIDENTIFICACION,
+CNUMERO;
+
+
+CREATE OR REPLACE TEMPORARY VIEW tmp_persona
+as 
+select  a.ICODIGOPERSONA ,MAX(a.ISECUENCIA)ISECUENCIA, MAX(a.DFECHAINGRESO) DFECHAINGRESO
+ from parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_siac/genmtelefono_cresa/` a
+ where a.CCODIGOTIPOTELEFONO='002'
+ group by a.ICODIGOPERSONA;
+
+CREATE OR REPLACE TEMPORARY VIEW tmp_persona1
+as 
+ select a.ICODIGOPERSONA,a.DFECHAINGRESO,b.CNUMERO from tmp_persona a
+ inner join parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_siac/genmtelefono_cresa/`  b
+ on a.ICODIGOPERSONA =b.ICODIGOPERSONA
+ and a.ISECUENCIA=b.ISECUENCIA
+ and a.DFECHAINGRESO=b.DFECHAINGRESO;
+
+
+CREATE OR REPLACE table dlh_cresa.staging.tmp_telefonos_cresa
+as 
+select  b.CNUMEROIDENTIFICACION,a.CNUMERO 
+from tmp_persona1 a
+inner join parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_siac/genmpersona_cresa/` b
+on a.ICODIGOPERSONA =b.ICODIGOPERSONA 
+ group by b.CNUMEROIDENTIFICACION,a.CNUMERO;
+ 
+CREATE OR REPLACE temporary view tmp_telefono2
+as 
+ select a.CNUMEROIDENTIFICACION,
+a.CNUMERO from tmp_telefono a
+where not EXISTS (select 1 from dlh_cresa.staging.tmp_telefonos_cresa  b
+where a.CNUMEROIDENTIFICACION=b.CNUMEROIDENTIFICACION);
+
+insert into dlh_cresa.staging.tmp_telefonos_cresa
+select * from tmp_telefono2;
+
+
+MERGE INTO dlh_cresa.gold.dw_cresa_persona_dim  AS target
+USING  dlh_cresa.staging.tmp_telefonos_cresa AS source
+ON target.num_identificacion = source.CNUMEROIDENTIFICACION
+WHEN MATCHED THEN
+UPDATE SET target.des_telefono2 = source.CNUMERO;

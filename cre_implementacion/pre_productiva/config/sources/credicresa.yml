@@ -1,0 +1,53 @@
+config_version: 1
+client_name: cresa
+project_name: credicresa
+source_name: credicresa
+source_type: databricks
+enabled: true
+input:
+  catalog: cresa
+  schema: landing
+  format: parquet
+  seed_catalog: cresa
+  seed_schema: landing
+  seed_volume: credicresa_input
+discovery:
+  ingestion_config_glob: config/ingestion/**/*.yml
+  recursive: true
+  include_disabled: false
+output:
+  format: parquet
+  catalog: cresa
+  schema: bronze
+  volume: credicresa_data
+  base_path: credicresa
+  register_tables: true
+  table_catalog: cresa
+  table_schema: bronze
+  write_mode: overwrite
+  compression: snappy
+execution:
+  continue_on_error: true
+  fail_job_on_any_error: true
+  max_parallel_tables: 1
+control_plane:
+  enabled: true
+  catalog: cresa
+  schema: audit01
+  runs_table: credicresa_ingestion_runs
+  table_runs_table: credicresa_ingestion_table_runs
+  columns_table: credicresa_ingestion_columns
+  watermarks_table: credicresa_ingestion_watermarks
+period_load:
+  mode: full_snapshot
+  input_layout: <period>/<source_table>/*
+  publication: latest_successful_snapshot
+  history: immutable_period_batches
+
+medallion:
+  silver_config: config/silver/credicresa.yml
+  gold_config: config/gold/credicresa.yml
+  status: temporal
+  publish_to_consumers: false
+
+quality_config: config/quality/credicresa.yml

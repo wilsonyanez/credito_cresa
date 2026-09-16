@@ -1,0 +1,142 @@
+config_version: 1
+source_name: credicresa
+source_schema: landing
+source_table: cat_profesion
+source_table_normalized: cat_profesion
+enabled: true
+description: Catálogo de profesiones desde CRESA (proyecto credicresa). Ingesta a Bronze para consumo
+  de dominios clientes.
+priority:
+  wave: fase_3_ingesta
+  score: 6
+  reason: Tabla maestra requerida para clasificar la profesión de clientes y operaciones.
+load_strategy:
+  initial_mode: full_snapshot
+  incremental_mode: delta_incremental
+  watermark_column: actualizado
+  sequence_column: id
+  delta_lookback_days: 1
+  delete_detection: true
+read:
+  mode: table
+query:
+  custom_sql: null
+  where_clause: null
+  order_by: null
+primary_key:
+  columns:
+  - id
+  enforced_in_source: false
+natural_key:
+  columns:
+  - nombre
+columns:
+  include:
+  - id
+  - nombre
+  - es_activo
+  exclude: []
+  rename: {}
+  pii_columns:
+  - creado_por
+  - actualizado_por
+  - gestor_id
+  restricted_columns: []
+  types:
+    id: STRING
+    nombre: STRING
+    es_activo: BOOLEAN
+  source_types:
+    id: VARCHAR(6)
+    nombre: VARCHAR(50)
+    es_activo: BIT
+target:
+  bronze_catalog: cresa
+  bronze_schema: bronze
+  bronze_table: credicresa_cat_profesion_bronze
+  write_mode_initial: overwrite
+  write_mode_delta: overwrite
+  partition_by: es_activo
+  cluster_by: cat_zona_id
+audit_columns:
+  add_ingestion_metadata: true
+  add_record_hash: true
+  add_schema_hash: true
+  add_source_watermark: true
+  add_execution_timestamp: true
+  add_row_number: true
+governance:
+  domain_official: Maestro
+  sensitivity: Confidencial
+  data_owner: Equipo de Datos - Maestro (por asignar oficialmente)
+  purview_collection: 01_Maestros
+  classification_level: L2_Confidencial
+  retention_policy: Permanente
+control_plane:
+  run_table: cresa.audit01.credicresa_ingestion_runs
+  watermark_table: cresa.audit01.credicresa_ingestion_watermarks
+  error_table: cresa.audit01.credicresa_ingestion_table_runs
+validation_rules:
+- name: verificar_ids_unicos
+  rule: PRIMARY_KEY_CHECK
+  column: id
+  severity: CRITICAL
+- name: validar_es_activo_binario
+  rule: VALUE_IN_LIST
+  column: es_activo
+  allowed_values:
+  - 0
+  - 1
+  severity: HIGH
+- name: validar_nombre_no_nulo
+  rule: NOT_NULL
+  column: nombre
+  severity: CRITICAL
+- name: validar_cat_zona_id_no_nulo
+  rule: NOT_NULL
+  column: cat_zona_id
+  severity: HIGH
+- name: validar_fechas_consistentes
+  rule: DATE_ORDER_CHECK
+  columns:
+    start: creado
+    end: actualizado
+  severity: MEDIUM
+- name: validar_actualizado_no_futuro
+  rule: DATE_NOT_IN_FUTURE
+  column: actualizado
+  severity: HIGH
+alert_rules:
+- condition: row_count_change > 30%
+  severity: MEDIUM
+  action: NOTIFY_TEAM
+- condition: execution_time > 300
+  severity: MEDIUM
+  action: NOTIFY_DBA
+  recipients:
+  - dba-team@empresa.local
+- condition: validation_failures > 0
+  severity: CRITICAL
+  action: BLOCK_AND_ALERT
+  recipients:
+  - data-owner@empresa.local
+  - data-platform-team@empresa.local
+  smtp_config:
+    host: smtp.empresa.local
+    port: 587
+    use_tls: true
+    from_address: databricks-alerts@empresa.local
+quality_metrics:
+  track_record_count: true
+  track_nulls: true
+  track_duplicates: true
+  track_execution_time: true
+  track_data_drift: true
+dictionary:
+  file: sql/02_credicresa_catalogos.sql
+  schema: credicresa
+  table: cat_profesion
+  attributes_not_selected: []
+schema_evolution:
+  mode: strict
+  type_widening: fail

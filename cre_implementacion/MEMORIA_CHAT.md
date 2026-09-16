@@ -1,3 +1,5 @@
+> **Actualización de contexto — 2026-09-16.** El [estado vigente](pre_productiva/docs/ESTADO_VIGENTE.md) y el [README operativo](pre_productiva/README.md) sustituyen las rutas, comandos y destinos anteriores como instrucciones de operación. Desarrollo del cliente: `dev_dlh_cresa` / `devstgdlh02`, 1,2 TB disponibles declarados; Producción: `dlh_cresa`; piloto: `cresa`. Los maestros Gold son `dw_cresa_maestro_cliente` y `dw_cresa_maestro_producto`; sus conformados Silver son `dw_cresa_cliente_conformado` y `dw_cresa_producto_conformado`. El contenido siguiente es historial fechado, no estado remoto actual.
+
 # Memoria del chat — CRESA Fase 3
 
 ## Información general

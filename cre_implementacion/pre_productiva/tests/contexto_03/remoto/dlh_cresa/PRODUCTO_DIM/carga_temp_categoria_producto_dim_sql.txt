@@ -1,0 +1,38 @@
+-- Databricks notebook source
+--DROP TABLE IF EXISTS dlh_cresa.staging.temp_categoria_producto_dim;
+--CREATE OR REPLACE TABLE IF NOT EXISTS
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_categoria_producto_dim (
+  id_empresa VARCHAR(20) COMMENT 'dataAreaId',
+  cod_categoria VARCHAR(20) COMMENT 'GroupId', 
+  des_categoria VARCHAR(60) COMMENT 'GroupName'
+  --campo_x varchar(20) COMMENT '',  -- campos que se requieran crear
+)
+COMMENT 'Tabla temporal para procesos de construir dimension (temp_categoria_producto_dim)';
+
+
+
+
+-- COMMAND ----------
+
+
+
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_categoria_producto_parquet
+as 
+select *from -- parquet.`/Volumes/dlh_cresa/bronze/vol_bronze_dynamics/productgroup/productgroup.parquet`
+dlh_cresa.bronze.ProductGroups;
+
+--select *from carga_temp_marca_parquet;
+--DESCRIBE TABLE carga_temp_marca_parquet;
+--SHOW VIEWS;
+
+TRUNCATE TABLE dlh_cresa.staging.temp_categoria_producto_dim;  
+
+INSERT INTO dlh_cresa.staging.temp_categoria_producto_dim
+select 
+  dataAreaId as id_empresa,
+  GroupId as cod_categoria,
+  GroupName as des_categoria
+from carga_temp_categoria_producto_parquet;
+

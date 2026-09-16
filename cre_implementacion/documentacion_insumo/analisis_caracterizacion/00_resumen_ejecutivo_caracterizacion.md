@@ -1,3 +1,5 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Caracterización Fase 3 — Resumen Ejecutivo (CRESA)
 
 > Generado a partir del diagnóstico técnico verificado contra producción (`adbdlh01`, catálogo `dlh_cresa`, corte 2026-07-14) y consolidado en `../../Implementación/CONTEXTO_PROYECTO.md`, `FUENTES_Y_GAP_CAPAS_CLIENTE_PRODUCTO.md`, `BOSQUEJO_TABLAS_CURADAS.md` y `MAPEO_CASOS_USO_FUENTES.md`. A diferencia de un barrido de metadatos en frío (caso Almar), aquí el punto de partida ya es un catálogo productivo con 649 tablas — el barrido fue de **estado de gobierno**, no de existencia de datos.

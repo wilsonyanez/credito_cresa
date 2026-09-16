@@ -1,3 +1,5 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Imágenes — Fase 3 (CRESA)
 
 Esta carpeta se conserva por paridad con `Almar/Fase 3/imagenes`, pero en esta iteración los diagramas se dejaron como **Mermaid embebido en Markdown** dentro de `../analisis_caracterizacion/07_diagramas_arquitectura_dominios.md`, en vez de generar PNG estáticos — no se contó con una herramienta de renderizado de imágenes en esta sesión.

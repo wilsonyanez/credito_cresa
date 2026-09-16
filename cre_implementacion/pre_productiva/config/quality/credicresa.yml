@@ -1,0 +1,13 @@
+config_version: 1
+action: flag_only
+key_authority: candidate
+duplicate_null_handling: exclude_incomplete_keys
+rules:
+- empty_source_alert
+- not_null_key
+- duplicate_declared_key
+- blank_string
+- surrounding_spaces
+- declared_text_length
+certification: temporal
+publication: false

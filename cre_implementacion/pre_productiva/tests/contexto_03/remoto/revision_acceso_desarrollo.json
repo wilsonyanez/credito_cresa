@@ -1,0 +1,11 @@
+{
+  "profile": "dev-dlh_cresa",
+  "catalog": "dev_dlh_cresa",
+  "catalog_get": "SUCCESS",
+  "catalog_browse_only": false,
+  "schemas_list": "SUCCESS",
+  "visible_schemas": ["bronze", "default", "information_schema"],
+  "previous_use_catalog_denial": "RESOLVED",
+  "write_permissions_tested": false,
+  "remote_objects_modified": false
+}

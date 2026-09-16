@@ -1,3 +1,5 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Plan de Ingesta y Almacenamiento Lakehouse — Fase 3 (CRESA)
 
 ## Decisión de arquitectura — diferencia clave frente a Almar
@@ -13,9 +15,9 @@ Almar diseñó catálogos nuevos por capa (`almar_bronze`, `almar_silver`, `alma
 | Conformación real en Silver | Las entidades nuevas (`dw_cresa_cliente_conformado`, `dw_cresa_producto_conformado`) sí deben vivir en `silver`, corrigiendo el patrón actual donde la conformación salta directo a Gold |
 | Certificación explícita en Gold | Todo producto Gold nuevo declara `_certification_status`; no aplica retroactivamente a las 127 tablas ya existentes salvo decisión explícita del Data Owner |
 | Control plane sin esquema nuevo si es posible | Extender `audit01` (ya existe, 4 tablas: `dynamics_odata_run_summary`, `dynamics_odata_runlogs`, `job_run_logs`, `log_procesos`) antes de crear un esquema de gobierno nuevo |
-| Formatos abiertos solo en landing | Bronze/Silver/Gold ya son Delta (Unity Catalog managed) — no hay decisión pendiente aquí |
+| Formatos por alcance | Las tablas Delta productivas existentes se conservan. Para la implementación del paquete se mantienen snapshots Parquet y control plane Delta, según el documento 17 |
 
-## Estructura lógica en Unity Catalog (respetando lo existente)
+## Estructura lógica del diseño original (consultar actualización 17 para objetos auxiliares)
 
 | Capa | Catálogo | Esquema | Convención de tabla |
 |---|---|---|---|
@@ -25,7 +27,7 @@ Almar diseñó catálogos nuevos por capa (`almar_bronze`, `almar_silver`, `alma
 | Gold — productos derivados | `dlh_cresa` | `gold` (ya existe) | `dw_cresa_<dominio>_<producto>` — ej. `dw_cresa_cliente_campos_salesforce` |
 | Control/gobierno técnico | `dlh_cresa` | `audit01` (extender) | `gobierno_<entidad>` — ej. `gobierno_certificacion_gold`, `gobierno_reglas_silver` |
 
-## Ejemplos concretos
+## Ejemplos del diseño original
 
 ```text
 dlh_cresa.silver.dw_cresa_cliente_conformado
@@ -60,7 +62,7 @@ dlh_cresa.audit01.gobierno_reglas_silver
 | `_last_certified_at` | Fecha de última certificación |
 | `_sensitivity_classification` | `Público` / `Interno` / `Confidencial` / `Sensible-Regulado` (cap. 4.4 Arquitectura To-Be) |
 
-## Control plane — extendiendo `audit01`, no reemplazándolo
+## Antecedente del control plane — nombres de gobierno anteriores
 
 `audit01` ya existe con 4 tablas de auditoría de ingesta Dynamics/jobs. Se propone extenderlo, no crear un esquema paralelo:
 

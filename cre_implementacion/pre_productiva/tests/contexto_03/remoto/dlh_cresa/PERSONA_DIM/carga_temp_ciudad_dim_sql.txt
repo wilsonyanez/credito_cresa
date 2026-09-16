@@ -1,0 +1,32 @@
+-- Databricks notebook source
+
+CREATE OR REPLACE TABLE dlh_cresa.staging.temp_ciudad_dim(
+  cod_pais VARCHAR(25) COMMENT 'CountryRegionId',
+  key_ciudad VARCHAR(100) COMMENT 'CityKey',
+  cod_provincia VARCHAR(25) COMMENT 'StateId',
+  cod_ciudad VARCHAR(25) COMMENT 'Name',
+  des_ciudad VARCHAR(100) COMMENT 'Description'
+)
+COMMENT 'Tabla temporal de ciudad para procesos de construir dimension de persona';
+
+
+
+
+-- COMMAND ----------
+
+
+CREATE OR REPLACE TEMPORARY VIEW carga_temp_ciudad_parquet
+AS
+select * from dlh_cresa.bronze.AddressCities;
+-- SELECT * FROM PARQUET.`/Volumes/dlh_cresa/bronze/vol_bronze_dynamics/addresscity/addresscity.parquet`;
+
+TRUNCATE TABLE dlh_cresa.staging.temp_ciudad_dim;
+
+INSERT INTO dlh_cresa.staging.temp_ciudad_dim
+SELECT 
+  CountryRegionId AS cod_pais,
+  CityKey AS key_ciudad,
+  StateId AS cod_provincia,
+  Name AS cod_ciudad,
+  Description AS des_ciudad
+FROM carga_temp_ciudad_parquet;

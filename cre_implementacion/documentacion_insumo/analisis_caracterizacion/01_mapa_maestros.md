@@ -1,6 +1,19 @@
+> **Revisión de consistencia — 2026-09-16.** Consultar el [estado vigente](../../pre_productiva/docs/ESTADO_VIGENTE.md) para los nombres Silver/Gold de Producción y Desarrollo, los 1,2 TB disponibles declarados y la evidencia posterior de fuentes. El diagnóstico y las métricas originales conservan su fecha de corte; las propuestas anteriores se aplican solo donde no contradigan los documentos 17/20. Este material no acredita implementación de los maestros.
+
 # Mapa de Maestros — Cliente y Producto (CRESA)
 
 > Condensa `../../Implementación/BOSQUEJO_TABLAS_CURADAS.md` (inspección real de columnas vía `databricks unity-catalog tables get`) en el mismo formato de mapa de maestros usado en Almar Fase 3. No es una implementación — es el punto de partida para validar con los Data Owners una vez designados.
+
+## Nombres vigentes por ambiente — 2026-09-16
+
+| Ambiente | Dominio | Conformación Silver | Maestro Gold |
+|---|---|---|---|
+| Producción | Cliente | `dlh_cresa.silver.dw_cresa_cliente_conformado` | `dlh_cresa.gold.dw_cresa_maestro_cliente` |
+| Producción | Producto | `dlh_cresa.silver.dw_cresa_producto_conformado` | `dlh_cresa.gold.dw_cresa_maestro_producto` |
+| Desarrollo | Cliente | `dev_dlh_cresa.silver.dw_cresa_cliente_conformado` | `dev_dlh_cresa.gold.dw_cresa_maestro_cliente` |
+| Desarrollo | Producto | `dev_dlh_cresa.silver.dw_cresa_producto_conformado` | `dev_dlh_cresa.gold.dw_cresa_maestro_producto` |
+
+La definición de nombres no implica despliegue. El [informe extendido](../../pre_productiva/docs/20_CRESA_MDM_ANALISIS_EXTENDIDO.md) distingue existencia verificada, atributos pendientes e hipótesis. Las expresiones de ausencia y completitud del mapa original se interpretan al corte de ese diagnóstico, no como un inventario actual exhaustivo. La clasificación vehicular requiere catálogo de negocio; una longitud de 17 caracteres no valida por sí sola un VIN.
 
 ## 1. Maestro Cliente
 
